@@ -1,0 +1,204 @@
+{
+  "main": {
+    "id": "fa21e03b4c4c4ae2",
+    "type": "split",
+    "children": [
+      {
+        "id": "9d5ee462840903cd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "23ccb6e5a5c2345d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "1_teoria_della_complessita.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "1_teoria_della_complessita"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "95d6a67a32f92700",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c855444b686735e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "015563a549e87f36",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "29bff1d5b7f8b346",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "182e33e900d83772",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "24753d100eddaef7",
+    "type": "split",
+    "children": [
+      {
+        "id": "ce6adb54c54e722d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7813f18a05a93c5b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "1_teoria_della_complessita.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 1_teoria_della_complessita"
+            }
+          },
+          {
+            "id": "08e0156bbda0b451",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "1_teoria_della_complessita.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 1_teoria_della_complessita"
+            }
+          },
+          {
+            "id": "1343c5490a69b811",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "b19726b1d58ecb03",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "42944d1336445dd0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "1_teoria_della_complessita.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 1_teoria_della_complessita"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "23ccb6e5a5c2345d",
+  "lastOpenFiles": [
+    "Pasted image 20260111182131.png",
+    "Pasted image 20260111181847.png",
+    "Pasted image 20260111181443.png",
+    "Gemini scaletta.md",
+    "Pasted.md",
+    "1_teoria_della_complessita.md",
+    "Pasted image 20260111174224.png",
+    "Pasted image 20260111174046.png",
+    "Pasted image 20260111174028.png",
+    "Pasted image 20260111173456.png",
+    "0_ripasso_complessità.md",
+    "schema_classi_problemi.md",
+    "README.md",
+    "Pasted image 20260111133929.png",
+    "Pasted image 20260111121952.png"
+  ]
+}
