@@ -64,10 +64,6 @@ A sinistra siamo nel caso in cui i problemi NP potrebbero essere risolti in temp
 | **NP**          | **NO** (o non lo sappiamo)                | **SÌ**                                       | Contiene P e NP-Complete                    |
 | **NP-Complete** | **NO**                                    | **SÌ**                                       | Intersezione tra NP e NP-Hard               |
 | **NP-Hard**     | **NO**                                    | **NO** (non garantito)                       | Almeno difficile quanto ogni problema in NP |
-***
-TODO:
-- [ ] Riduzione di karp
-- [ ] esempio con tsp e ciclo hamiltoniano
 
 ***
 ## Confrontiamo la difficoltà di due algoritmi: **Riduzione di Karp**
@@ -177,142 +173,135 @@ Molti problemi NP-hard hanno importanti applicazioni e non possono essere ignora
 ***
 ### **Teorema: Il problema del Commesso Viaggiatore (TSP) è NP-Hard**
 
-Obiettivo: Dimostrare che $HC \leq_p TSP$ (Optimization).
+Obiettivo: Dimostrare che $TSP (Optmization) \geq_p HC (decisionale)$.
+
+_Vogliamo dimostrare che se avessimo un oracolo (un algoritmo efficiente) in grado di risolvere il TSP, potremmo usarlo per risolvere il problema del Ciclo Hamiltoniano (HC)._
 
 Poiché il problema del Ciclo Hamiltoniano ($HC$) è noto essere NP-Completo, se dimostriamo che esso è riducibile polinomialmente al TSP di ottimizzazione, allora il TSP è almeno tanto difficile quanto un problema NP-Completo, dunque è NP-Hard.
 
-#### **1. Definizione della Riduzione**
+#### **1. Intuizione e Strategia della Riduzione**
 
-Dobbiamo costruire un algoritmo di trasformazione $f$ che operi in tempo polinomiale.
+Il problema $HC$ è un problema decisionale (Esiste un ciclo? Sì/No), mentre il $TSP$ è un problema di ottimizzazione (Trova il ciclo di costo minimo).
 
-- **Input (Istanza HC)**: Un grafo orientato o non orientato $G = (V, E)$.
-	
-- **Output (Istanza TSP)**: Un grafo completo ponderato $G' = (V, E')$ con una funzione di costo $c: E' \rightarrow \mathbb{N}$.
+Per collegarli, dobbiamo trasformare la struttura topologica del grafo di HC in costi per il TSP.
+
+L'idea chiave è penalizzare l'uso di archi non esistenti:
+
+- Assegniamo costo **0** agli archi che esistono realmente (nessuna penalità).
+- Assegniamo costo **1** agli archi che non esistono (penalità).
+
+In questo modo, il costo totale del tour fungerà da "rivelatore": se il costo è 0, il tour non ha mai "barato" (ha usato solo archi esistenti); se il costo è $\ge 1$, il tour è stato costretto a "barare" (ha usato archi che non c'erano in origine).
+
+![[Pasted image 20260113182650.png]]
+
+#### **2. Definizione Formale della Riduzione**
+
+Costruiamo un algoritmo di trasformazione $f$ che mappa un'istanza $G$ di HC in un'istanza $G'$ di TSP.
+- **Input:** Grafo $G = (V, E)$.
+- **Output:** Grafo completo ponderato $G' = (V, E')$ con funzione costo $c$.
 
 **Costruzione di $G'$:**
 
-1. L'insieme dei vertici $V$ rimane lo stesso.
+1. **Vertici:** $V' = V$ (stessi nodi).
+2. **Archi:** $E' = V \times V$ (grafo completo: colleghiamo tutto con tutto).
+3. Pesi: Per ogni coppia $(u, v)$, il peso è definito come:$$c(u, v) = \begin{cases} 0 & \text{se } (u, v) \in E \quad (\text{arco originale}) \\ 1 & \text{se } (u, v) \notin E \quad (\text{arco fittizio}) \end{cases}$$
+_Nota: La costruzione di $G'$ richiede di iterare su tutte le coppie di nodi, impiegando un tempo $O(|V|^2)$, che è polinomiale.
+
+![[Code_Generated_Image.png|500]]
+#### **3. Dimostrazione di Correttezza**
+
+Sia $C_{min}$ il valore della soluzione ottima restituita dal TSP su $G'$. 
+Dobbiamo dimostrare che $C_{min} = 0 \iff G \text{ ha un HC}$.
+
+**Direzione A**
+
+> **Ipotesi:** $G \text{ ha un HC} \implies$ **Tesi:**  $C_{min} = 0$
+
+- **Ragionamento:** Se $G$ ha un ciclo Hamiltoniano, esiste una permutazione di vertici collegati solo da archi in $E$.
     
-2. L'insieme degli archi $E'$ include tutti i possibili archi tra i vertici di $V$ (ovvero, $G'$ è un grafo completo $K_{|V|}$).
+- **Nel grafo TSP:** Poiché abbiamo mappato tutti gli archi di $E$ con peso $0$, questo ciclo esiste anche in $G'$ e ha costo somma $0$. Dato che i pesi sono non-negativi, $0$ è il minimo possibile.
     
-3. Definiamo la funzione di costo $c(u, v)$ per ogni arco $(u, v) \in E'$ come:
-    $$c(u, v) = \begin{cases} 0 & \text{se } (u, v) \in E \quad (\text{l'arco esisteva nel grafo originale}) \\ 1 & \text{se } (u, v) \notin E \quad (\text{l'arco non esisteva}) \end{cases}$$
+- **Conclusione:** L'algoritmo TSP troverà questo tour (o uno equivalente) e restituirà $0$.
 
-_Nota: La costruzione di $G'$ richiede di iterare su tutte le coppie di nodi, impiegando un tempo $O(|V|^2)$, che è polinomiale._
+Direzione B
 
-#### **2. Dimostrazione di Correttezza**
+> **Ipotesi:** $C_{min} = 0 \implies$ **Tesi:**  $G$ ha un HC
 
-Sia $C_{min}$ il costo del ciclo hamiltoniano di costo minimo in $G'$ trovato risolvendo il TSP.
+(Utilizziamo l'implicazione diretta sul valore del costo, che è più intuitiva della contronominale per chi legge).
 
-**Caso A: $G$ ha un Ciclo Hamiltoniano $\implies C_{min} = 0$**
-
-- **Ipotesi**: Esiste un ciclo hamiltoniano in $G$.
+- **Ragionamento:** Supponiamo che l'algoritmo TSP restituisca un tour di costo $0$.
     
-- **Tesi**: Il TSP su $G'$ ha costo 0.
+- **Analisi dei pesi:** Poiché la somma dei pesi è $0$ e i pesi possibili sono solo $\{0, 1\}$, questo implica che **ogni singolo arco** del tour ha peso $0$.
     
-- **Dimostrazione**: Se esiste un ciclo in $G$, esso è composto esclusivamente da archi appartenenti a $E$. Nella nostra costruzione, tutti gli archi in $E$ hanno costo $0$ in $G'$. Pertanto, esiste un tour in $G'$ che visita tutti i nodi con costo totale $0$. Poiché i pesi non sono negativi, questo è necessariamente il minimo.
+- **Legame con $G$:** Per costruzione, un arco ha peso $0$ in $G'$ solo se esisteva in $G$.
     
+- **Conclusione:** Il tour trovato dal TSP è quindi composto esclusivamente da archi originali di $G$. Poiché un tour TSP visita ogni nodo esattamente una volta, questo corrisponde esattamente alla definizione di Ciclo Hamiltoniano in $G$.
 
-Caso B: $G$ non ha un Ciclo Hamiltoniano $\implies C_{min} > 0$
+**Nota logica**
+Dimostrando $C_{min} = 0 \implies G \text{ ha un HC}$  abbiamo dimostrato anche la sua contronominale:
 
-(Dimostriamo la contronominale: Se $C_{min} = 0 \implies G$ ha un HC).
+> **Ipotesi:** $G \text{ non ha un HC} \implies$ **Tesi:**  $C_{min} \ne 0$ _(C non può essere negativa, quindi $C_{min} \ge 1$)_
 
-- **Ipotesi**: Il TSP trova un tour in $G'$ con costo totale $0$.
-    
-- **Tesi**: Esiste un ciclo hamiltoniano in $G$.
-    
-- **Dimostrazione**: Se il costo totale del tour è $0$, significa che il tour utilizza _solo_ archi con peso $0$. Per la nostra funzione di costo, gli archi di peso $0$ in $G'$ corrispondono esattamente agli archi esistenti in $E$ del grafo $G$. Poiché un tour TSP visita ogni nodo esattamente una volta e torna all'inizio, questo corrisponde per definizione a un Ciclo Hamiltoniano formato solo da archi originali di $G$.
+Infatti, se $C_{min} \ge 1$, significa che ogni possibile tour deve usare almeno un arco fittizio, quindi non esiste un HC in $G$._
+#### **4. Conclusione**
 
-#### **3. Conclusione**
+La riduzione è polinomiale e valida. Risolvere il TSP permette di decidere HC:
 
-Abbiamo mostrato che:
+- Se $TSP(G') = 0 \rightarrow$ Risposta HC: **SÌ**.
+	
+- Se $TSP(G') \ge 1 \rightarrow$ Risposta HC: **NO**.
 
-1. L'algoritmo TSP su $G'$ restituisce $0$ se e solo se $G$ ammette un Ciclo Hamiltoniano.
-    
-2. L'algoritmo TSP su $G'$ restituisce un valore $\ge 1$ se $G$ non ammette un Ciclo Hamiltoniano.
-    
+Poiché HC è NP-Completo, **TSP (Ottimizzazione) è NP-Hard**.
 
-Dato che $HC$ è NP-Completo e la riduzione è polinomiale, il **TSP (versione ottimizzazione) è NP-Hard**.
+***
+### **Approfondimento: Perché scegliere pesi 1 e 2 invece di 0 e 1?**
 
-### Piccolo dettaglio teorico interessante
-In alcuni libri al posto di usare i pesi 0 e 1, vengono usati 1 e 2... come mai?
-### Il motivo teorico: TSP Metrico vs TSP Generale
+La scelta dei pesi nella riduzione non è casuale, ma determina **quale variante** del TSP stiamo dimostrando essere NP-Hard.
 
-Nella tua dimostrazione con pesi 0 (arco presente) e 1 (arco assente), proviamo a vedere se vale la Disuguaglianza Triangolare:
+#### **1. Il Test della Disuguaglianza Triangolare**
+
+La disuguaglianza triangolare è la regola che rende un grafo "geometricamente sensato". Essa afferma che andare direttamente da $A$ a $B$ non deve mai costare più che passare attraverso un intermedio $C$:
 
 $$c(u, w) \le c(u, v) + c(v, w)$$
 
-Immagina tre nodi $u, v, w$:
+Analizziamo i due casi:
 
-1. Esiste l'arco $(u, v)$ nel grafo originale $\rightarrow$ peso $0$.
+**Caso A: Pesi $\{0, 1\}$ (La riduzione "Base")**
+
+- Arco presente ($u,v$) e ($v,w$) $\to$ costo $0$.
+- Arco mancante ($u,w$) $\to$ costo $1$.
+
+- **Verifica:** $1 \le 0 + 0 \implies 1 \le 0$ (**FALSO!**)
     
-2. Esiste l'arco $(v, w)$ nel grafo originale $\rightarrow$ peso $0$.
+- **Conclusione:** Questa riduzione genera un grafo che viola la geometria euclidea. Stiamo dimostrando la difficoltà del **TSP Generale**.
+
+**Caso B: Pesi $\{1, 2\}$ (La riduzione "Metrica")**
+
+- Arco presente ($u,v$) e ($v,w$) $\to$ costo $1$.
+- Arco mancante ($u,w$) $\to$ costo $2$.
     
-3. **NON** esiste l'arco $(u, w)$ nel grafo originale $\rightarrow$ peso $1$.
+- **Verifica:** $2 \le 1 + 1 \implies 2 \le 2$ (**VERO!**)
     
+- **Conclusione:** Questa riduzione genera un grafo che rispetta la geometria. Stiamo dimostrando la difficoltà del **Metric-TSP**.
 
-Controlliamo la disuguaglianza:
+#### **2. Perché questa distinzione è cruciale? (Il vero motivo teorico)**
 
-$$c(u, w) \le c(u, v) + c(v, w)$$
-$$1 \le 0 + 0$$
-$$1 \le 0$$
+La distinzione riguarda l'**approssimabilità**:
 
-Falso! La disuguaglianza triangolare NON vale.
-
-#### Perché è importante?
-
-Se usiamo pesi **1** (arco presente) e **2** (arco assente):
-
-1. Disuguaglianza nel caso peggiore (scorciatoia non esistente):
+1. TSP Generale (Pesi 0/1):
     
-    $$c(u, w) \le c(u, v) + c(v, w)$$
+    È un problema "cattivo". Non solo è NP-Hard, ma non è nemmeno approssimabile.
     
-    $$2 \le 1 + 1$$
+    Teorema: Se esistesse un algoritmo che approssima il TSP generale entro un fattore polinomiale, allora $P=NP$.
     
-    $$2 \le 2$$
+    Quindi, con pesi 0/1 dimostriamo che il caso peggiore assoluto è intrattabile.
     
-    Vero!
+2. Metric-TSP (Pesi 1/2):
     
-
-Conclusione Accademica:
-
-Usando pesi 1 e 2, dimostriamo che anche il "Metric TSP" (TSP dove vale la disuguaglianza triangolare) è NP-Complete.
-
-Questa è una dimostrazione più forte: stiamo dicendo che il problema rimane difficile anche se imponiamo regole geometriche sensate (come appunto la disuguaglianza triangolare).
-
-Se usassimo 0 e 1 (o pesi arbitrariamente grandi per i non-archi, tipo $M$), staremmo dimostrando la difficoltà solo del **TSP Generale**, che è un risultato corretto ma meno potente, perché il TSP Generale non è nemmeno approssimabile (Teorema di non approssimabilità), mentre il Metric TSP sì.
-# OLD
-
-## **Esempio: TSP (Travelling Salesman Problem)**
-
-**INPUT**: Grafo completo con archi pesati
-**OUTPUT**: Ciclo hamiltoniano di costo minimo
-
-**Teorema**: Il TSP è NP-hard
-
-Devo dimostrare che  $Ciclo Hamiltoniano \leq_p TSP$, quindi devo risolvere il problema del ciclo Hamiltoniano con il TSP.
-
-Istanza CicloHamiltoniano --> TRASFORMAZIONE input --> Istanza TSP --> Algoritmo TSP --> TRASFORMAZIONE risultato --> Output Sì/No
-
-Ci servono quindi due algoritmi polinomiali di trasformazione.
-#### TRASFORMAZIONE Istanza
-Il problema del Ciclo Hamiltoniano prende in input un grafo qualunque, mentre il TSP ha bisogno di un grafo connesso e pesato.
-Quindi dato un grafo $G = (V, E)$, creiamo $G' = (V, E')$ completo con pesi:
-- Agli archi già presenti assegno costo 0
-- Agli archi che aggiungo assegno costo 1
-
-#### TRASFORMAZIONE Risultato
-Eseguo l'algoritmo del TSP.
-Se il ciclo hamiltoniano minimo ha costo:
-- 0 --> allora il ciclo hamiltoniano è presente anche nel Grafo originale (Risposta Sì)
-- 1 --> allora il ciclo hamiltoniano non è presente nel Grafo originale (Risposta No)
-
-**In Sintesi**: Riduciamo il problema del Ciclo Hamiltoniano (NP-completo) al TSP:
-
-1. Dato un grafo $G = (V, E)$, creiamo $G' = (V, E')$ completo con pesi:
-   - $c(e) = 0$ se $e \in E$
-   - $c(e) = 1$ altrimenti
-2. Se il ciclo hamiltoniano di costo minimo in $G'$ ha costo 0, allora $G$ ha un ciclo hamiltoniano
-3. Se ha costo $> 0$, allora $G$ non ha ciclo hamiltoniano
-
-Dato che abbiamo dimostrato che il problema del TSP è almeno difficile quanto un problema np-completo standard (ciclo hamiltoniano), possiamo dire che il TSP è NP-hard.
+    È un problema "più gentile". È NP-Hard (come dimostrato dalla riduzione con pesi 1/2), ma appartiene alla classe APX.
+    
+    Esistono algoritmi efficienti che garantiscono una soluzione vicina all'ottimo:
+    
+    - **2-Approximation:** Basato sull'Albero di Copertura Minimo (MST).
+        
+    - **Algoritmo di Christofides:** Garantisce un'approssimazione di fattore $1.5$ (o $3/2$).
