@@ -728,211 +728,620 @@ Rapporto: $2n / n = 2$.
 
 Questo dimostra che non possiamo dimostrare un fattore inferiore a 2 per questo algoritmo specifico.
 
-
-
-# Il resto è ancora da rielaborare
 ---
----
-
-### Il Paradosso del Calcolo (e la sua soluzione)
-
-_"Se il problema è NP-Hard e non conosciamo $OPT(I)$, come facciamo a dimostrare che il nostro algoritmo è vicino a $OPT(I)$?"_
-
-È come cercare di dimostrare che sei alto quasi quanto una persona invisibile di cui non conosci l'altezza.
-
-**La Soluzione: Il Lower Bound (Limite Inferiore)**
-
-Per aggirare il problema, usiamo un "proxy" o un'approssimazione dell'ottimo che siamo in grado di calcolare facilmente.
-
-Cerchiamo un valore LB (Lower Bound) che sappiamo per certo essere minore o uguale all'ottimo:
-
-$$LB(I) \le OPT(I)$$
-
-La strategia di dimostrazione diventa quindi un processo a tre passi:
-
-1. Troviamo un **Lower Bound (LB)** efficiente da calcolare (es. il costo del Minimum Spanning Tree per il TSP).
-    
-2. Dimostriamo che il nostro algoritmo $A$ produce una soluzione che è legata a questo LB da un fattore costante (es. $A(I) \le 2 \cdot LB$).
-    
-3. Usiamo la proprietà transitiva:
-    $$A(I) \le 2 \cdot LB(I) \le 2 \cdot OPT(I)$$
-
-Ecco fatto! Abbiamo dimostrato che $\rho = 2$ senza mai conoscere il vero valore di $OPT$.
-
-
-$2 \cdot LB$ è un **upper bound (limite superiore)** del costo del tuo algoritmo, ma con una caratteristica speciale: è un upper bound che **possiamo calcolare**.
-
-Proviamo a sviscerare questa intuizione, perché è il cuore dell'analisi.
-
-### La catena della sicurezza
-
-Immagina di voler dimostrare che il tuo algoritmo non spende mai più del doppio dell'ottimo ($2 \cdot OPT$). Il problema è che $OPT$ è un fantasma: non sai quanto vale.
-
-Quindi costruisci questa catena logica:
-
-1. **Il costo del tuo algoritmo ($ALG$):** È _esattamente_ (o al massimo) $2 \cdot LB$.
-    
-    - Nel Vertex Cover: $ALG = 2 \cdot |E'|$.
-        
-    - Questo valore lo conosci! Se il tuo matching ha 50 archi, sai che il tuo algoritmo userà 100 vertici.
-        
-2. **Il confronto con il fantasma ($OPT$):**
-    
-    - Sappiamo che $LB \le OPT$ (perché l'ottimo deve coprire almeno gli archi del matching).
-        
-    - Moltiplichiamo tutto per 2: **$2 \cdot LB \le 2 \cdot OPT$**.
-        
-
-### Mettiamo tutto insieme
-
-$$ALG = \underbrace{2 \cdot LB}_{\text{Limite calcolabile}} \le \underbrace{2 \cdot OPT}_{\text{Limite ideale}}$$
-
-Quindi sì, $2 \cdot LB$ funge da "tetto" sicuro.
-
-Tu puoi dire: "Non so quanto sia l'ottimo, ma so che il mio algoritmo spende $2 \cdot LB$. E dato che $2 \cdot LB$ è sicuramente più piccolo di $2 \cdot OPT$, sono salvo: non ho sforato il fattore 2."
-
-### Perché è geniale?
-
-Stai usando una quantità "pessimistica" per l'ottimo.
-
-Dire che $OPT \ge LB$ è come dire "L'ottimo è almeno grande quanto il matching".
-
-Anche nella peggiore delle ipotesi (in cui l'ottimo fosse piccolo, cioè proprio uguale a $LB$), il tuo algoritmo sarebbe comunque "solo" il doppio ($2 \cdot LB$).
-
-Se l'ottimo fosse più grande di $LB$, tanto meglio! Il tuo algoritmo sarebbe ancora più vicino all'ottimo di quanto pensi (il fattore reale sarebbe minore di 2).
+## Vertex Cover Non Pesato
+Non approfondito e non è materiale d'esame
 
 ---
 
-#### Esempio Pratico: Calcolo del fattore per TSP Metrico (2-Approx)
+### Approssimazione Vertex Cover: "Relax & Round"
 
-Applichiamo subito il metodo al **TSP Metrico** usando l'algoritmo basato sull'MST (Minimum Spanning Tree), che abbiamo citato prima.
+Il problema del Vertex Cover (copertura dei vertici) ci chiede di trovare il numero minimo di vertici per "toccare" tutti gli archi del grafo.
+Sappiamo che trovare la soluzione ottima esatta è **NP-Hard**. Non possiamo farlo velocemente.
+Gli altri metodi di approssimazione hanno un fattore di approssimazione troppo alto, quindi proviamo a cambiare strategia.
 
-Passo 1: Identificare il Lower Bound ($LB$)
+L'idea geniale è questa:
 
-Immagina la soluzione ottima del TSP: è un ciclo che tocca tutti i nodi.
-
-Se rimuoviamo un arco qualsiasi da questo ciclo ottimo, otteniamo un cammino che tocca tutti i nodi (uno Spanning Path).
-
-Uno Spanning Path è un tipo di albero di copertura.
-
-Poiché l'MST è l'albero di copertura di costo minimo assoluto, il suo costo deve essere inferiore o uguale al costo di quel cammino, e quindi inferiore al ciclo ottimo.
-
-$$Costo(MST) \le Costo(OPT)$$
-
-Abbiamo il nostro $LB = Costo(MST)$.
-
-Passo 2: Analizzare l'algoritmo
-
-L'algoritmo "raddoppia" gli archi dell'MST per creare un grafo Euleriano e poi trova un ciclo.
-
-Il costo del grafo raddoppiato è esattamente $2 \cdot Costo(MST)$.
-
-Grazie alle scorciatoie (che non aumentano il costo per la disuguaglianza triangolare), il tour finale $A(I)$ non costerà più del grafo raddoppiato:
-
-$$A(I) \le 2 \cdot Costo(MST)$$
-
-Passo 3: Conclusione (Calcolo di $\rho$)
-
-Mettiamo insieme i pezzi:
-
-$$A(I) \le 2 \cdot Costo(MST) \le 2 \cdot Costo(OPT)$$
-
-Dividendo tutto per $OPT$ (che è positivo):
-
-$$\frac{A(I)}{OPT(I)} \le 2$$
-
-Quindi, il fattore di approssimazione è **2**.
-
-#### Classi di Approssimabilità (Approfondimento)
-
-Non tutti i problemi sono uguali. In base a che tipo di $\rho$ riusciamo a ottenere, classifichiamo i problemi in classi di complessità (trovi i dettagli nelle slide "Complexity Theory"):
-
-1. **APX (Approximable):** Problemi che ammettono un'approssimazione con $\rho$ costante (es. Vertex Cover, TSP Metrico).
+1. **Formuliamo** il problema come se fosse una scelta binaria rigida (prendo o non prendo il nodo). Questo è difficile (__Programmazione Lineare Intera - ILP__).
     
-2. **PTAS (Polynomial Time Approximation Scheme):** Possiamo scegliere quanto essere precisi. Per ogni $\epsilon > 0$, esiste un algoritmo con fattore $(1+\epsilon)$. Il tempo però può dipendere esponenzialmente da $1/\epsilon$.
+2. **Rilassiamo** (Relax) le regole: permettiamo di prendere "frazioni" di nodi (es. prendo mezzo nodo). Questo diventa facile da risolvere (__Programmazione Lineare - LP__).
     
-3. **FPTAS (Fully PTAS):** Il Santo Graal. Come sopra, ma il tempo è polinomiale anche rispetto a $1/\epsilon$ (es. Knapsack Problem).
+3. **Arrotondiamo** (Round): convertiamo le frazioni in scelte binarie (0 o 1) per ottenere una soluzione valida reale (ammissibile al problema ILP).
+
+### Approssimiamo l'algoritmo
+
+Vediamo i dettagli formali per applicare l'approssimazione Relax&Round per il VertexCover
+
+#### Passo 1: Formulazione ILP (Integer Linear Programming)
+
+Immagina di associare a ogni vertice $v$ una variabile $x_v$.
+
+- $x_v = 1$: il vertice è nel cover.
+- $x_v = 0$: il vertice non è nel cover.
+
+Vogliamo minimizzare il numero di vertici scelti ($\sum x_v$) con il vincolo che ogni arco $(u,v)$ sia coperto, cioè almeno uno dei due estremi deve essere scelto ($x_u + x_v \ge 1$).
+
+Il vincolo difficile è che $x_v \in \{0, 1\}$. Questo vincolo di "interezza" rende il problema difficile.
+
+Abbiamo quindi: $$
+\begin{aligned}
+& \text{Formulazione ILP di Vertex Cover} \\
+& \min \quad \sum_{v \in V} x_v \\
+& \text{s.t.} \\
+& x_v + x_u \ge 1 \quad \forall (v, u) \in E \\
+& x_v \in \{0, 1\} \quad \forall v \in V
+\end{aligned}
+$$
+#### Passo 2: Rilassamento (Relax)
+
+Rimuoviamo il vincolo rigido $x_v \in \{0, 1\}$ e lo sostituiamo con $0 \le x_v \le 1$.
+
+Abbiamo quindi:$$
+\begin{aligned}
+& \text{Formulazione PL di Vertex Cover frazionario} \\
+& \min \quad \sum_{v \in V} x_v \\
+& \text{s.t.} \\
+& x_v + x_u \ge 1 \quad \forall (v, u) \in E \\
+& x_v \in [0, 1] \quad \forall v \in V
+\end{aligned}
+$$
+
+Ora stiamo risolvendo un problema di **Programmazione Lineare (LP)**.
+
+- Possiamo risolverlo in **tempo polinomiale** (è facile per un computer).
     
-4. **Non-Approssimabili (Log-APX o peggio):** Problemi dove $\rho$ dipende dalla dimensione dell'input $n$. Esempio: **Set Cover** ha un fattore $\ln(n)$.
+- Otterremo una soluzione ottima _frazionaria_ $x^*$. Ad esempio, potremmo avere $x^*_A = 0.5, x^*_B = 0.5, x^*_C = 0$.
 
-***
-## Algoritmo 2-Approx (Approfondimento)
+**Nota importante:** Il costo di questa soluzione ottima frazionaria ($Cost(LP)$) sarà sicuramente _minore o uguale_ al costo della soluzione ottima intera ($Cost(OPT)$), perché abbiamo meno restrizioni.
 
-Questo è l'approccio più intuitivo. L'idea è: _"Non so trovare il ciclo perfetto, ma so trovare l'albero più economico che collega tutti. Partiamo da lì."_
+#### Passo 3: Arrotondamento (Round)
 
-**I Passaggi (Step-by-Step):**
+Ora dobbiamo tornare alla realtà. Non possiamo prendere "0.5 vertici". 
+Dobbiamo decidere: 0 o 1?
 
-1. **Minimum Spanning Tree (MST):** Calcola l'Albero di Copertura Minimo del grafo $G$. Sia $T$ questo albero.
+La regola è semplice:
+
+- Se $x^*_v \ge 0.5$, allora impostiamo $x_v = 1$ (prendiamo il vertice).
     
-    - _Perché?_ Perché $Cost(T) \le Cost(OPT)$. È il modo più economico per connettere tutto, anche se non è un ciclo.
+- Se $x^*_v < 0.5$, allora impostiamo $x_v = 0$ (scartiamo il vertice).
+
+**Perché funziona (Correttezza/Ammissibilità)?**
+
+Dobbiamo garantire che tutti gli archi siano coperti.
+
+Per ogni arco $(u,v)$, il vincolo LP diceva che $x^*_u + x^*_v \ge 1$.
+
+Matematicamente, è impossibile che due numeri siano entrambi strettamente minori di 0.5 e la loro somma sia $\ge 1$.
+
+Quindi, almeno uno tra $x^*_u$ e $x^*_v$ deve essere $\ge 0.5$.
+
+Di conseguenza, il nostro algoritmo arrotonderà almeno uno dei due a 1, coprendo l'arco.
+
+Ovviamente non siamo certi che la soluzione sia ottima, ma possiamo dire che sia ammissibile.
+
+---
+###  3. Analisi del Fattore di Approssimazione (Cruciale!)
+
+Vogliamo dimostrare che il costo della soluzione restituita dal nostro algoritmo $Cost(APPROX)$ è al massimo il doppio del costo della soluzione ottima ideale $Cost(OPT)$.
+
+Definiamo i tre "attori" in gioco:
+
+1. **$Cost(OPT)$**: Il costo della soluzione ottima **Intera** (il "vero" ottimo del problema, spesso impossibile da calcolare).
+    
+2. **$Cost(X^*)$**: Il costo della soluzione ottima **Rilassata/Frazionaria** (calcolata tramite LP).
+    
+    - _Nota Bene:_ La soluzione $X^*$ è matematicamente perfetta per il problema rilassato, ma è **quasi sempre INAMMISSIBILE** per il problema originale (non puoi comprare "mezzo nodo"). Tuttavia, ci serve come punto di riferimento matematico (Lower Bound).
         
-2. **Raddoppiamento (Doubling):** Raddoppia ogni arco di $T$. Ottieni un multigrafo $G'$ dove ogni arco dell'albero appare due volte.
+3. **$Cost(APPROX)$**: Il costo della nostra soluzione **Arrotondata** (la soluzione reale che l'algoritmo restituisce, valida e intera).
+
+#### Passo 1: Relazione tra Rilassato (LP) e Ottimo (ILP)
+
+Il problema rilassato (LP) cerca il minimo in uno spazio di soluzioni molto più ampio di quello intero (ILP), poiché ammette anche le frazioni.
+
+Essendo meno vincolato, il problema LP riesce a trovare un costo _più basso o uguale_ rispetto a quando siamo costretti a usare solo numeri interi.
+
+Quindi, il costo frazionario è un **Lower Bound** (limite inferiore) del costo vero:
+
+$$Cost(X^*) \le Cost(OPT)$$
+
+_(Intuizione: $X^*$ costa poco perché "bara" usando le frazioni; $OPT$ costa di più perché deve rispettare le regole dell'interezza).*
+
+#### Passo 2: Relazione tra Arrotondamento e Rilassato
+
+Analizziamo il __costo introdotto dalla fase di arrotondamento__ per ogni singolo vertice $v$.
+
+La nostra regola è: se $x^*_v \ge 0.5 \implies x_v = 1$, altrimenti $0$.
+
+Confrontiamo il valore arrotondato $x_v$ con il valore frazionario originale $x^*_v$:
+
+- Se $x_v = 0$: il costo è nullo, la disuguaglianza $0 \le 2 \cdot x^*_v$ regge sempre.
     
-    - _Perché?_ In un grafo, un **Ciclo Euleriano** (un giro che attraversa ogni arco esattamente una volta e torna all'inizio) esiste se e solo se tutti i nodi hanno **grado pari**. Raddoppiando gli archi, ogni nodo avrà grado $2 \times k$, quindi sicuramente pari!
+- Se $x_v = 1$: questo accade solo se $x^*_v \ge 0.5$.
+    
+    - Matematicamente: $1 \le 2 \cdot 0.5$.
         
-3. **Ciclo Euleriano:** Trova un ciclo euleriano $E$ in $G'$. Questo è facile da fare in tempo lineare.
-    
-4. **Scorciatoie (Shortcutting):** Trasforma il ciclo euleriano in un Ciclo Hamiltoniano. Scorri la lista dei nodi del ciclo euleriano; se incontri un nodo che hai già visitato, saltalo e vai direttamente al successivo non visitato.
-    
-    - _Il trucco:_ Grazie alla **disuguaglianza triangolare**, saltare un nodo (andare da $u$ a $w$ invece di fare $u \to v \to w$) non aumenta mai il costo.
+    - Quindi: $x_v \le 2 \cdot x^*_v$.
         
 
-**Analisi del Costo (Il fattore 2):**
+In entrambi i casi, paghiamo al massimo il doppio del valore frazionario:
 
-- Costo MST $\le 1 \cdot OPT$.
+$$x_v \le 2 \cdot x^*_v \quad \forall v \in V$$
+
+#### Passo 3: Conclusione (La Catena di Disuguaglianze)
+
+Sommiamo i costi su tutti i vertici per ottenere il costo totale della nostra soluzione ($Cost(APPROX)$):
+
+$$\begin{aligned} Cost(APPROX) &= \sum_{v \in V} x_v \\ &\le \sum_{v \in V} 2 \cdot x^*_v && \text{(per il Passo 2)} \\ &= 2 \cdot \sum_{v \in V} x^*_v \\ &= 2 \cdot Cost(X^*) \end{aligned}$$
+
+Ora sostituiamo $Cost(X^*)$ usando la disuguaglianza del **Passo 1**:
+
+$$Cost(APPROX) \le 2 \cdot Cost(X^*) \le 2 \cdot Cost(OPT)$$
+
+**Teorema Dimostrato:** L'algoritmo Relax & Round restituisce una soluzione valida con un costo che non supera mai il doppio dell'ottimo.
+
+### Bonus: spiegazione del fattore 2
+
+Il fattore **2** non è casuale, ma è conseguenza diretta della necessità di garantire una soluzione valida (**Safety**).
+
+1. **Il Vincolo (Safety):**
     
-- Grafo Raddoppiato = $2 \cdot Costo(MST) \le 2 \cdot OPT$.
+    Per coprire un arco $(u,v)$, la somma delle variabili frazionarie deve essere $\ge 1$. Nel caso peggiore, la soluzione LP ripartisce il peso equamente: $x^*_u = 0.5$ e $x^*_v = 0.5$.
     
-- Le scorciatoie non peggiorano il costo.
+    Per non lasciare l'arco scoperto, siamo **costretti** a porre la soglia di arrotondamento a **0.5** (se fosse più alta, arrotonderemmo entrambi a 0 e l'arco non sarebbe coperto).
     
-- **Risultato:** La soluzione è $\le 2 \cdot OPT$.
+2. **Il Calcolo (Efficiency):**
     
+    Il fattore di approssimazione è il rapporto massimo tra il costo che paghiamo (1, il nodo intero) e il costo che aveva calcolato l'LP (la soglia minima che fa scattare l'acquisto).
+    
+    $$\text{Fattore} = \frac{\text{Costo Arrotondato}}{\text{Soglia Minima}} = \frac{1}{0.5} = \mathbf{2}$$
+    
+
+**In breve:** Poiché dobbiamo accettare valori bassi fino a **1/2** per garantire la correttezza, il nostro errore massimo sarà l'inverso di quel valore, ovvero **2**.
+
+#BadNews. `Non  noto nessun algoritmo di approssimazione per Vertex Cover con fattore di approssimazione migliore di due, e non e noto se possibile approssimare meglio di due o no.`
+
+---
+_Riprendiamo il discorso sul commesso viaggiatore, poi al massimo lo spostiamo dopo
 
 ---
 
-### 2. Algoritmo di Christofides (1.5-Approx)
+## TSP generale è approssimabile?
 
-Nicos Christofides (nel 1976) si chiese: _"Raddoppiare tutti gli archi è uno spreco enorme. Possiamo rendere i gradi pari aggiungendo meno peso?"_
+#TEOREMA  _Se $P \neq NP$, allora per ogni costante $\rho \ge 1$ non esiste un algoritmo di approssimazione polinomiale per il TSP generale con fattore $\rho$._
 
-La risposta è sì, lavorando solo sui nodi "problematici".
+#### 1. La riduzione (Costruzione del Grafo $G'$)
 
-**I Passaggi (Step-by-Step):**
+Partiamo da un’istanza del problema del **Ciclo Hamiltoniano (HC)**: un grafo $G = (V, E)$. Vogliamo sapere se $G$ ha un ciclo che tocca tutti i vertici. Costruiamo un nuovo grafo completo $G' = (V, E')$ per il TSP:
 
-1. **Minimum Spanning Tree (MST):** Calcola l'MST, $T$. (Come prima).
-    
-2. **Individua i Nodi Dispari:** Chiama $O$ l'insieme dei nodi che in $T$ hanno grado dispari.
-    
-    - _Teorema:_ Per il "Lemma delle strette di mano", il numero di nodi con grado dispari in un grafo è sempre **pari**. Quindi $|O|$ è un numero pari.
-        
-3. **Minimum Weight Perfect Matching:** Costruisci un **Matching Perfetto di Costo Minimo** solo sui nodi in $O$. Chiamiamo questo insieme di archi $M$.
-    
-    - In pratica: accoppiamo i nodi dispari tra loro spendendo il meno possibile.
-        
-4. **Unione:** Aggiungi gli archi del matching $M$ all'albero $T$. Ottieni un multigrafo $H = T \cup M$.
-    
-    - _Risultato:_ I nodi che avevano grado pari in $T$ non sono stati toccati (o toccati due volte se facevano parte del matching, restando pari). I nodi che avevano grado dispari in $T$ hanno ricevuto esattamente un arco in più dal matching, diventando pari. **Tutti i nodi ora hanno grado pari!**
-        
-5. **Ciclo Euleriano & Shortcut:** Come nell'algoritmo precedente, trova il ciclo euleriano in $H$ e applica le scorciatoie.
+- Se un arco $e$ era presente nel grafo originale $G$, gli assegniamo costo **1**.
+- Se l'arco $e$ **non** era in $G$, gli assegniamo un costo pesantissimo: **$\rho|V| + 1$**.
     
 
-Analisi del Costo (Il fattore 1.5):
+#### 2. Analisi dei due casi
 
-Qui serve attenzione, è la parte che distingue il 30 dalla lode.
+- **Caso SI (G ha un ciclo hamiltoniano):** In $G'$ esiste un tour di costo esattamente **$|V|$** (composto da $|V|$ archi di costo 1). Questo è il valore ottimo $OPT$. Un algoritmo di approssimazione $A$ con fattore $\rho$ deve restituire una soluzione $SOL \le \rho \cdot OPT$. Quindi $SOL \le \rho \cdot |V|$.
+    
+- **Caso NO (G non ha un ciclo hamiltoniano):** Qualsiasi tour in $G'$ deve usare almeno un arco che non era in $G$ (quelli che costano $\rho|V| + 1$). Il costo del tour ottimo in $G'$ sarà almeno $(\rho|V| + 1) + (|V| - 1)$, che è **strettamente maggiore** di $\rho|V|$. Di conseguenza, anche l'algoritmo $A$ dovrà restituire un valore $SOL > \rho|V|$.
+    
 
-- Sappiamo che $Costo(T) \le 1 \cdot OPT$.
-    
-- **Quanto costa il Matching $M$?**
-    
-    - Immagina il ciclo ottimo $OPT$ solo sui nodi dispari $O$. Questo ciclo è formato da due matching alternati.
-        
-    - Il matching che abbiamo trovato noi è quello di costo minimo, quindi non può costare più della metà del ciclo ottimo ristretto a quei nodi.
-        
-    - Poiché (per disuguaglianza triangolare) il ciclo sui nodi $O$ non costa più del ciclo su _tutti_ i nodi, abbiamo:
-        
-    - $Costo(M) \le \frac{1}{2} Costo(OPT)$.
-        
-- Totale:
-    
-    $$Costo(Christofides) = Costo(T) + Costo(M) \le 1 \cdot OPT + 0.5 \cdot OPT = 1.5 \cdot OPT$$
+#### 3. Conclusione
 
-***
+Se avessimo l'algoritmo $A$, basterebbe guardare il costo della soluzione prodotta:
+
+1. Se $costo \le \rho|V|$, allora $G$ ha un ciclo hamiltoniano.
+    
+2. Se $costo > \rho|V|$, allora $G$ non lo ha.
+    
+
+Avremmo risolto un problema NP-completo in tempo polinomiale, il che implicherebbe $P = NP$.
+E questo __sarebbe assurdo__.
+
+---
+### Contesto generale
+
+Il **Travelling Salesman Problem (TSP)** è un classico problema di ottimizzazione NP-hard.  
+Abbiamo visto che, nel caso generale, **non è possibile progettare algoritmi di approssimazione con fattore costante**, a meno di risultati molto forti sulla complessità.
+
+La buona notizia è che questo risultato negativo **non vale per tutte le istanze**. Esiste infatti un sottoinsieme di istanze particolarmente rilevanti, in cui la funzione costo sugli archi rispetta la **disuguaglianza triangolare**. In questo caso diventa possibile progettare algoritmi di approssimazione efficaci.
+
+## TSP con disuguaglianza triangolare (TSPdt o TSP metric)
+
+Ricordiamo che si tratta del problema del tsp con una garanzia in più: la __diseguaglianza triangolare__.
+### Proprietà triangolare
+La funzione costo sugli archi soddisfa:
+$$
+\forall i,j,k \in V:\quad c(i,j) \le c(i,k) + c(k,j)
+$$
+
+📌 **Intuizione**  
+	Andare **direttamente** da $i$ a $j$ non costa più che passare per un nodo intermedio.
+
+### Definizione formale del problema
+
+**Problema del Commesso Viaggiatore con disuguaglianza triangolare (TSPdt)**
+
+**Input**
+- Grafo completo non diretto $G = (V,E)$
+- Funzione costo $c : E \rightarrow \mathbb{R}^+$
+- $c$ soddisfa la disuguaglianza triangolare
+
+**Output**
+- Un **ciclo hamiltoniano** su $G$ di **costo minimo**
+
+## Approssimazione per TSPdt
+
+Per questo problema, un algoritmo di approssimazione deve restituire **una soluzione ammissibile**, cioè un ciclo hamiltoniano, che può avere un costo maggiore di quello ottimo.  
+Nel seguito verranno presentati **due algoritmi progettati ad-hoc** per il TSPdt; il secondo rappresenta un miglioramento del primo.
+
+### Notazione sui costi
+
+Dato un sottografo:
+$$
+G' = (V', E') \subseteq G = (V,E)
+$$
+
+si definisce il costo:
+$$
+\text{cost}(G') = \sum_{e \in E'} c(e)
+$$
+
+### Concetto utile: Ciclo Euleriano
+
+Un concetto fondamentale per entrambi gli algoritmi è quello di **ciclo euleriano**.  
+Un ciclo euleriano è un cammino chiuso che attraversa **esattamente una volta ciascun arco del grafo**.
+
+Un risultato classico afferma che un grafo ammette un ciclo euleriano **se e solo se tutti i suoi nodi hanno grado pari**. 
+Quando questa condizione è soddisfatta, il ciclo euleriano può essere trovato in **tempo polinomiale**.
+
+## Proprietà fondamentale della disuguaglianza triangolare
+
+#Teorema — **Accorciamento dei cammini nei grafi metrici**
+
+Sia $G$ un grafo con archi pesati tale che la funzione costo soddisfi la **disuguaglianza triangolare**, cioè:
+$$
+\forall i,j,k \in V:\quad c(i,j) \le c(i,k) + c(k,j)
+$$
+
+Sia inoltre:
+$$
+C = \langle v_1, v_2, \dots, v_{k+1} \rangle
+$$
+un **cammino semplice** in $G$, composto da $k$ archi.
+
+Allora vale:
+$$
+c(v_1, v_{k+1}) \le \sum_{i=1}^{k} c(v_i, v_{i+1})
+$$
+
+In altre parole, **il costo dell’arco diretto tra il primo e l’ultimo nodo del cammino non è maggiore del costo dell’intero cammino**.
+
+
+**Significato intuitivo**
+
+Il teorema formalizza un’idea molto naturale: nei grafi che rispettano la disuguaglianza triangolare, **fare deviazioni non conviene**.  
+Se si percorre un cammino passando per nodi intermedi, il costo complessivo non può essere inferiore a quello del collegamento diretto tra gli estremi.
+
+Geometricamente, è l’equivalente del fatto che **la linea retta è il percorso più breve**.
+
+### Dimostrazione
+
+**Idea generale della dimostrazione**
+
+La dimostrazione si basa su un’**induzione sulla lunghezza del cammino**, cioè sul numero di archi $k$.
+
+L’idea è quella di:
+- spezzare il cammino in parti più corte,
+- usare la disuguaglianza triangolare per eliminare nodi intermedi,
+- ridurre progressivamente il cammino fino a collegare direttamente i due estremi.
+
+**Caso base**
+
+Nel caso $k = 2$, il cammino è:
+$$
+v_1 \rightarrow v_2 \rightarrow v_3
+$$
+
+La tesi diventa:
+$$
+c(v_1, v_3) \le c(v_1, v_2) + c(v_2, v_3)
+$$
+
+Questa è **esattamente la disuguaglianza triangolare**, quindi il caso base è immediatamente verificato.
+
+**Passo induttivo**
+
+Si assume che la tesi sia vera per tutti i cammini di lunghezza minore di $k$ e si considera un cammino di lunghezza $k$:
+$$
+C = \langle v_1, v_2, \dots, v_{k-1}, v_k, v_{k+1} \rangle
+$$
+
+Il costo totale del cammino può essere scritto come:
+$$
+\sum_{i=1}^{k} c(v_i, v_{i+1})
+=
+\sum_{i=1}^{k-2} c(v_i, v_{i+1})
++ c(v_{k-1}, v_k)
++ c(v_k, v_{k+1})
+$$
+
+Applicando la disuguaglianza triangolare agli ultimi due archi si ottiene:
+$$
+c(v_{k-1}, v_k) + c(v_k, v_{k+1}) \ge c(v_{k-1}, v_{k+1})
+$$
+
+Inoltre, per ipotesi induttiva, il costo del sottocammino che va da $v_1$ a $v_{k-1}$ è almeno:
+$$
+c(v_1, v_{k-1})
+$$
+
+Combinando questi risultati e applicando nuovamente la disuguaglianza triangolare si ottiene:
+$$
+\sum_{i=1}^{k} c(v_i, v_{i+1}) \ge c(v_1, v_{k+1})
+$$
+
+Questo conclude il passo induttivo.
+
+#InterpretazioneGrafica
+
+Ogni applicazione della disuguaglianza triangolare consente di **eliminare un nodo intermedio** dal cammino senza aumentare il costo.  
+Ripetendo questo processo, il cammino viene progressivamente “raddrizzato” fino a diventare un singolo arco tra i due estremi.
+
+**Importanza del teorema**
+
+Questo risultato è fondamentale negli algoritmi di approssimazione per il **TSP con disuguaglianza triangolare**, perché consente di:
+- visitare nodi più volte durante una costruzione intermedia (ad esempio con cicli euleriani),
+- eliminare successivamente le visite ridondanti,
+- ottenere un **ciclo hamiltoniano** senza aumentare il costo totale.
+
+Il teorema giustifica formalmente la possibilità di “saltare” nodi già visitati mantenendo un buon controllo sul costo della soluzione.
+
+__Grazie alla disuguaglianza triangolare, ogni cammino può essere accorciato collegando direttamente i suoi estremi senza aumentare il costo totale.__
+
+---
+## Algoritmo di 2-approssimazione per TSP con disuguaglianza triangolare
+
+Consideriamo il problema del **TSP con disuguaglianza triangolare** (TSPdt), cioè su un grafo completo $G = (V,E)$ con funzione di costo $c$ tale che:
+$$c(u,w) \le c(u,v) + c(v,w) \quad \forall u,v,w \in V$$
+
+### Descrizione dell’algoritmo (MST-based)
+
+L’algoritmo di 2-approssimazione procede come segue:
+
+1. Si calcola un **Minimum Spanning Tree** $T$ di $G$ e si sceglie un nodo $r$ come radice;
+2. Si **raddoppiano tutti gli archi di $T$**, ottenendo un multigrafo in cui ogni nodo ha grado pari;
+3. Si calcola un **ciclo euleriano** $E$ sul multigrafo;
+4. A partire da $E$, si costruisce un **ciclo hamiltoniano** $H$ saltando i nodi già visitati (shortcut);
+5. Si restituisce $H$.
+
+---
+## Concetti da ripassare
+
+### Minimum Spanning Tree (MST)
+
+**Definizione**
+Dato un grafo **non orientato**, **connesso** e pesato $G=(V,E)$ con pesi $w(e)\ge 0$, un **Minimum Spanning Tree** è un sottoinsieme di archi $T \subseteq E$ tale che:
+- $T$ connette tutti i vertici (è uno **spanning tree**),
+- non contiene cicli,
+- ha costo totale minimo:
+$$ w(T)=\sum_{e\in T} w(e) $$
+tra tutti gli spanning tree di $G$.
+
+Uno spanning tree su $n=|V|$ nodi ha sempre **esattamente** $n-1$ archi.
+
+**Intuizione**
+L’MST è il modo **più economico** di collegare tutti i nodi senza “sprechi” (cioè senza cicli).
+Non è necessariamente unico: se ci sono pesi uguali, possono esistere più MST.
+
+#### Proprietà chiave (utili per dimostrazioni)
+
+**Cut Property (proprietà del taglio)**
+Considera un taglio $(S, V\setminus S)$.  
+Se $e$ è l’arco di **peso minimo** che attraversa quel taglio, allora esiste un MST che contiene $e$ (in molte formulazioni: $e$ è “safe”).
+
+Questa proprietà giustifica perché algoritmi greedy come Kruskal/Prim funzionano.
+
+**Cycle Property (proprietà del ciclo)**
+In qualunque ciclo, un arco di **peso massimo** nel ciclo **non** può appartenere a un MST (se è strettamente maggiore degli altri), perché togliendolo resti connesso ma spendi meno.
+
+---
+
+#### Algoritmi classici
+
+**Kruskal (edge-based)**
+Idea greedy: ordina gli archi per peso crescente e aggiungili se **non creano un ciclo** (tipicamente con Union-Find).
+- Output: una foresta che diventa albero quando raggiunge $n-1$ archi.
+- Tempo tipico: $O(m \log m)$ (ordinamento), con $m=|E|$.
+
+**Prim (vertex-based)**
+Idea greedy: cresci un albero partendo da una radice, aggiungendo ogni volta l’arco minimo che collega l’albero a un nodo esterno (con coda di priorità).
+- Tempo tipico: $O(m \log n)$ con heap.
+
+#### Perché serve nel TSP con disuguaglianza triangolare
+Nel 2-approx per TSPdt si usa l’MST perché è un **lower bound** sul costo del tour ottimo $H^*$:
+togliendo un arco da un tour ottimo ottieni uno spanning tree $T'$ con
+$$ w(T') \le w(H^*) $$,
+e poiché $T$ è minimo,
+$$ w(T) \le w(T') \le w(H^*) $$.
+Quindi $w(T)\le w(H^*)$.
+
+### DFS (Depth-First Search) e ordini di visita
+
+**Idea della DFS**
+La **DFS** (*Depth-First Search*, ricerca in profondità) esplora un grafo/albero seguendo questa strategia: da un nodo corrente si visita **un vicino non ancora visitato** e si continua “andando avanti” il più possibile lungo quel ramo. Quando non ci sono più vicini non visitati, si **torna indietro** (backtracking) all’ultimo nodo che aveva ancora alternative e si riprende da lì.
+
+Nel caso dei **grafi**, la DFS deve mantenere un insieme/array `visited` per evitare di entrare in cicli e rivisitare nodi già esplorati.
+
+#### Ordini di visita: pre-order, post-order, in-order
+
+- **Pre-order**: Nodo → Figli  
+- **Post-order**: Figli → Nodo  
+- **In-order (binario)**: Sinistra → Nodo → Destra
+
+--- 
+## Correttezza dei passi dell’algoritmo
+
+#### (a) Esistenza e calcolo del ciclo euleriano
+
+Dopo il raddoppio degli archi di $T$, ogni nodo ha grado pari, perché il grado di ciascun nodo raddoppia rispetto a quello nell’albero.
+
+Per il **teorema di Eulero**, un grafo connesso in cui tutti i nodi hanno grado pari ammette un ciclo euleriano.  
+Il ciclo $E$ può essere calcolato in tempo polinomiale, ad esempio seguendo una visita DFS in pre-ordine dell’albero $T$.
+
+#### (b) Costruzione del ciclo hamiltoniano
+
+Il ciclo hamiltoniano $H$ si ottiene visitando i nodi nell’ordine in cui compaiono in $E$, includendo ogni nodo **solo la prima volta** e saltando le visite successive.
+
+Questa operazione è sempre possibile perché il grafo di partenza $G$ è **completo**: tra ogni coppia di nodi esiste un arco, anche se non appartiene a $E$.
+
+Grazie alla disuguaglianza triangolare, la sostituzione di un cammino con un arco diretto (**shortcut**) non aumenta il costo.
+
+---
+
+### Teorema – Fattore di approssimazione
+
+**Teorema.** L’algoritmo descritto è una **2-approssimazione** per il problema TSPdt.
+
+#### Dimostrazione
+
+La dimostrazione si basa su due osservazioni fondamentali.
+
+**(1) Bound superiore sul costo della soluzione approssimata**
+
+Il ciclo euleriano $E$ percorre ogni arco di $T$ esattamente due volte, quindi:
+$$ cost(E) = 2 \cdot cost(T) $$.
+
+Poiché il ciclo hamiltoniano $H$ si ottiene da $E$ tramite shortcut che non aumentano il costo, vale:
+$$ cost(H) \le cost(E) \le 2 \cdot cost(T) $$.
+
+**(2) Bound inferiore sul costo della soluzione ottima**
+
+Sia $H^*$ un ciclo hamiltoniano ottimo. Rimuovendo un arco da $H^*$ otteniamo un albero di copertura $T'$, per cui:
+$$ cost(T') \le cost(H^*) $$
+
+Poiché $T$ è un minimum spanning tree, vale anche:
+$$ cost(T) \le cost(T') $$
+
+Combinando le disuguaglianze otteniamo:
+$$ cost(H^*) \ge cost(T) $$
+
+**Conclusione**
+
+Dalle due osservazioni segue:
+$$ cost(H) \le 2 \cdot cost(H^*) $$
+
+---
+
+### Tightness dell’analisi
+
+Il fattore di approssimazione $2$ è **tight**, cioè non migliorabile per questo algoritmo.
+
+#### Esempio
+
+Consideriamo un grafo completo con $n$ nodi e pesi definiti come segue:
+- $c(1,v) = 1$ per ogni $v = 2, \dots, n$;
+- $c(v,v+1) = 1$ per $v = 1, \dots, n-1$ e $c(n,1) = 1$;
+- tutti gli altri archi hanno costo $2$.
+
+Esiste un ciclo hamiltoniano ottimo di costo:
+$$ cost(H^*) = n $$
+
+Il minimum spanning tree può essere una **stella centrata nel nodo 1**, di costo $n-1$.
+Il ciclo euleriano risultante passa ripetutamente dal centro e, dopo le shortcut, il ciclo hamiltoniano approssimato utilizza:
+- $n-2$ archi di costo $2$,
+- $2$ archi di costo $1$.
+
+Il costo totale è quindi:
+$$ cost(H) = 2(n-2) + 2 = 2n - 2 $$
+
+Il rapporto di approssimazione è:
+$$ \frac{cost(H)}{cost(H^*)} = \frac{2n-2}{n} \to 2 \quad \text{per } n \to \infty $$
+
+
+
+### Osservazione finale
+
+Questo algoritmo è concettualmente semplice ma **non sfrutta informazioni strutturali più profonde** del problema. Per migliorare il fattore di approssimazione è necessario introdurre tecniche più raffinate, come nel caso dell’algoritmo di **Christofides (3/2-approssimazione)**.
+
+---
+# 3.1.2 Algoritmo di Christofides (TSPdt) — 3/2-approssimazione
+
+## Contesto e assunzioni
+Consideriamo **TSP con disuguaglianza triangolare** su grafo completo $G=(V,E)$ con costi $c$ tali che:
+$c(u,w) \le c(u,v) + c(v,w)\ \ \forall u,v,w \in V$.
+L’idea è costruire un **multigrafo euleriano più economico** rispetto al “raddoppia-MST” della 2-approssimazione.  
+
+---
+
+## Matching e Perfect Matching
+- **Matching**: insieme di archi a due a due disgiunti (nessun vertice è incidente a più di un arco del matching).
+- **Perfect matching**: matching che **copre tutti i vertici** (ogni vertice è incidente esattamente a un arco del matching).
+Condizione necessaria: il numero di nodi deve essere **pari**. 
+
+---
+
+## Algoritmo di Christofides (schema)
+1. Calcola un **MST** $T^*$ di $G$.
+2. Sia $V_d$ l’insieme dei nodi di **grado dispari** in $T^*$. Considera il sottografo completo $G_d$ indotto da $V_d$.
+3. Calcola un **minimum-weight perfect matching** $M^*$ su $G_d$.
+4. Costruisci il multigrafo $G' = T^* \uplus M^*$ (unione multinsieme degli archi).
+5. Calcola un **ciclo euleriano** $E$ in $G'$.
+6. Da $E$ costruisci un **ciclo hamiltoniano** $H$ facendo **shortcut** (salti i nodi già visitati).
+7. Restituisci $H$. 
+
+---
+
+## Perché l’algoritmo è sempre eseguibile
+
+### (a) Esistenza del perfect matching su $G_d$
+Serve che $|V_d|$ sia pari. Questo vale sempre perché in qualunque grafo la somma dei gradi è $2|E|$ (pari). Separando la somma dei gradi pari e la somma dei gradi dispari, la seconda deve essere pari; una somma di numeri dispari è pari **solo se** ci sono **un numero pari di termini**, quindi i nodi di grado dispari sono in numero pari. 
+
+Dato che $G_d$ è completo sui vertici $V_d$, l’esistenza del perfect matching segue, e il matching minimo si calcola in tempo polinomiale con algoritmi noti. 
+
+### (b) Esistenza del ciclo euleriano in $G'$
+In $T^*$ i nodi in $V_d$ hanno grado dispari. Aggiungendo $M^*$, ogni nodo di $V_d$ riceve **esattamente un arco in più**, quindi diventa di grado pari; i nodi già pari restano pari. Quindi **tutti i gradi in $G'$ sono pari** ⇒ esiste un ciclo euleriano $E$. 
+
+### (c) Shortcut per ottenere un ciclo hamiltoniano
+Come nella 2-approssimazione: seguendo l’ordine di $E$, si include un nodo solo la prima volta. Essendo $G$ completo e valendo la triangolare, gli shortcut sono sempre possibili e non aumentano il costo. 
+
+---
+
+## Teorema: fattore di approssimazione $3/2$
+**Teorema.** Christofides è una **$3/2$-approssimazione** per TSPdt. 
+
+### Idee chiave della prova
+Sia $H^*$ un tour ottimo.
+
+1) **Lower bound da MST**  
+Togliendo un arco da $H^*$ otteniamo uno spanning tree, quindi:
+$cost(H^*) \ge cost(T^*)$. 
+
+2) **Bound sul matching minimo**
+Considera $V_d$ (nodi dispari di $T^*$). Dal tour ottimo $H^*$ otteniamo tramite shortcut un ciclo $\Gamma$ che visita solo $V_d$ e:
+$cost(\Gamma) \le cost(H^*)$ (triangolare). 
+
+Poiché $|V_d|$ è pari, $\Gamma$ ha lunghezza pari e si può decomporre alternando gli archi in due matching disgiunti $M_1$ e $M_2$:
+$cost(\Gamma)=cost(M_1)+cost(M_2)\ge 2\cdot cost(M^*)$,
+da cui:
+$cost(M^*) \le \frac{cost(H^*)}{2}$.  
+
+3) **Costo del tour euleriano e shortcut**
+Il ciclo euleriano usa tutti gli archi di $T^*$ e $M^*$:
+$cost(E)=cost(T^*)+cost(M^*)$,
+e lo shortcut non aumenta:
+$cost(H)\le cost(E)$. 
+
+### Conclusione
+$cost(H)\le cost(T^*)+cost(M^*) \le cost(H^*)+\frac{cost(H^*)}{2}=\frac{3}{2}cost(H^*)$.
+
+---
+
+## Complessità (alto livello)
+- MST: tipicamente $O(m\log n)$ (su completo $m=\Theta(n^2)$).
+- Step dominante: **minimum-weight perfect matching** su $|V_d|\le n$, tipicamente $O(n^3)$ (come ordine di grandezza).
+Quindi il costo è dominato dal matching.
+
+---
+
+## Note utili per l’orale
+- Il “trucco” rispetto alla 2-approx è sostituire il raddoppio dell’MST con l’aggiunta di un matching minimo solo sui nodi dispari: così rendi euleriano il grafo spendendo “circa metà OPT” invece di “+MST intero”.
+- La parte delicata della prova è mostrare $cost(M^*)\le OPT/2$ usando $\Gamma$ e la decomposizione in due matching.

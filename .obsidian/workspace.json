@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "24753d100eddaef7",
@@ -186,23 +185,22 @@
   },
   "active": "ff556e79ede97d5d",
   "lastOpenFiles": [
+    "1_teoria_della_complessita.pdf",
+    "Code_Generated_Image.png",
+    "1_teoria_della_complessita.md",
+    "0_ripasso_complessità.md",
     "Pasted image 20260122190718.png",
     "Pasted image 20260122190350.png",
     "Pasted image 20260120180945.png",
     "Pasted image 20260120175042.png",
-    "1_teoria_della_complessita.pdf",
     "Untitled 1.base",
     "Untitled.base",
-    "1_teoria_della_complessita.md",
     "Pasted image 20260120155350.png",
-    "0_ripasso_complessità.md",
     "Gemini scaletta.md",
     "Pasted image 20260111121952.png",
-    "Code_Generated_Image.png",
     "Pasted image 20260113182650.png",
     "Pasted image 20260113175819.png",
     "Pasted image 20260111182131.png",
-    "Pasted image 20260111181847.png",
     "Pasted.md",
     "schema_classi_problemi.md",
     "README.md"
