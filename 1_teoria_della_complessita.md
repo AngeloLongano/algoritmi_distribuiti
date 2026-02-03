@@ -763,7 +763,8 @@ Vogliamo minimizzare il numero di vertici scelti ($\sum x_v$) con il vincolo che
 
 Il vincolo difficile è che $x_v \in \{0, 1\}$. Questo vincolo di "interezza" rende il problema difficile.
 
-Abbiamo quindi: $$
+Abbiamo quindi: 
+$$
 \begin{aligned}
 & \text{Formulazione ILP di Vertex Cover} \\
 & \min \quad \sum_{v \in V} x_v \\
@@ -776,7 +777,8 @@ $$
 
 Rimuoviamo il vincolo rigido $x_v \in \{0, 1\}$ e lo sostituiamo con $0 \le x_v \le 1$.
 
-Abbiamo quindi:$$
+Abbiamo quindi:
+$$
 \begin{aligned}
 & \text{Formulazione PL di Vertex Cover frazionario} \\
 & \min \quad \sum_{v \in V} x_v \\
