@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1_teoria_della_complessita.md",
+                "file": "4_fondamenti di algoritmi distribuiti.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "1_teoria_della_complessita"
+              "title": "4_fondamenti di algoritmi distribuiti"
             }
           }
         ]
@@ -185,24 +185,26 @@
   },
   "active": "ff556e79ede97d5d",
   "lastOpenFiles": [
+    "1_teoria_della_complessita.md",
+    "Untitled 1.base",
+    "0_ripasso_complessità.md",
+    "4_fondamenti di algoritmi distribuiti.md",
+    "4_fondamenti di algoritmi distribuiti.pdf",
+    "Pasted image 20260203175451.png",
+    "README.md",
+    "Untitled.base",
+    "Gemini scaletta.md",
     "1_teoria_della_complessita.pdf",
     "Code_Generated_Image.png",
-    "1_teoria_della_complessita.md",
-    "0_ripasso_complessità.md",
     "Pasted image 20260122190718.png",
     "Pasted image 20260122190350.png",
     "Pasted image 20260120180945.png",
     "Pasted image 20260120175042.png",
-    "Untitled 1.base",
-    "Untitled.base",
     "Pasted image 20260120155350.png",
-    "Gemini scaletta.md",
     "Pasted image 20260111121952.png",
     "Pasted image 20260113182650.png",
     "Pasted image 20260113175819.png",
-    "Pasted image 20260111182131.png",
     "Pasted.md",
-    "schema_classi_problemi.md",
-    "README.md"
+    "schema_classi_problemi.md"
   ]
 }
