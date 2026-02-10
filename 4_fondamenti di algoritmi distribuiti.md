@@ -125,8 +125,8 @@ Categorie tipiche:
 Per algoritmi sequenziali guardiamo tipicamente tempo e spazio; nel distribuito invece sono centrali:
 1. **Amount of communication**: numero di messaggi scambiati (o più fine: numero di bit).
 2. **Tempo**: ritardo massimo che possiamo avere durante la comunicazione.
-	   - _tempo ideale_: 1 unità di tempo per trasmettere 1 messaggio,
-	   - *tempo realistico/asincrono: i ritardi sono imprevedibili → spesso si conta la lunghezza della **catena di messaggi** più lunga (dipendenza causale) in un’esecuzione.
+	   - _tempo ideale_ (**sincrono**): 1 unità di tempo per trasmettere 1 messaggio,
+	   - *tempo realistico (**asincrono**): i ritardi sono imprevedibili → spesso si conta la lunghezza della **catena di messaggi** più lunga (dipendenza causale) in un’esecuzione.
 
 _N.B. A differenza dello studio di complessità degli algoritmi classici, mi concentro di più sulla comunicazione tra le varie entità, rispetto a considerare il costo computazionale nelle singole macchine._
 
@@ -145,8 +145,8 @@ Il requisito “un solo nodo inizia” è l’assunzione **Unique Initiator** (s
 Per discutere Bcast e FLOODING si assumono spesso le **standard restrictions**
 $$R=\{BL, CN, TR\}$$
 dove:
+-  $BL$ (**Bidirectional Links**): il grafo non è orientato  
 - $CN$ (**Connectivity**): il grafo è connesso (tutti raggiungibili)  
-- $BL$ (**Bidirectional Links**)  
 - $TR$ (**Total Reliability**): nessun guasto durante l’esecuzione 
 
 ---
@@ -202,7 +202,6 @@ quando parte:  
 
 se riceve I:  
     ignora  
-
 ```
 
 **Entità SLEEPING**  
@@ -244,7 +243,6 @@ se riceve I:  
 ```
 
 **Entità SLEEPING**  
-
 ```pseudo
 se riceve I da `sender`:
   per ogni vicino y ∈ N(x):
@@ -278,6 +276,21 @@ in DONE non invia più nulla. Quindi ogni nodo termina localmente.
 - $N(x)$ = insieme dei vicini di $x$
 - INITIATOR $s$
 - Diametro $D(G)$
+
+## **Misure di complessità nel distribuito: messaggi vs tempo**
+
+Nel distribuito si misurano soprattutto:
+
+1. **Amount of communication**: numero di messaggi (o bit) scambiati.
+2. **Tempo**: dipende dal **modello temporale** assunto.
+    
+    - **Total synchrony / Ideal time**: 1 unità di tempo per trasmettere 1 messaggio (ragionamento “a hop/round”).
+        
+    - **Asynchrony / Casual time**: clock non sincronizzati e ritardi imprevedibili; si misura il tempo come **lunghezza della longest message chain** tra tutte le possibili esecuzioni.
+
+> Nota importante: **la message complexity non dipende** dal fatto che il sistema sia sincrono o asincrono; la **time complexity sì**, perché cambia la nozione di “quanto dura” un’esecuzione.
+
+---
 
 ## Message complexity di FLOODING
 
@@ -313,20 +326,25 @@ $$M(\text{Flooding}(G)) = 2m - (n-1) = 2m - n + 1$$
 **Conclusione:**
 $$M(\text{Flooding}(G)) = 2m - n + 1 \in O(m)$$
 
+#Motivazione: _la somma dei gradi è $2m$ perché se ci pensi in un grafo connesso quando calcoli il grado di tutti i nodi, in realtà stai contando ogni arco due volte. Infatti ogni arco deve essere conteggiato e viene conteggiato 2 volte perché ha due nodi collegati_
+
 ---
 
-## Time complexity (ideal) di FLOODING
+## Time complexity di FLOODING
 #perché è $\Theta(D(G))$
 
 #### Definizioni
 
 - Distanza minima in un cammino da $a$ a $b$  $$d(a,b)$$
-- Eccentricità (radius nel senso “r(a)” delle slide):
+- Eccentricità _o Radius_ (distanza minima tra $a$ e il nodo più lontano $y$):
 $$r(a)=\max_y d(a,y)$$
-- Diametro:
+- Diametro (distanza tra i nodi più lontani tra loro nel grafo):
 $$D(G)=\max_a r(a)=\max_{x,y} d(x,y)$$
 
-### Upper bound per FLOODING 
+### A) Tempo  ***sincrono** = Ideal time (total synchrony)
+
+**Assunzione temporale**: “1 unità di tempo = 1 hop”, cioè in una unità ogni vicino riceve il messaggio (ragionamento a round).
+#### Upper bound per FLOODING 
 *tempo impiegato dal INITIATOR a raggiungere tutti*
 
 In ideal time (1 unità per hop), dopo $t$ unità hanno ricevuto $I$ tutti i nodi a distanza $\le t$ dal INITIATOR.  
@@ -336,16 +354,33 @@ $$T_s \le r(s)=\max_y d(s,y)$$
 Nel worst-case su tutte le scelte possibili di initiator:
 $$T(\text{Flooding}) \le \max_s r(s)=D(G)$$
 
-### Lower bound per qualsiasi broadcast (non solo flooding)
+#### Lower bound per qualsiasi broadcast (non solo flooding)
 Nel caso peggiore l’initiator può essere un nodo “estremo”, e qualche nodo può essere a distanza $D(G)$.  
 Quindi nessun algoritmo può fare meglio di:
 $$T(\text{Broadcast}(G)) \ge \max_{x,y} d(x,y)=D(G)$$ 
 
 **Conclusione (tight bound):**
 $$T(\text{Flooding}) = \Theta(D(G))$$ 
+_N.B. : il diametro di un grafo può essere massimo $n-1$. Se ci pensi per raggiungere il nodo più lontano dovrai al massimo attraversare tutti gli altri nodi del grafo._
+
+### B) Tempo **asincrono**  = Casual time (longest message chain)
+  
+**Assunzione temporale**: clock non sincronizzati, ritardi imprevedibili ma finiti; non ha senso parlare di round globali.
+
+La misura consigliata nelle slide è la **lunghezza della longest message chain** (dipendenza causale) nel worst-case tra tutte le esecuzioni possibili.
+
+Per FLOODING, la catena causale che “porta” $I$ al nodo più lontano dall’initiator deve attraversare almeno $d(s,y)$ hop; nel worst-case:
+
+$$T^{async}(\text{Flooding}) \in \Theta(D(G))$$
+
+dove però l’interpretazione è: **numero di messaggi in catena causale**, non “unità di tempo fisiche”.
+
+> In pratica: **stesso ordine $\Theta(D(G))$**, ma cambia il significato:
+
+- > sincrono: “$D(G)$ round (1 hop per round)”
+- > asincrono: “$D(G)$ dipendenze causali minime lungo il cammino peggiore”
 
 ---
-
 ## Lower bound sui messaggi per Broadcast: da $n-1$ a $m$
 
 ### Bound “ovvio”: almeno $n-1$
@@ -367,8 +402,117 @@ $$M(\text{Bcast}) \ge m$$
 
 ## Risultato finale
 Per broadcast sotto le restrizioni standard (e unique initiator), e per FLOODING:
-- $M(\text{Flooding}(G)) = 2m - n + 1 \in \Theta(m)$$
-- $T(\text{Flooding}(G)) \in \Theta(D(G))$$
+- $M(\text{Flooding}(G)) = 2m - n + 1 \in \Theta(m)$
+	
+- $T(\text{Flooding}(G)) \in \Theta(D(G))$
+		
+	- $T^{ideal}(\text{Flooding}) = \Theta(D(G))$
+		
+	- $T^{async}(\text{Flooding}) = \Theta(D(G)) \text{ (misurato come longest message chain)}$
+
+### Possiamo fare meglio di così?
+Facciamo queste due considerazioni:
+- Message complexity minima con un albero: 
+	- In un albero il numero di archi è $m=n-1$
+	- $M(\text{Flooding}(G)) = 2m - n + 1 = 2(n-1) - n + 1 = n - 1 =m$
+	
+- Message complexity massima con un grafo connesso:
+	- In un grafo connesso il numero di archi è $m=\binom{n}{2}=\frac{n(n-1)}{2}$
+	- Quindi $M(\text{Flooding}(G)) \in O(n^2)$
+
+Ma dobbiamo per forza usare il flooding asincrono in un grafo connesso?
+
+Con un broadcast classico avremmo:
+- $M(SimpleBroadcast)=n-1$
+- $T^{ideal}(SimpleBroadcast)=1$
+
+Infatti il flooding è efficiente in un albero, ma non è adatto per i grafi generici.
+
+---
+
+# Wake-up problem 
+
+![[Pasted image 20260210181714.png]]
+Il **wake-up problem** è la “versione più generale” del broadcast: devi far partire una computazione che coinvolga _tutti_ i nodi, ma **all’inizio solo alcuni sono attivi** (possono iniziare a mandare messaggi), mentre gli altri sono **ASLEEP** e si “svegliano” solo quando ricevono un messaggio.
+
+- Situazione: un task deve coinvolgere **tutte** le entità, ma inizialmente **solo alcune** sono attive (*awake*) e le altre sono inattive (*asleep*). 
+	
+- Obiettivo: **svegliare tutti i nodi** (portarli nello stato AWAKE).
+	
+- Relazione con Broadcast:
+	- **Broadcast = Wake-up con un solo initiator** (un solo nodo inizialmente awake).
+	- **Wake-up = Broadcast con più initiator** (più nodi inizialmente awake). 
+
+---
+### Modello (stati e restrizioni)
+- Stati:
+  - $S = \{\text{ASLEEP}, \text{AWAKE}\}$ 
+- Stati iniziali:
+  - $S_{init}=\{\text{ASLEEP}\}$ (tutti asleep, ma alcuni possono svegliarsi spontaneamente) 
+- Stato terminale:
+  - $S_{term}=\{\text{AWAKE}\}$ 
+- Restrizioni: quelle “standard” del modello usato nel corso (nelle note: “R”). 
+
+---
+### Protocollo WFlood (wake-up via flooding)
+
+#Obiettivo Tutti i nodi che siano in stato $AWAKE$ (sveglio)
+
+- Stati $S=\{\text{ASLEEP},\ \text{AWAKE}\}$
+- Stato iniziale $S_{init}=\{\text{ASLEEP}\}$ (tutti asleep, ma alcuni possono svegliarsi spontaneamente)
+- Stato terminale $S_{term}=\{\text{AWAKE}\}$ 
+	
+- Messaggio $W$ (richiesta di svegliarsi)
+
+_Usiamo la **stessa strategia del flooding** del broadcast risolve anche il wake-up._ 
+
+**Entità ASLEEP**  
+```text
+quando parte:  
+    manda W a tutti i vicini  
+    diventa AWAKE
+
+se riceve W da `sender`:  
+	per ogni vicino y ∈ N(x):
+	    se y ≠ sender:
+	      manda W a y
+  diventa AWAKE
+```
 
 
-#TODO: spanning tree per ottimizzazione del broadcast
+---
+### Complessità in messaggi (message complexity)
+
+- Caso 1 initiator: coincide col flooding del broadcast
+	- $M = 2m - n + 1$  
+- Caso generale con $k$ initiator:
+	- $M = 2m - (n-k)$  
+- Caso tutti $n$ initiator:
+	- $M = 2m$ 
+
+Come si legge $2m-(n-k)$?
+
+- $2m$ è il conteggio “grezzo”: in un grafo non orientato ogni arco può essere percorso al massimo **due volte** (una per direzione).
+    
+- Però **non tutti i nodi fanno l’azione “receiving(W) then forward”**: se un nodo è un iniziatore, si sveglia per spontaneous impulse e **non ha un “sender” da escludere** in quel primo step (di fatto “manca” un inoltro rispetto al caso in cui si svegliasse ricevendo).
+    
+- Ci sono $k$ iniziatori, quindi i nodi che _non_ sono iniziatori sono $n-k$ e sono proprio quelli che generano quel tipo di inoltro “da ricezione” con esclusione del sender: il termine $(n-k)$ è la correzione che compare nelle slide.
+
+
+**Bound generali**
+
+- Per WFlood vale: $$2m \ge M[\text{WFlood}] \ge 2m - n + 1$$
+- Quindi in ordine di grandezza:$$M(\text{Wake-Up}/R) \in \Theta(m)$$
+
+**Caso speciale: Tree**
+- Se $G$ è un albero e $k'$ è il numero di initiator:$$M[\text{WFlood}/\text{Tree}] = n + k' - 2$$
+
+---
+
+### Complessità in tempo (ideal time / time complexity)
+
+#Intuizione: rispetto al broadcast, in generale è **non maggiore** perché un nodo può essere più vicino a *qualche* initiator. 
+
+**Worst case (bound di ordine)**:$$T(\text{Wake-Up}/R) \in \Theta(d)$$ dove $d$ è il diametro del grafo (come nelle note “ideal time”). 
+- Caso $k=1$ (un solo initiator): il tempo coincide con Flooding, tipicamente $O(D)$.  
+	
