@@ -156,7 +156,7 @@
 </li>
 </ul>
 </li>
-<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#teorema-se-p-neq-np-allora-per-ogni-costante-rho-ge-1-non-esiste-un-algoritmo-di-approssimazione-polinomiale-per-il-tsp-generale-con-fattore-rho">TEOREMA Se \(P \neq NP\), allora per ogni costante \(\rho \ge 1\) non esiste un algoritmo di approssimazione polinomiale per il TSP generale con fattore \(\rho\).</a>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#teorema-se-p-neq-np-allora-per-ogni-costante-rho-ge-1-non-esiste-un-algoritmo-di-approssimazione-polinomiale-per-il-tsp-generale-con-fattore-rho">TEOREMA Se $P \neq NP$, allora per ogni costante $\rho \ge 1$ non esiste un algoritmo di approssimazione polinomiale per il TSP generale con fattore $\rho$.</a>
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#tsp-con-disuguaglianza-triangolare-tspdt-o-tsp-metric">TSP con disuguaglianza triangolare (TSPdt o TSP metric)</a>
 <ul class="nav flex-column">
@@ -210,7 +210,7 @@
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#teorema-fattore-di-approssimazione-32">Teorema: fattore di approssimazione \(3/2\)</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#teorema-fattore-di-approssimazione-32">Teorema: fattore di approssimazione $3/2$</a>
 <ul class="nav flex-column">
 </ul>
 </li>
@@ -230,11 +230,11 @@
 <div class="col-md-9" role="main">
 <h1 id="riassunto-teoria-della-complessita">Riassunto - Teoria della Complessità</h1>
 <p>La teoria della complessità classifica i problemi in base alla difficoltà di risolverli efficientemente. Si concentra sui <strong>problemi decisionali</strong> (output SI o NO), poiché la trattazione formale è più agevole e permette di trarre conclusioni applicabili anche ad altri tipi di problemi.</p>
-<p><strong>Esempio</strong>: Il problema <strong>Shortest Path</strong> può essere espresso sia come problema di ottimizzazione (qual è la lunghezza del cammino minimo?) che come problema decisionale (esiste un cammino di lunghezza <span class="arithmatex">\(\leq k\)</span>?).</p>
+<p><strong>Esempio</strong>: Il problema <strong>Shortest Path</strong> può essere espresso sia come problema di ottimizzazione (qual è la lunghezza del cammino minimo?) che come problema decisionale (esiste un cammino di lunghezza $\leq k$?).</p>
 <hr/>
 <h2 id="classificazione-dei-problemi">Classificazione dei problemi</h2>
 <h4 id="classe-p-polynomial-time-i-facili">Classe P (Polynomial Time) - "I Facili"</h4>
-<p>Sono i problemi che un computer può <strong>RISOLVERE</strong> velocemente (in tempo polinomiale, <span class="arithmatex">\(O(n^k)\)</span>).</p>
+<p>Sono i problemi che un computer può <strong>RISOLVERE</strong> velocemente (in tempo polinomiale, $O(n^k)$).</p>
 <ul>
 <li>
 <p><strong>Esempio:</strong> Ordinare una lista (Sorting), trovare il cammino minimo (Dijkstra).</p>
@@ -250,10 +250,10 @@
 <p><em>Definizioni utili</em></p>
 <ul>
 <li>
-<p><strong>Certificato</strong>: sequenza di caratteri di dimensione al massimo polinomiale che contiene l'evidenza che un'istanza <span class="arithmatex">\(i\)</span> sia positiva per il problema Π.</p>
+<p><strong>Certificato</strong>: sequenza di caratteri di dimensione al massimo polinomiale che contiene l'evidenza che un'istanza $i$ sia positiva per il problema Π.</p>
 </li>
 <li>
-<p><strong>Algoritmo verificatore</strong>: algoritmo decisionale che prende in input un'istanza <span class="arithmatex">\(i\)</span> e un certificato <span class="arithmatex">\(C_i\)</span>, restituendo SI se <span class="arithmatex">\(i\)</span> è positiva per Π, NO altrimenti.</p>
+<p><strong>Algoritmo verificatore</strong>: algoritmo decisionale che prende in input un'istanza $i$ e un certificato $C_i$, restituendo SI se $i$ è positiva per Π, NO altrimenti.</p>
 </li>
 </ul>
 </li>
@@ -261,14 +261,14 @@
 <p><strong>Esempio:</strong> Fare un Sudoku è difficile (ci metti tempo a risolverlo), ma se ti do un Sudoku già compilato, ci metti un attimo a controllare se le regole sono rispettate.</p>
 </li>
 <li>
-<p><strong>Relazione:</strong> <span class="arithmatex">\(P \subseteq NP\)</span>. (Se so risolvere un problema velocemente, so anche verificare la soluzione velocemente).</p>
+<p><strong>Relazione:</strong> $P \subseteq NP$. (Se so risolvere un problema velocemente, so anche verificare la soluzione velocemente).</p>
 </li>
 </ul>
 <h4 id="classe-np-hard-i-piu-cattivi-di-tutti">Classe NP-Hard - "I Più Cattivi di Tutti"</h4>
 <p>Qui usciamo dal recinto dei problemi "trattabili". Un problema è NP-Hard se è <strong>almeno</strong> difficile quanto il problema più difficile in NP.</p>
 <ul>
 <li>
-<p><strong>La Chiave (Riduzione):</strong> Un problema <span class="arithmatex">\(H\)</span> è NP-Hard se <strong>ogni</strong> problema in NP può essere ridotto (trasformato) in <span class="arithmatex">\(H\)</span> in tempo polinomiale.</p>
+<p><strong>La Chiave (Riduzione):</strong> Un problema $H$ è NP-Hard se <strong>ogni</strong> problema in NP può essere ridotto (trasformato) in $H$ in tempo polinomiale.</p>
 </li>
 <li>
 <p><strong>Significato:</strong> Se trovassi un modo veloce per risolvere un problema NP-Hard, avrei trovato un modo veloce per risolvere <em>tutti</em> i problemi in NP (e quindi avrei dimostrato che P=NP).</p>
@@ -281,13 +281,13 @@
 <p>Questi sono i problemi "chiave". Sono sia in NP che NP-Hard.</p>
 <ul>
 <li>
-<p><strong>Definizione:</strong> Un problema <span class="arithmatex">\(C\)</span> è NP-Complete se soddisfa due condizioni:</p>
+<p><strong>Definizione:</strong> Un problema $C$ è NP-Complete se soddisfa due condizioni:</p>
 <ol>
 <li>
-<p><span class="arithmatex">\(C \in NP\)</span> (è verificabile efficientemente).</p>
+<p>$C \in NP$ (è verificabile efficientemente).</p>
 </li>
 <li>
-<p><span class="arithmatex">\(C \in\)</span> NP-Hard (tutti i problemi in NP si riducono a lui).</p>
+<p>$C \in$ NP-Hard (tutti i problemi in NP si riducono a lui).</p>
 </li>
 </ol>
 </li>
@@ -301,10 +301,10 @@
 <h4 id="domanda-il-problema-del-commesso-viaggiatore-tsp-e-np-complete">Domanda: Il problema del commesso viaggiatore (TSP) è NP-Complete?</h4>
 <ul>
 <li>
-<p><strong>TSP Decisionale:</strong> "Esiste un ciclo di costo minore di <span class="arithmatex">\(k\)</span>?" <span class="arithmatex">\(\rightarrow\)</span> <strong>NP-Complete</strong>. (Posso verificare se un ciclo dato costa meno di <span class="arithmatex">\(k\)</span>).</p>
+<p><strong>TSP Decisionale:</strong> "Esiste un ciclo di costo minore di $k$?" $\rightarrow$ <strong>NP-Complete</strong>. (Posso verificare se un ciclo dato costa meno di $k$).</p>
 </li>
 <li>
-<p><strong>TSP di Ottimizzazione:</strong> "Trovami il ciclo di costo minimo assoluto." <span class="arithmatex">\(\rightarrow\)</span> <strong>NP-Hard</strong>, ma <strong>non</strong> NP-Complete.</p>
+<p><strong>TSP di Ottimizzazione:</strong> "Trovami il ciclo di costo minimo assoluto." $\rightarrow$ <strong>NP-Hard</strong>, ma <strong>non</strong> NP-Complete.</p>
 <ul>
 <li><em>Perché?</em> Se ti do una soluzione e ti dico "Questa è la minima", tu non hai un modo veloce per verificare che non ne esista una ancora più piccola da qualche parte. Devi fidarti. Quindi non è in NP (come definito classicamente per i problemi decisionali).</li>
 </ul>
@@ -327,7 +327,7 @@
 <td><strong>P</strong></td>
 <td><strong>SÌ</strong></td>
 <td><strong>SÌ</strong></td>
-<td><span class="arithmatex">\(P \subseteq NP\)</span></td>
+<td>$P \subseteq NP$</td>
 </tr>
 <tr>
 <td><strong>NP</strong></td>
@@ -351,34 +351,34 @@
 </table>
 <hr/>
 <h2 id="confrontiamo-la-difficolta-di-due-algoritmi-riduzione-di-karp">Confrontiamo la difficoltà di due algoritmi: <strong>Riduzione di Karp</strong></h2>
-<p><strong>Definizione</strong>: Un problema decisionale <span class="arithmatex">\(A\)</span> è <strong>riducibile in tempo polinomiale</strong> a <span class="arithmatex">\(B\)</span> (<span class="arithmatex">\(A \leq_p B\)</span>) se:</p>
+<p><strong>Definizione</strong>: Un problema decisionale $A$ è <strong>riducibile in tempo polinomiale</strong> a $B$ ($A \leq_p B$) se:</p>
 <ul>
-<li>Ogni istanza di <span class="arithmatex">\(A\)</span> <em>può essere trasformata</em> in tempo polinomiale in un'istanza di <span class="arithmatex">\(B\)</span></li>
-<li>Ogni istanza positiva di <span class="arithmatex">\(A\)</span> viene trasformata in un'istanza positiva di <span class="arithmatex">\(B\)</span></li>
-<li>Ogni istanza negativa di <span class="arithmatex">\(A\)</span> viene trasformata in un'istanza negativa di <span class="arithmatex">\(B\)</span></li>
+<li>Ogni istanza di $A$ <em>può essere trasformata</em> in tempo polinomiale in un'istanza di $B$</li>
+<li>Ogni istanza positiva di $A$ viene trasformata in un'istanza positiva di $B$</li>
+<li>Ogni istanza negativa di $A$ viene trasformata in un'istanza negativa di $B$</li>
 </ul>
-<p><strong>Intuizione</strong>: <span class="arithmatex">\(A \leq_p B\)</span> significa che:</p>
+<p><strong>Intuizione</strong>: $A \leq_p B$ significa che:</p>
 <ul>
-<li>Il problema <span class="arithmatex">\(B\)</span> non è più facile di <span class="arithmatex">\(A\)</span> (un algoritmo per <span class="arithmatex">\(B\)</span> può risolvere <span class="arithmatex">\(A\)</span>)</li>
-<li>Il problema <span class="arithmatex">\(A\)</span> non è più difficile di <span class="arithmatex">\(B\)</span></li>
+<li>Il problema $B$ non è più facile di $A$ (un algoritmo per $B$ può risolvere $A$)</li>
+<li>Il problema $A$ non è più difficile di $B$</li>
 </ul>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_2.png"/></p>
 <h2 id="conseguenze"><strong>Conseguenze</strong></h2>
-<p>Se <span class="arithmatex">\(A \leq_p B\)</span> allora:</p>
+<p>Se $A \leq_p B$ allora:</p>
 <ul>
-<li><span class="arithmatex">\(B \in P \Rightarrow A \in P\)</span> 🚀 abbiamo un algoritmo polinomiale per <span class="arithmatex">\(A\)</span>  🚀</li>
-<li><span class="arithmatex">\(A \notin P \Rightarrow B \notin P\)</span>  non abbiamo un algoritmo polinomiale per A 🥲, quindi neanche per B 🥲 </li>
-<li><span class="arithmatex">\(B \leq_p A \Rightarrow A \equiv B\)</span> i problemi sono equivalentemente difficili</li>
+<li>$B \in P \Rightarrow A \in P$ 🚀 abbiamo un algoritmo polinomiale per $A$  🚀</li>
+<li>$A \notin P \Rightarrow B \notin P$  non abbiamo un algoritmo polinomiale per A 🥲, quindi neanche per B 🥲 </li>
+<li>$B \leq_p A \Rightarrow A \equiv B$ i problemi sono equivalentemente difficili</li>
 </ul>
-<p><strong>Proprietà</strong>: La riduzione polinomiale è <strong>transitiva</strong>: <span class="arithmatex">\(A \leq_p B \land B \leq_p C \Rightarrow A \leq_p C\)</span>.</p>
+<p><strong>Proprietà</strong>: La riduzione polinomiale è <strong>transitiva</strong>: $A \leq_p B \land B \leq_p C \Rightarrow A \leq_p C$.</p>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_3.png" width="400"/> <img alt="" src="../assets/1_teoria_della_complessita_images/image_4.png" width="400"/>
 <img alt="" src="../assets/1_teoria_della_complessita_images/image_5.png" width="400"/></p>
 <hr/>
 <h2 id="classe-np-non-deterministic-polynomial-time"><strong>Classe NP (Non-deterministic Polynomial Time)</strong></h2>
 <h2 id="esempio-ciclo-hamiltoniano"><strong>Esempio: Ciclo Hamiltoniano</strong></h2>
 <ul>
-<li><strong>INPUT</strong>: Grafo <span class="arithmatex">\(G = (V, E)\)</span></li>
-<li><strong>OUTPUT</strong>: Esiste un ciclo in <span class="arithmatex">\(G\)</span> che passa per tutti i nodi esattamente una volta?</li>
+<li><strong>INPUT</strong>: Grafo $G = (V, E)$</li>
+<li><strong>OUTPUT</strong>: Esiste un ciclo in $G$ che passa per tutti i nodi esattamente una volta?</li>
 </ul>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_6.png" width="500"/></p>
 <p>Per questo problema:</p>
@@ -389,43 +389,43 @@
 </ul>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_7.png" width="400"/></p>
 <h2 id="classe-np-completo"><strong>Classe NP-Completo</strong></h2>
-<p><strong>Definizione</strong>: Un problema decisionale <span class="arithmatex">\(A\)</span> è <strong>NP-completo</strong> se:</p>
+<p><strong>Definizione</strong>: Un problema decisionale $A$ è <strong>NP-completo</strong> se:</p>
 <ol>
-<li><span class="arithmatex">\(A \in NP\)</span></li>
-<li><span class="arithmatex">\(\forall B \in NP : B \leq_p A\)</span></li>
+<li>$A \in NP$</li>
+<li>$\forall B \in NP : B \leq_p A$</li>
 </ol>
 <h2 id="come-dimostrare-che-un-problema-e-np-completo"><strong>Come dimostrare che un Problema è NP-Completo</strong></h2>
-<p>Per dimostrare che <span class="arithmatex">\(A\)</span> è NP-completo, sfruttiamo la transitività della riduzione:</p>
+<p>Per dimostrare che $A$ è NP-completo, sfruttiamo la transitività della riduzione:</p>
 <ol>
-<li>Dimostrare che <span class="arithmatex">\(A \in NP\)</span></li>
-<li>Scegliere un problema <span class="arithmatex">\(B\)</span> già dimostrato NP-completo</li>
-<li>Dimostrare che <span class="arithmatex">\(B \leq_p A\)</span></li>
+<li>Dimostrare che $A \in NP$</li>
+<li>Scegliere un problema $B$ già dimostrato NP-completo</li>
+<li>Dimostrare che $B \leq_p A$</li>
 </ol>
 <p><strong>Teoremi di Cook</strong> (1971) <strong>e Levin</strong> (1973): Il primo problema dimostrato NP-completo è <strong>SAT</strong> (Satisfiability).</p>
 <p><strong>SAT</strong>: Data una formula in forma normale congiuntiva (FNC), esiste un assegnamento di verità che la renda vera?</p>
 <ul>
-<li>Esempio: <span class="arithmatex">\((a \lor b \lor c) \land (\neg b \lor c) \land (\neg a \lor \neg b \lor c)\)</span></li>
+<li>Esempio: $(a \lor b \lor c) \land (\neg b \lor c) \land (\neg a \lor \neg b \lor c)$</li>
 </ul>
-<p>P.S. and --&gt; <span class="arithmatex">\(\land\)</span> 
-    or --&gt; <span class="arithmatex">\(\lor\)</span></p>
+<p>P.S. and --&gt; $\land$ 
+    or --&gt; $\lor$</p>
 <h2 id="teorema-fondamentale"><strong>Teorema Fondamentale</strong></h2>
 <p>Se si dimostra che un problema NP-completo:</p>
 <ol>
-<li>Ha un algoritmo polinomiale, allora <span class="arithmatex">\(P = NP\)</span></li>
-<li>Non ha algoritmi polinomiali, allora <span class="arithmatex">\(P \neq NP\)</span></li>
+<li>Ha un algoritmo polinomiale, allora $P = NP$</li>
+<li>Non ha algoritmi polinomiali, allora $P \neq NP$</li>
 </ol>
 <hr/>
 <h2 id="classe-np-hard"><strong>Classe NP-Hard</strong></h2>
-<p><strong>Definizione</strong>: Un problema <span class="arithmatex">\(A\)</span> (non necessariamente decisionale) è <strong>NP-hard</strong> se:</p>
+<p><strong>Definizione</strong>: Un problema $A$ (non necessariamente decisionale) è <strong>NP-hard</strong> se:</p>
 <ul>
-<li><span class="arithmatex">\(\forall B \in NP : B \leq_p A\)</span></li>
+<li>$\forall B \in NP : B \leq_p A$</li>
 </ul>
 <p><strong>Differenza con NP-completo</strong>: un problema NP-hard non è necessariamente in NP (ad esempio, problemi di ottimizzazione).</p>
 <h2 id="come-dimostrare-che-un-problema-e-np-hard"><strong>Come Dimostrare che un Problema è NP-Hard</strong></h2>
-<p>Per dimostrare che <span class="arithmatex">\(A\)</span> è NP-hard:</p>
+<p>Per dimostrare che $A$ è NP-hard:</p>
 <ol>
-<li>Scegliere un problema <span class="arithmatex">\(B\)</span> già dimostrato NP-completo</li>
-<li>Dimostrare che <span class="arithmatex">\(B \leq_p A\)</span></li>
+<li>Scegliere un problema $B$ già dimostrato NP-completo</li>
+<li>Dimostrare che $B \leq_p A$</li>
 </ol>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_8.png"/></p>
 <p><em>N.B.: Non è detto che A abbia un algoritmo verificatore polinomiale</em></p>
@@ -439,82 +439,82 @@
 </ul>
 <hr/>
 <h3 id="teorema-il-problema-del-commesso-viaggiatore-tsp-e-np-hard"><strong>Teorema: Il problema del Commesso Viaggiatore (TSP) è NP-Hard</strong></h3>
-<p>Obiettivo: Dimostrare che <span class="arithmatex">\(TSP (Optmization) \geq_p HC (decisionale)\)</span>.</p>
+<p>Obiettivo: Dimostrare che $TSP (Optmization) \geq_p HC (decisionale)$.</p>
 <p><em>Vogliamo dimostrare che se avessimo un oracolo (un algoritmo efficiente) in grado di risolvere il TSP, potremmo usarlo per risolvere il problema del Ciclo Hamiltoniano (HC).</em></p>
-<p>Poiché il problema del Ciclo Hamiltoniano (<span class="arithmatex">\(HC\)</span>) è noto essere NP-Completo, se dimostriamo che esso è riducibile polinomialmente al TSP di ottimizzazione, allora il TSP è almeno tanto difficile quanto un problema NP-Completo, dunque è NP-Hard.</p>
+<p>Poiché il problema del Ciclo Hamiltoniano ($HC$) è noto essere NP-Completo, se dimostriamo che esso è riducibile polinomialmente al TSP di ottimizzazione, allora il TSP è almeno tanto difficile quanto un problema NP-Completo, dunque è NP-Hard.</p>
 <h4 id="1-intuizione-e-strategia-della-riduzione"><strong>1. Intuizione e Strategia della Riduzione</strong></h4>
-<p>Il problema <span class="arithmatex">\(HC\)</span> è un problema decisionale (Esiste un ciclo? Sì/No), mentre il <span class="arithmatex">\(TSP\)</span> è un problema di ottimizzazione (Trova il ciclo di costo minimo).</p>
+<p>Il problema $HC$ è un problema decisionale (Esiste un ciclo? Sì/No), mentre il $TSP$ è un problema di ottimizzazione (Trova il ciclo di costo minimo).</p>
 <p>Per collegarli, dobbiamo trasformare la struttura topologica del grafo di HC in costi per il TSP.</p>
 <p>L'idea chiave è penalizzare l'uso di archi non esistenti:</p>
 <ul>
 <li>Assegniamo costo <strong>0</strong> agli archi che esistono realmente (nessuna penalità).</li>
 <li>Assegniamo costo <strong>1</strong> agli archi che non esistono (penalità).</li>
 </ul>
-<p>In questo modo, il costo totale del tour fungerà da "rivelatore": se il costo è 0, il tour non ha mai "barato" (ha usato solo archi esistenti); se il costo è <span class="arithmatex">\(\ge 1\)</span>, il tour è stato costretto a "barare" (ha usato archi che non c'erano in origine).</p>
+<p>In questo modo, il costo totale del tour fungerà da "rivelatore": se il costo è 0, il tour non ha mai "barato" (ha usato solo archi esistenti); se il costo è $\ge 1$, il tour è stato costretto a "barare" (ha usato archi che non c'erano in origine).</p>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_9.png"/></p>
 <h4 id="2-definizione-formale-della-riduzione"><strong>2. Definizione Formale della Riduzione</strong></h4>
-<p>Costruiamo un algoritmo di trasformazione <span class="arithmatex">\(f\)</span> che mappa un'istanza <span class="arithmatex">\(G\)</span> di HC in un'istanza <span class="arithmatex">\(G'\)</span> di TSP.
-- <strong>Input:</strong> Grafo <span class="arithmatex">\(G = (V, E)\)</span>.
-- <strong>Output:</strong> Grafo completo ponderato <span class="arithmatex">\(G' = (V, E')\)</span> con funzione costo <span class="arithmatex">\(c\)</span>.</p>
-<p><strong>Costruzione di <span class="arithmatex">\(G'\)</span>:</strong></p>
+<p>Costruiamo un algoritmo di trasformazione $f$ che mappa un'istanza $G$ di HC in un'istanza $G'$ di TSP.
+- <strong>Input:</strong> Grafo $G = (V, E)$.
+- <strong>Output:</strong> Grafo completo ponderato $G' = (V, E')$ con funzione costo $c$.</p>
+<p><strong>Costruzione di $G'$:</strong></p>
 <ol>
-<li><strong>Vertici:</strong> <span class="arithmatex">\(V' = V\)</span> (stessi nodi).</li>
-<li><strong>Archi:</strong> <span class="arithmatex">\(E' = V \times V\)</span> (grafo completo: colleghiamo tutto con tutto).</li>
-<li>Pesi: Per ogni coppia <span class="arithmatex">\((u, v)\)</span>, il peso è definito come:$<span class="arithmatex">\(c(u, v) = \begin{cases} 0 &amp; \text{se } (u, v) \in E \quad (\text{arco originale}) \\ 1 &amp; \text{se } (u, v) \notin E \quad (\text{arco fittizio}) \end{cases}\)</span>$
-_Nota: La costruzione di <span class="arithmatex">\(G'\)</span> richiede di iterare su tutte le coppie di nodi, impiegando un tempo <span class="arithmatex">\(O(|V|^2)\)</span>, che è polinomiale.</li>
+<li><strong>Vertici:</strong> $V' = V$ (stessi nodi).</li>
+<li><strong>Archi:</strong> $E' = V \times V$ (grafo completo: colleghiamo tutto con tutto).</li>
+<li>Pesi: Per ogni coppia $(u, v)$, il peso è definito come:$$c(u, v) = \begin{cases} 0 &amp; \text{se } (u, v) \in E \quad (\text{arco originale}) \ 1 &amp; \text{se } (u, v) \notin E \quad (\text{arco fittizio}) \end{cases}$$
+_Nota: La costruzione di $G'$ richiede di iterare su tutte le coppie di nodi, impiegando un tempo $O(|V|^2)$, che è polinomiale.</li>
 </ol>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_10.png" width="500"/></p>
 <h4 id="3-dimostrazione-di-correttezza"><strong>3. Dimostrazione di Correttezza</strong></h4>
-<p>Sia <span class="arithmatex">\(C_{min}\)</span> il valore della soluzione ottima restituita dal TSP su <span class="arithmatex">\(G'\)</span>. 
-Dobbiamo dimostrare che <span class="arithmatex">\(C_{min} = 0 \iff G \text{ ha un HC}\)</span>.</p>
+<p>Sia $C_{min}$ il valore della soluzione ottima restituita dal TSP su $G'$. 
+Dobbiamo dimostrare che $C_{min} = 0 \iff G \text{ ha un HC}$.</p>
 <p><strong>Direzione A</strong></p>
 <blockquote>
-<p><strong>Ipotesi:</strong> <span class="arithmatex">\(G \text{ ha un HC} \implies\)</span> <strong>Tesi:</strong> <span class="arithmatex">\(C_{min} = 0\)</span></p>
+<p><strong>Ipotesi:</strong> $G \text{ ha un HC} \implies$ <strong>Tesi:</strong>  $C_{min} = 0$</p>
 </blockquote>
 <ul>
 <li>
-<p><strong>Ragionamento:</strong> Se <span class="arithmatex">\(G\)</span> ha un ciclo Hamiltoniano, esiste una permutazione di vertici collegati solo da archi in <span class="arithmatex">\(E\)</span>.</p>
+<p><strong>Ragionamento:</strong> Se $G$ ha un ciclo Hamiltoniano, esiste una permutazione di vertici collegati solo da archi in $E$.</p>
 </li>
 <li>
-<p><strong>Nel grafo TSP:</strong> Poiché abbiamo mappato tutti gli archi di <span class="arithmatex">\(E\)</span> con peso <span class="arithmatex">\(0\)</span>, questo ciclo esiste anche in <span class="arithmatex">\(G'\)</span> e ha costo somma <span class="arithmatex">\(0\)</span>. Dato che i pesi sono non-negativi, <span class="arithmatex">\(0\)</span> è il minimo possibile.</p>
+<p><strong>Nel grafo TSP:</strong> Poiché abbiamo mappato tutti gli archi di $E$ con peso $0$, questo ciclo esiste anche in $G'$ e ha costo somma $0$. Dato che i pesi sono non-negativi, $0$ è il minimo possibile.</p>
 </li>
 <li>
-<p><strong>Conclusione:</strong> L'algoritmo TSP troverà questo tour (o uno equivalente) e restituirà <span class="arithmatex">\(0\)</span>.</p>
+<p><strong>Conclusione:</strong> L'algoritmo TSP troverà questo tour (o uno equivalente) e restituirà $0$.</p>
 </li>
 </ul>
 <p>Direzione B</p>
 <blockquote>
-<p><strong>Ipotesi:</strong> <span class="arithmatex">\(C_{min} = 0 \implies\)</span> <strong>Tesi:</strong> <span class="arithmatex">\(G\)</span> ha un HC</p>
+<p><strong>Ipotesi:</strong> $C_{min} = 0 \implies$ <strong>Tesi:</strong>  $G$ ha un HC</p>
 </blockquote>
 <p>(Utilizziamo l'implicazione diretta sul valore del costo, che è più intuitiva della contronominale per chi legge).</p>
 <ul>
 <li>
-<p><strong>Ragionamento:</strong> Supponiamo che l'algoritmo TSP restituisca un tour di costo <span class="arithmatex">\(0\)</span>.</p>
+<p><strong>Ragionamento:</strong> Supponiamo che l'algoritmo TSP restituisca un tour di costo $0$.</p>
 </li>
 <li>
-<p><strong>Analisi dei pesi:</strong> Poiché la somma dei pesi è <span class="arithmatex">\(0\)</span> e i pesi possibili sono solo <span class="arithmatex">\(\{0, 1\}\)</span>, questo implica che <strong>ogni singolo arco</strong> del tour ha peso <span class="arithmatex">\(0\)</span>.</p>
+<p><strong>Analisi dei pesi:</strong> Poiché la somma dei pesi è $0$ e i pesi possibili sono solo ${0, 1}$, questo implica che <strong>ogni singolo arco</strong> del tour ha peso $0$.</p>
 </li>
 <li>
-<p><strong>Legame con <span class="arithmatex">\(G\)</span>:</strong> Per costruzione, un arco ha peso <span class="arithmatex">\(0\)</span> in <span class="arithmatex">\(G'\)</span> solo se esisteva in <span class="arithmatex">\(G\)</span>.</p>
+<p><strong>Legame con $G$:</strong> Per costruzione, un arco ha peso $0$ in $G'$ solo se esisteva in $G$.</p>
 </li>
 <li>
-<p><strong>Conclusione:</strong> Il tour trovato dal TSP è quindi composto esclusivamente da archi originali di <span class="arithmatex">\(G\)</span>. Poiché un tour TSP visita ogni nodo esattamente una volta, questo corrisponde esattamente alla definizione di Ciclo Hamiltoniano in <span class="arithmatex">\(G\)</span>.</p>
+<p><strong>Conclusione:</strong> Il tour trovato dal TSP è quindi composto esclusivamente da archi originali di $G$. Poiché un tour TSP visita ogni nodo esattamente una volta, questo corrisponde esattamente alla definizione di Ciclo Hamiltoniano in $G$.</p>
 </li>
 </ul>
 <p><strong>Nota logica</strong>
-Dimostrando <span class="arithmatex">\(C_{min} = 0 \implies G \text{ ha un HC}\)</span>  abbiamo dimostrato anche la sua contronominale:</p>
+Dimostrando $C_{min} = 0 \implies G \text{ ha un HC}$  abbiamo dimostrato anche la sua contronominale:</p>
 <blockquote>
-<p><strong>Ipotesi:</strong> <span class="arithmatex">\(G \text{ non ha un HC} \implies\)</span> <strong>Tesi:</strong> <span class="arithmatex">\(C_{min} \ne 0\)</span> <em>(C non può essere negativa, quindi <span class="arithmatex">\(C_{min} \ge 1\)</span>)</em></p>
+<p><strong>Ipotesi:</strong> $G \text{ non ha un HC} \implies$ <strong>Tesi:</strong>  $C_{min} \ne 0$ <em min="min">(C non può essere negativa, quindi $C</em> \ge 1$)_</p>
 </blockquote>
-<p>Infatti, se <span class="arithmatex">\(C_{min} \ge 1\)</span>, significa che ogni possibile tour deve usare almeno un arco fittizio, quindi non esiste un HC in <span class="arithmatex">\(G\)</span>._</p>
+<p>Infatti, se $C_{min} \ge 1$, significa che ogni possibile tour deve usare almeno un arco fittizio, quindi non esiste un HC in $G$._</p>
 <h4 id="4-conclusione"><strong>4. Conclusione</strong></h4>
 <p>La riduzione è polinomiale e valida. Risolvere il TSP permette di decidere HC:</p>
 <ul>
 <li>
-<p>Se <span class="arithmatex">\(TSP(G') = 0 \rightarrow\)</span> Risposta HC: <strong>SÌ</strong>.</p>
+<p>Se $TSP(G') = 0 \rightarrow$ Risposta HC: <strong>SÌ</strong>.</p>
 </li>
 <li>
-<p>Se <span class="arithmatex">\(TSP(G') \ge 1 \rightarrow\)</span> Risposta HC: <strong>NO</strong>.</p>
+<p>Se $TSP(G') \ge 1 \rightarrow$ Risposta HC: <strong>NO</strong>.</p>
 </li>
 </ul>
 <p>Poiché HC è NP-Completo, <strong>TSP (Ottimizzazione) è NP-Hard</strong>.</p>
@@ -522,30 +522,30 @@ Dimostrando <span class="arithmatex">\(C_{min} = 0 \implies G \text{ ha un HC}\)
 <h3 id="approfondimento-perche-scegliere-pesi-1-e-2-invece-di-0-e-1"><strong>Approfondimento: Perché scegliere pesi 1 e 2 invece di 0 e 1?</strong></h3>
 <p>La scelta dei pesi nella riduzione non è casuale, ma determina <strong>quale variante</strong> del TSP stiamo dimostrando essere NP-Hard.</p>
 <h4 id="1-il-test-della-disuguaglianza-triangolare"><strong>1. Il Test della Disuguaglianza Triangolare</strong></h4>
-<p>La disuguaglianza triangolare è la regola che rende un grafo "geometricamente sensato". Essa afferma che andare direttamente da <span class="arithmatex">\(A\)</span> a <span class="arithmatex">\(B\)</span> non deve mai costare più che passare attraverso un intermedio <span class="arithmatex">\(C\)</span>:</p>
-<div class="arithmatex">\[c(u, w) \le c(u, v) + c(v, w)\]</div>
+<p>La disuguaglianza triangolare è la regola che rende un grafo "geometricamente sensato". Essa afferma che andare direttamente da $A$ a $B$ non deve mai costare più che passare attraverso un intermedio $C$:</p>
+<p>$$c(u, w) \le c(u, v) + c(v, w)$$</p>
 <p>Analizziamo i due casi:</p>
-<p><strong>Caso A: Pesi <span class="arithmatex">\(\{0, 1\}\)</span> (La riduzione "Base")</strong></p>
+<p><strong>Caso A: Pesi ${0, 1}$ (La riduzione "Base")</strong></p>
 <ul>
-<li>Arco presente (<span class="arithmatex">\(u,v\)</span>) e (<span class="arithmatex">\(v,w\)</span>) <span class="arithmatex">\(\to\)</span> costo <span class="arithmatex">\(0\)</span>.</li>
+<li>Arco presente ($u,v$) e ($v,w$) $\to$ costo $0$.</li>
 <li>
-<p>Arco mancante (<span class="arithmatex">\(u,w\)</span>) <span class="arithmatex">\(\to\)</span> costo <span class="arithmatex">\(1\)</span>.</p>
+<p>Arco mancante ($u,w$) $\to$ costo $1$.</p>
 </li>
 <li>
-<p><strong>Verifica:</strong> <span class="arithmatex">\(1 \le 0 + 0 \implies 1 \le 0\)</span> (<strong>FALSO!</strong>)</p>
+<p><strong>Verifica:</strong> $1 \le 0 + 0 \implies 1 \le 0$ (<strong>FALSO!</strong>)</p>
 </li>
 <li>
 <p><strong>Conclusione:</strong> Questa riduzione genera un grafo che viola la geometria euclidea. Stiamo dimostrando la difficoltà del <strong>TSP Generale</strong>.</p>
 </li>
 </ul>
-<p><strong>Caso B: Pesi <span class="arithmatex">\(\{1, 2\}\)</span> (La riduzione "Metrica")</strong></p>
+<p><strong>Caso B: Pesi ${1, 2}$ (La riduzione "Metrica")</strong></p>
 <ul>
-<li>Arco presente (<span class="arithmatex">\(u,v\)</span>) e (<span class="arithmatex">\(v,w\)</span>) <span class="arithmatex">\(\to\)</span> costo <span class="arithmatex">\(1\)</span>.</li>
+<li>Arco presente ($u,v$) e ($v,w$) $\to$ costo $1$.</li>
 <li>
-<p>Arco mancante (<span class="arithmatex">\(u,w\)</span>) <span class="arithmatex">\(\to\)</span> costo <span class="arithmatex">\(2\)</span>.</p>
+<p>Arco mancante ($u,w$) $\to$ costo $2$.</p>
 </li>
 <li>
-<p><strong>Verifica:</strong> <span class="arithmatex">\(2 \le 1 + 1 \implies 2 \le 2\)</span> (<strong>VERO!</strong>)</p>
+<p><strong>Verifica:</strong> $2 \le 1 + 1 \implies 2 \le 2$ (<strong>VERO!</strong>)</p>
 </li>
 <li>
 <p><strong>Conclusione:</strong> Questa riduzione genera un grafo che rispetta la geometria. Stiamo dimostrando la difficoltà del <strong>Metric-TSP</strong>.</p>
@@ -557,7 +557,7 @@ Dimostrando <span class="arithmatex">\(C_{min} = 0 \implies G \text{ ha un HC}\)
 <li>
 <p>TSP Generale (Pesi 0/1):</p>
 <p>È un problema "cattivo". Non solo è NP-Hard, ma non è nemmeno approssimabile.</p>
-<p>Teorema: Se esistesse un algoritmo che approssima il TSP generale entro un fattore polinomiale, allora <span class="arithmatex">\(P=NP\)</span>.</p>
+<p>Teorema: Se esistesse un algoritmo che approssima il TSP generale entro un fattore polinomiale, allora $P=NP$.</p>
 <p>Quindi, con pesi 0/1 dimostriamo che il caso peggiore assoluto è intrattabile.</p>
 </li>
 <li>
@@ -569,134 +569,134 @@ Dimostrando <span class="arithmatex">\(C_{min} = 0 \implies G \text{ ha un HC}\)
 <p><strong>2-Approximation:</strong> Basato sull'Albero di Copertura Minimo (MST).</p>
 </li>
 <li>
-<p><strong>Algoritmo di Christofides:</strong> Garantisce un'approssimazione di fattore <span class="arithmatex">\(1.5\)</span> (o <span class="arithmatex">\(3/2\)</span>).</p>
+<p><strong>Algoritmo di Christofides:</strong> Garantisce un'approssimazione di fattore $1.5$ (o $3/2$).</p>
 </li>
 </ul>
 </li>
 </ol>
 <hr/>
 <h2 id="fattore-di-approssimazione-questa-parte-devo-ancora-capirla">Fattore di approssimazione (questa parte devo ancora capirla)</h2>
-<p>Il <strong>fattore di approssimazione</strong> (spesso indicato con la lettera greca <span class="arithmatex">\(\rho\)</span>, "rho", o <span class="arithmatex">\(\alpha\)</span>) è la misura della "garanzia di qualità" che un algoritmo ci offre nel caso peggiore.</p>
+<p>Il <strong>fattore di approssimazione</strong> (spesso indicato con la lettera greca $\rho$, "rho", o $\alpha$) è la misura della "garanzia di qualità" che un algoritmo ci offre nel caso peggiore.</p>
 <h3 id="definizione-formale-di-algoritmo-di-approssimazione">Definizione Formale di Algoritmo di Approssimazione</h3>
-<p>Sia <span class="arithmatex">\(\Pi\)</span> un problema di ottimizzazione (minimizzazione o massimizzazione) e sia <span class="arithmatex">\(I\)</span> una generica istanza di questo problema.</p>
+<p>Sia $\Pi$ un problema di ottimizzazione (minimizzazione o massimizzazione) e sia $I$ una generica istanza di questo problema.</p>
 <p>Indichiamo con:</p>
 <ul>
 <li>
-<p><span class="arithmatex">\(OPT(I)\)</span>: il valore della soluzione ottima per l'istanza <span class="arithmatex">\(I\)</span>.</p>
+<p>$OPT(I)$: il valore della soluzione ottima per l'istanza $I$.</p>
 </li>
 <li>
-<p><span class="arithmatex">\(A(I)\)</span>: il valore della soluzione restituita dal nostro algoritmo (deterministico) <span class="arithmatex">\(A\)</span> per l'istanza <span class="arithmatex">\(I\)</span>.</p>
+<p>$A(I)$: il valore della soluzione restituita dal nostro algoritmo (deterministico) $A$ per l'istanza $I$.</p>
 </li>
 </ul>
-<p>Diciamo che l'algoritmo <span class="arithmatex">\(A\)</span> è un <strong>algoritmo di <span class="arithmatex">\(\rho\)</span>-approssimazione</strong> (o ha un fattore di approssimazione <span class="arithmatex">\(\rho\)</span>) se, per <strong>ogni</strong> istanza <span class="arithmatex">\(I\)</span> di dimensione <span class="arithmatex">\(n\)</span>, vale la seguente relazione:
-$<span class="arithmatex">\(A(I) \le \rho \cdot OPT(I) \Rightarrow \frac{A(I)}{OPT(I)} \le \rho(n) \quad \text{(per problemi di minimizzazione)}\)</span>$
+<p>Diciamo che l'algoritmo $A$ è un <strong>algoritmo di $\rho$-approssimazione</strong> (o ha un fattore di approssimazione $\rho$) se, per <strong>ogni</strong> istanza $I$ di dimensione $n$, vale la seguente relazione:
+$$A(I) \le \rho \cdot OPT(I) \Rightarrow \frac{A(I)}{OPT(I)} \le \rho(n) \quad \text{(per problemi di minimizzazione)}$$
 oppure
-$<span class="arithmatex">\(A(I) \ge \rho \cdot OPT(I) \Rightarrow \frac{OPT(I)}{A(I)} \le \rho(n) \quad \text{(per problemi di massimizzazione)}\)</span>$</p>
-<p>In entrambi i casi, il rapporto è definito in modo da essere sempre <span class="arithmatex">\(\ge 1\)</span>.</p>
+$$A(I) \ge \rho \cdot OPT(I) \Rightarrow \frac{OPT(I)}{A(I)} \le \rho(n) \quad \text{(per problemi di massimizzazione)}$$</p>
+<p>In entrambi i casi, il rapporto è definito in modo da essere sempre $\ge 1$.</p>
 <ul>
 <li>
-<p>Se <span class="arithmatex">\(\rho(n) = 1\)</span>, l'algoritmo è esatto (trova l'ottimo).</p>
+<p>Se $\rho(n) = 1$, l'algoritmo è esatto (trova l'ottimo).</p>
 </li>
 <li>
-<p>Se <span class="arithmatex">\(\rho(n) &gt; 1\)</span>, l'algoritmo è approssimato. Più <span class="arithmatex">\(\rho\)</span> è vicino a 1, migliore è l'algoritmo.</p>
+<p>Se $\rho(n) &gt; 1$, l'algoritmo è approssimato. Più $\rho$ è vicino a 1, migliore è l'algoritmo.</p>
 </li>
 </ul>
 <h4 id="nota-bene">Nota Bene:</h4>
-<p>Il fattore <span class="arithmatex">\(\rho\)</span> è una garanzia nel caso peggiore (worst-case).</p>
-<p>Non stiamo dicendo che l'algoritmo sbaglia sempre di un fattore <span class="arithmatex">\(\rho\)</span>. Stiamo dicendo che non sbaglierà mai più di un fattore <span class="arithmatex">\(\rho\)</span>, nemmeno nell'istanza più "cattiva" possibile che l'esaminatore possa inventare.</p>
+<p>Il fattore $\rho$ è una garanzia nel caso peggiore (worst-case).</p>
+<p>Non stiamo dicendo che l'algoritmo sbaglia sempre di un fattore $\rho$. Stiamo dicendo che non sbaglierà mai più di un fattore $\rho$, nemmeno nell'istanza più "cattiva" possibile che l'esaminatore possa inventare.</p>
 <hr/>
 <h3 id="tipologie-di-fattori-di-approssimazione">Tipologie di Fattori di Approssimazione</h3>
-<p>Nel nostro corso, incontriamo principalmente tre classi di <span class="arithmatex">\(\rho\)</span>:</p>
+<p>Nel nostro corso, incontriamo principalmente tre classi di $\rho$:</p>
 <ol>
 <li>
-<p>Fattore Costante (<span class="arithmatex">\(\rho = k\)</span>):</p>
+<p>Fattore Costante ($\rho = k$):</p>
 <p>Il caso ideale per un problema NP-Hard. L'errore non cresce con la dimensione dell'input.</p>
 <ul>
 <li>
-<p><em>Esempio:</em> <strong>Vertex Cover</strong> ha <span class="arithmatex">\(\rho = 2\)</span>.</p>
+<p><em>Esempio:</em> <strong>Vertex Cover</strong> ha $\rho = 2$.</p>
 </li>
 <li>
-<p><em>Esempio:</em> <strong>Metric TSP</strong> (con disuguaglianza triangolare) ha <span class="arithmatex">\(\rho = 2\)</span> (o <span class="arithmatex">\(\rho = 1.5\)</span> con Christofides).</p>
+<p><em>Esempio:</em> <strong>Metric TSP</strong> (con disuguaglianza triangolare) ha $\rho = 2$ (o $\rho = 1.5$ con Christofides).</p>
 </li>
 </ul>
 </li>
 <li>
-<p>Fattore Logaritmico (<span class="arithmatex">\(\rho = O(\log n)\)</span>):</p>
+<p>Fattore Logaritmico ($\rho = O(\log n)$):</p>
 <p>L'errore cresce lentamente al crescere dell'input.</p>
 <ul>
-<li><em>Esempio classico:</em> <strong>Set Cover</strong> (Copertura di Insiemi). Non puoi avere un fattore costante qui (salvo P=NP), il meglio che possiamo fare è <span class="arithmatex">\(\ln n\)</span>.</li>
+<li><em>Esempio classico:</em> <strong>Set Cover</strong> (Copertura di Insiemi). Non puoi avere un fattore costante qui (salvo P=NP), il meglio che possiamo fare è $\ln n$.</li>
 </ul>
 </li>
 <li>
-<p>Fattore Polinomiale (<span class="arithmatex">\(\rho = O(n^k)\)</span>):</p>
+<p>Fattore Polinomiale ($\rho = O(n^k)$):</p>
 <p>L'approssimazione degrada molto rapidamente. Spesso è inutile in pratica, ma teoricamente interessante.</p>
 <ul>
-<li><em>Esempio:</em> <strong>General TSP</strong> (senza disuguaglianza triangolare). Qui il fattore di approssimazione può essere arbitrariamente grande (<span class="arithmatex">\(2^n\)</span>, o peggio), rendendo il problema <em>inapprossimabile</em>.</li>
+<li><em>Esempio:</em> <strong>General TSP</strong> (senza disuguaglianza triangolare). Qui il fattore di approssimazione può essere arbitrariamente grande ($2^n$, o peggio), rendendo il problema <em>inapprossimabile</em>.</li>
 </ul>
 </li>
 </ol>
 <hr/>
 <h3 id="la-tecnica-formale-di-dimostrazione-il-lower-bound">La Tecnica Formale di Dimostrazione (Il "Lower Bound")</h3>
-<p>Come facciamo a calcolare <span class="arithmatex">\(\rho\)</span> se non conosciamo <span class="arithmatex">\(OPT(I)\)</span>?</p>
+<p>Come facciamo a calcolare $\rho$ se non conosciamo $OPT(I)$?</p>
 <p>Formalizziamo il ragionamento che abbiamo fatto prima.</p>
-<p>Per dimostrare che un algoritmo <span class="arithmatex">\(A\)</span> è una <span class="arithmatex">\(\rho\)</span>-approssimazione per un problema di <strong>minimizzazione</strong>, dobbiamo trovare un <strong>Lower Bound (LB)</strong> tale che:</p>
-<div class="arithmatex">\[LB(I) \le OPT(I)\]</div>
+<p>Per dimostrare che un algoritmo $A$ è una $\rho$-approssimazione per un problema di <strong>minimizzazione</strong>, dobbiamo trovare un <strong>Lower Bound (LB)</strong> tale che:</p>
+<p>$$LB(I) \le OPT(I)$$</p>
 <p>E dimostrare che il nostro algoritmo soddisfa:</p>
-<div class="arithmatex">\[A(I) \le \rho \cdot LB(I)\]</div>
+<p>$$A(I) \le \rho \cdot LB(I)$$</p>
 <p>Combinando le due disuguaglianze:</p>
-<div class="arithmatex">\[A(I) \le \underbrace{\rho \cdot LB(I)}_{\text{Limite calcolabile}} \le \underbrace{\rho \cdot OPT(I)}_{Limite ideale}\]</div>
-<div class="arithmatex">\[\Rightarrow \frac{A(I)}{OPT(I)} \le \rho\]</div>
+<p>$$A(I) \le \underbrace{\rho \cdot LB(I)}<em ideale="ideale" limite="Limite">{\text{Limite calcolabile}} \le \underbrace{\rho \cdot OPT(I)}</em>$$</p>
+<p>$$\Rightarrow \frac{A(I)}{OPT(I)} \le \rho$$</p>
 <p>Q.E.D. (Come Volevasi Dimostrare).</p>
 <hr/>
 <h3 id="esempio-il-vertex-cover">Esempio: Il Vertex Cover</h3>
 <p>Applichiamo il rigore al Vertex Cover.</p>
 <ol>
 <li>
-<p><strong>Algoritmo <span class="arithmatex">\(A\)</span>:</strong></p>
+<p><strong>Algoritmo $A$:</strong></p>
 <ul>
 <li>
-<p>Trova un <em>Matching Massimale</em> <span class="arithmatex">\(M\)</span> nel grafo <span class="arithmatex">\(G=(V,E)\)</span>.</p>
+<p>Trova un <em>Matching Massimale</em> $M$ nel grafo $G=(V,E)$.</p>
 </li>
 <li>
-<p>Restituisci l'insieme <span class="arithmatex">\(S\)</span> composto da <em>tutti</em> gli estremi degli archi in <span class="arithmatex">\(M\)</span>.</p>
+<p>Restituisci l'insieme $S$ composto da <em>tutti</em> gli estremi degli archi in $M$.</p>
 </li>
 <li>
-<p>Costo: <span class="arithmatex">\(|S| = 2 \cdot |M|\)</span>.</p>
+<p>Costo: $|S| = 2 \cdot |M|$.</p>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Il Lower Bound (<span class="arithmatex">\(LB\)</span>):</strong></p>
+<p><strong>Il Lower Bound ($LB$):</strong></p>
 <ul>
 <li>
-<p>Sia <span class="arithmatex">\(S^*\)</span> la soluzione ottima (il Vertex Cover minimo).</p>
+<p>Sia $S^*$ la soluzione ottima (il Vertex Cover minimo).</p>
 </li>
 <li>
-<p>Poiché gli archi in <span class="arithmatex">\(M\)</span> sono disgiunti (non condividono vertici), per coprirli tutti <span class="arithmatex">\(S^*\)</span> deve contenere almeno un vertice per ogni arco in <span class="arithmatex">\(M\)</span>.</p>
+<p>Poiché gli archi in $M$ sono disgiunti (non condividono vertici), per coprirli tutti $S^*$ deve contenere almeno un vertice per ogni arco in $M$.</p>
 </li>
 <li>
-<p>Formalmente: <span class="arithmatex">\(|S^*| \ge |M|\)</span>. Questo è il nostro <span class="arithmatex">\(LB\)</span>.</p>
+<p>Formalmente: $|S^*| \ge |M|$. Questo è il nostro $LB$.</p>
 </li>
 </ul>
 </li>
 <li>
-<p>Calcolo di <span class="arithmatex">\(\rho\)</span>:</p>
-<div class="arithmatex">\[\frac{A(I)}{OPT(I)} = \frac{|S|}{|S^*|} \le \frac{2 \cdot |M|}{|M|} = 2\]</div>
+<p>Calcolo di $\rho$:</p>
+<p>$$\frac{A(I)}{OPT(I)} = \frac{|S|}{|S^*|} \le \frac{2 \cdot |M|}{|M|} = 2$$</p>
 </li>
 </ol>
 <p>Quindi, l'algoritmo è una <strong>2-approssimazione</strong>.</p>
 <hr/>
 <h2 id="vertex-cover">Vertex cover</h2>
-<p>Dato un grafo non orientato <span class="arithmatex">\(G = (V, E)\)</span>:</p>
+<p>Dato un grafo non orientato $G = (V, E)$:</p>
 <ul>
 <li>
-<p>Un <strong>Vertex Cover</strong> è un sottoinsieme di vertici <span class="arithmatex">\(V' \subseteq V\)</span> tale che per ogni arco <span class="arithmatex">\((u, v) \in E\)</span>, si ha che <span class="arithmatex">\(u \in V'\)</span> oppure <span class="arithmatex">\(v \in V'\)</span> (o entrambi).</p>
+<p>Un <strong>Vertex Cover</strong> è un sottoinsieme di vertici $V' \subseteq V$ tale che per ogni arco $(u, v) \in E$, si ha che $u \in V'$ oppure $v \in V'$ (o entrambi).</p>
 </li>
 <li>
-<p><strong>Problema di Ottimizzazione:</strong> Trovare il <span class="arithmatex">\(V'\)</span> con la cardinalità minima (minimo numero di vertici).</p>
+<p><strong>Problema di Ottimizzazione:</strong> Trovare il $V'$ con la cardinalità minima (minimo numero di vertici).</p>
 </li>
 <li>
-<p><strong>Problema Decisionale:</strong> Dato <span class="arithmatex">\(G\)</span> e un intero <span class="arithmatex">\(k\)</span>, esiste un Vertex Cover di dimensione <span class="arithmatex">\(\le k\)</span>?</p>
+<p><strong>Problema Decisionale:</strong> Dato $G$ e un intero $k$, esiste un Vertex Cover di dimensione $\le k$?</p>
 </li>
 </ul>
 <h4 id="la-complessita-perche-e-difficile">La Complessità (Perché è "difficile"?)</h4>
@@ -711,83 +711,83 @@ $<span class="arithmatex">\(A(I) \ge \rho \cdot OPT(I) \Rightarrow \frac{OPT(I)}
 </ol>
 <p>In pratica: non conosciamo (e probabilmente non esiste) un algoritmo che trovi la soluzione <em>esatta</em> (il minimo assoluto) in tempo polinomiale. Se il grafo è grande, trovare l'ottimo richiederebbe tempi astronomici.</p>
 <h3 id="teorema-il-problema-del-vertex-cover-ottimizzazione-e-np-hard">Teorema: Il problema del Vertex Cover (ottimizzazione) è NP-Hard.</h3>
-<p>Dato che la versione decisionale del Vertex Cover è NP-completo, definiamo la riduzione <span class="arithmatex">\(VCD \le_p VC\)</span> .
+<p>Dato che la versione decisionale del Vertex Cover è NP-completo, definiamo la riduzione $VCD \le_p VC$ .
 Il Vertex Cover (ottimizzazione) è difficile almeno quanto il Vertex Cover Decisionale.</p>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_11.png" width="600"/>
 La riduzione è molto semplice perché l'istanza dell'input dei due algoritmi è la stessa, ci serve solo definire una trasformazione polinomiale dell'output.</p>
 <p>Quindi:
-1. Utilizziamo l'algoritmo VC sul grado G per trovare il Vertex Cover <span class="arithmatex">\(V' \subseteq V\)</span> di cardinalità minima
+1. Utilizziamo l'algoritmo VC sul grado G per trovare il Vertex Cover $V' \subseteq V$ di cardinalità minima
 2. Definiamo la trasformazione polinomiale dell'output:
-    - se <span class="arithmatex">\(|V'| \leq k\)</span> allora rispondo <strong>sì</strong>.
-    - se <span class="arithmatex">\(|V'| \gt k\)</span> allora rispondo <strong>no</strong>.</p>
+    - se $|V'| \leq k$ allora rispondo <strong>sì</strong>.
+    - se $|V'| \gt k$ allora rispondo <strong>no</strong>.</p>
 <p>Una volta trovato il Vertex Cover con cardinalità minima, possiamo confrontarlo con k e quindi fornire la risposta decisionale del Vertex Cover.
 Il numero di chiamate dell'algoritmo dell'algoritmo è costante (una volta sola viene chiamato) e anche il numero di operazioni extra è costante.
 Dunque possiamo definire anche l'algoritmo del Vertex Cover np-hard.</p>
 <h2 id="approfondimento">Approfondimento</h2>
-<p>Possiamo definire anche dimostrare il contrario: <span class="arithmatex">\(VC \le_p VCD\)</span>
+<p>Possiamo definire anche dimostrare il contrario: $VC \le_p VCD$
 Anche la versione decisionale del Vertex Cover è difficile almeno quanto la versione di ottimizzazione.</p>
 <h2 id="self-reduction-di-vertex-cover-approfondimento">Self-Reduction di Vertex Cover (Approfondimento)</h2>
 <p>Dimostriamo che il problema del Vertex Cover di ottimizzazione è equalmente difficile come il Vertex Cover decisionale.</p>
-<p>Il problema di ricerca del Vertex Cover (<span class="arithmatex">\(VC_{\text{search}}\)</span>) è polinomialmente riducibile al problema decisionale del Vertex Cover (<span class="arithmatex">\(VC_{\text{decision}}\)</span>).</p>
-<div class="arithmatex">\[VC_{\text{search}} \leq_P VC_{\text{decision}}\]</div>
-<p>Ciò implica che se esiste un algoritmo polinomiale per decidere se esiste una copertura di dimensione <span class="arithmatex">\(k\)</span>, esiste anche un algoritmo polinomiale per trovare i vertici che compongono tale copertura.</p>
+<p>Il problema di ricerca del Vertex Cover ($VC_{\text{search}}$) è polinomialmente riducibile al problema decisionale del Vertex Cover ($VC_{\text{decision}}$).</p>
+<p>$$VC_{\text{search}} \leq_P VC_{\text{decision}}$$</p>
+<p>Ciò implica che se esiste un algoritmo polinomiale per decidere se esiste una copertura di dimensione $k$, esiste anche un algoritmo polinomiale per trovare i vertici che compongono tale copertura.</p>
 <blockquote>
-<p><strong>Ipotesi:</strong> Sia <span class="arithmatex">\(A(G, k)\)</span> un algoritmo "oracolo" per <span class="arithmatex">\(VC_{\text{decision}}\)</span> che accetta in input un grafo <span class="arithmatex">\(G\)</span> e un intero <span class="arithmatex">\(k\)</span>, e restituisce:
-  - <strong>YES</strong>: se esiste un Vertex Cover di dimensione <span class="arithmatex">\(\le k\)</span>.
+<p><strong>Ipotesi:</strong> Sia $A(G, k)$ un algoritmo "oracolo" per $VC_{\text{decision}}$ che accetta in input un grafo $G$ e un intero $k$, e restituisce:
+  - <strong>YES</strong>: se esiste un Vertex Cover di dimensione $\le k$.
   - <strong>NO</strong>: se non esiste.</p>
 </blockquote>
 <h3 id="procedimento">Procedimento</h3>
 <p>L'algoritmo di ricerca si svolge in due fasi sequenziali.</p>
-<h4 id="fase-1-calcolo-della-cardinalita-minima-k_opt">Fase 1: Calcolo della Cardinalità Minima (<span class="arithmatex">\(k_{opt}\)</span>)</h4>
+<h4 id="fase-1-calcolo-della-cardinalita-minima-k_opt">Fase 1: Calcolo della Cardinalità Minima ($k_{opt}$)</h4>
 <p>L'obiettivo è determinare la dimensione minima esatta del Vertex Cover.</p>
-<p>Poiché la dimensione della soluzione è un intero compreso tra <span class="arithmatex">\(0\)</span> e <span class="arithmatex">\(|V|\)</span>, utilizziamo una Ricerca Binaria interrogando l'oracolo <span class="arithmatex">\(A\)</span>.</p>
+<p>Poiché la dimensione della soluzione è un intero compreso tra $0$ e $|V|$, utilizziamo una Ricerca Binaria interrogando l'oracolo $A$.</p>
 <ol>
 <li>
-<p>Inizializziamo l'intervallo di ricerca: <span class="arithmatex">\(min = 0\)</span>, <span class="arithmatex">\(max = |V|\)</span>.</p>
+<p>Inizializziamo l'intervallo di ricerca: $min = 0$, $max = |V|$.</p>
 </li>
 <li>
-<p>Mentre <span class="arithmatex">\(min &lt; max\)</span>:</p>
+<p>Mentre $min &lt; max$:</p>
 <ul>
-<li>Poniamo <span class="arithmatex">\(mid = \lfloor \frac{min + max}{2} \rfloor\)</span>.</li>
+<li>Poniamo $mid = \lfloor \frac{min + max}{2} \rfloor$.</li>
 <li>
-<p>Eseguiamo <span class="arithmatex">\(A(G, mid)\)</span>.</p>
+<p>Eseguiamo $A(G, mid)$.</p>
 </li>
 <li>
-<p>Se l'esito è <strong>YES</strong>: la soluzione ottima è <span class="arithmatex">\(\le mid\)</span>, quindi poniamo <span class="arithmatex">\(max = mid\)</span>.</p>
+<p>Se l'esito è <strong>YES</strong>: la soluzione ottima è $\le mid$, quindi poniamo $max = mid$.</p>
 </li>
-<li>Se l'esito è <strong>NO</strong>: la soluzione ottima è <span class="arithmatex">\(&gt; mid\)</span>, quindi poniamo <span class="arithmatex">\(min = mid + 1\)</span>.</li>
+<li>Se l'esito è <strong>NO</strong>: la soluzione ottima è $&gt; mid$, quindi poniamo $min = mid + 1$.</li>
 </ul>
 </li>
 <li>
-<p>Al termine, <span class="arithmatex">\(k_{opt} = min\)</span>.</p>
+<p>Al termine, $k_{opt} = min$.</p>
 </li>
 </ol>
-<p><strong>Costo Fase 1:</strong> <span class="arithmatex">\(O(\log |V|) \times Costo(A)\)</span>.</p>
-<h4 id="fase-2-costruzione-dellinsieme-di-copertura-c">Fase 2: Costruzione dell'Insieme di Copertura (<span class="arithmatex">\(C\)</span>)</h4>
-<p>L'obiettivo è individuare quali specifici vertici compongono l'insieme <span class="arithmatex">\(C\)</span> di cardinalità <span class="arithmatex">\(k_{opt}\)</span>.</p>
-<p>Iteriamo su ogni vertice <span class="arithmatex">\(v \in V\)</span> del grafo originale <span class="arithmatex">\(G=(V, E)\)</span>.</p>
+<p><strong>Costo Fase 1:</strong> $O(\log |V|) \times Costo(A)$.</p>
+<h4 id="fase-2-costruzione-dellinsieme-di-copertura-c">Fase 2: Costruzione dell'Insieme di Copertura ($C$)</h4>
+<p>L'obiettivo è individuare quali specifici vertici compongono l'insieme $C$ di cardinalità $k_{opt}$.</p>
+<p>Iteriamo su ogni vertice $v \in V$ del grafo originale $G=(V, E)$.</p>
 <ol>
-<li>Inizializziamo <span class="arithmatex">\(C = \emptyset\)</span> e <span class="arithmatex">\(k = k_{opt}\)</span>.</li>
+<li>Inizializziamo $C = \emptyset$ e $k = k_{opt}$.</li>
 <li>
-<p>Per ogni vertice <span class="arithmatex">\(v \in V\)</span>:</p>
+<p>Per ogni vertice $v \in V$:</p>
 <ul>
-<li>Costruiamo temporaneamente il grafo <span class="arithmatex">\(G' = G \setminus \{v\}\)</span> (rimuovendo <span class="arithmatex">\(v\)</span> e i suoi archi incidenti).</li>
-<li>Interroghiamo l'oracolo: <span class="arithmatex">\(A(G', k-1)\)</span>.</li>
+<li>Costruiamo temporaneamente il grafo $G' = G \setminus {v}$ (rimuovendo $v$ e i suoi archi incidenti).</li>
+<li>Interroghiamo l'oracolo: $A(G', k-1)$.</li>
 <li>
 <p><strong>Analisi della risposta:</strong></p>
 <ul>
 <li>
-<p><strong>Esito YES:</strong> Significa che è possibile coprire i restanti archi con i <span class="arithmatex">\(k-1\)</span> vertici rimanenti. Dunque, <span class="arithmatex">\(v\)</span> può far parte di una soluzione ottima.</p>
+<p><strong>Esito YES:</strong> Significa che è possibile coprire i restanti archi con i $k-1$ vertici rimanenti. Dunque, $v$ può far parte di una soluzione ottima.</p>
 <ul>
-<li><em>Azione:</em> Aggiungiamo <span class="arithmatex">\(v\)</span> a <span class="arithmatex">\(C\)</span> (<span class="arithmatex">\(C \leftarrow C \cup \{v\}\)</span>).</li>
-<li>Decrementiamo il budget (<span class="arithmatex">\(k \leftarrow k-1\)</span>).</li>
-<li>Aggiorniamo il grafo corrente rimuovendo definitivamente <span class="arithmatex">\(v\)</span> (<span class="arithmatex">\(G \leftarrow G'\)</span>).</li>
+<li><em>Azione:</em> Aggiungiamo $v$ a $C$ ($C \leftarrow C \cup {v}$).</li>
+<li>Decrementiamo il budget ($k \leftarrow k-1$).</li>
+<li>Aggiorniamo il grafo corrente rimuovendo definitivamente $v$ ($G \leftarrow G'$).</li>
 </ul>
 </li>
 <li>
-<p><strong>Esito NO:</strong> Significa che rimuovendo <span class="arithmatex">\(v\)</span>, il resto del grafo richiede ancora <span class="arithmatex">\(k\)</span> vertici per essere coperto. Non abbiamo "guadagnato" nulla spendendo un vertice su <span class="arithmatex">\(v\)</span>.</p>
+<p><strong>Esito NO:</strong> Significa che rimuovendo $v$, il resto del grafo richiede ancora $k$ vertici per essere coperto. Non abbiamo "guadagnato" nulla spendendo un vertice su $v$.</p>
 <ul>
-<li><em>Azione:</em> <span class="arithmatex">\(v\)</span> non viene incluso in <span class="arithmatex">\(C\)</span>. Il grafo <span class="arithmatex">\(G\)</span> e il budget <span class="arithmatex">\(k\)</span> rimangono invariati per la prossima iterazione.</li>
+<li><em>Azione:</em> $v$ non viene incluso in $C$. Il grafo $G$ e il budget $k$ rimangono invariati per la prossima iterazione.</li>
 </ul>
 </li>
 </ul>
@@ -795,12 +795,12 @@ Anche la versione decisionale del Vertex Cover è difficile almeno quanto la ver
 </ul>
 </li>
 <li>
-<p>Restituiamo <span class="arithmatex">\(C\)</span>.</p>
+<p>Restituiamo $C$.</p>
 </li>
 </ol>
-<p><strong>Costo Fase 2:</strong> <span class="arithmatex">\(O(|V|) \times Costo(A)\)</span>.</p>
+<p><strong>Costo Fase 2:</strong> $O(|V|) \times Costo(A)$.</p>
 <h3 id="conclusione-sulla-complessita">Conclusione sulla Complessità</h3>
-<p>L'intero procedimento richiede un numero di chiamate all'oracolo pari a <span class="arithmatex">\(O(\log |V| + |V|)\)</span>, che è polinomiale rispetto alla dimensione dell'input. Pertanto, la riduzione è polinomiale.</p>
+<p>L'intero procedimento richiede un numero di chiamate all'oracolo pari a $O(\log |V| + |V|)$, che è polinomiale rispetto alla dimensione dell'input. Pertanto, la riduzione è polinomiale.</p>
 <hr/>
 <h2 id="approssimazione-di-vertex-cover">Approssimazione di Vertex Cover</h2>
 <p>Ci sono vari modi in cui possiamo andare a definire un algoritmo di approssimazione:
@@ -819,25 +819,25 @@ Anche la versione decisionale del Vertex Cover è difficile almeno quanto la ver
         3. Rimuovi da E tutti gli archi incidenti a v
     RETURN C
 </code></pre></div>
-<p>Il costo computazionale dell'algoritmo è <span class="arithmatex">\(O(|V |+ |E|)\)</span>.</p>
+<p>Il costo computazionale dell'algoritmo è $O(|V |+ |E|)$.</p>
 <p><em>Sebbene l'algoritmo produca sempre una copertura valida in tempo polinomiale, il fattore di approssimazione non è limitato (non è costante).</em></p>
 <p><strong>Controesempio</strong> (Grafo a Stella):</p>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_12.png" width="500"/></p>
-<p>Consideriamo un grafo a stella <span class="arithmatex">\(S_k\)</span> composto da un nodo centrale <span class="arithmatex">\(c\)</span> collegato a <span class="arithmatex">\(k\)</span> foglie <span class="arithmatex">\(l_1, l_2, ..., l_k\)</span>.</p>
+<p>Consideriamo un grafo a stella $S_k$ composto da un nodo centrale $c$ collegato a $k$ foglie $l_1, l_2, ..., l_k$.</p>
 <ul>
 <li>
-<p><strong>Soluzione Ottima (<span class="arithmatex">\(C^*\)</span>):</strong> Basta selezionare il solo nodo centrale <span class="arithmatex">\(c\)</span>. Dimensione <span class="arithmatex">\(|C^*| = 1\)</span>.</p>
+<p><strong>Soluzione Ottima ($C^*$):</strong> Basta selezionare il solo nodo centrale $c$. Dimensione $|C^*| = 1$.</p>
 </li>
 <li>
-<p><strong>Caso Peggiore dell'Algoritmo:</strong> L'algoritmo potrebbe sfortunatamente selezionare, uno dopo l'altro, tutti i nodi foglia <span class="arithmatex">\(l_1, ..., l_k\)</span>. Ogni volta che seleziona una foglia, copre solo un arco.</p>
+<p><strong>Caso Peggiore dell'Algoritmo:</strong> L'algoritmo potrebbe sfortunatamente selezionare, uno dopo l'altro, tutti i nodi foglia $l_1, ..., l_k$. Ogni volta che seleziona una foglia, copre solo un arco.</p>
 </li>
 <li>
-<p><strong>Risultato:</strong> L'algoritmo restituisce un insieme di dimensione <span class="arithmatex">\(k\)</span>.</p>
+<p><strong>Risultato:</strong> L'algoritmo restituisce un insieme di dimensione $k$.</p>
 </li>
 </ul>
 <p>Rapporto di Approssimazione:</p>
-<div class="arithmatex">\[\rho = \frac{|C_{greedy}|}{|C^*|} = \frac{k}{1} = k\]</div>
-<p>Poiché <span class="arithmatex">\(k\)</span> dipende dal numero di vertici del grafo (<span class="arithmatex">\(n\)</span>), il rapporto di approssimazione è <span class="arithmatex">\(O(n)\)</span>, il che <strong>è inaccettabile</strong> per un algoritmo di approssimazione.</p>
+<p>$$\rho = \frac{|C_{greedy}|}{|C^*|} = \frac{k}{1} = k$$</p>
+<p>Poiché $k$ dipende dal numero di vertici del grafo ($n$), il rapporto di approssimazione è $O(n)$, il che <strong>è inaccettabile</strong> per un algoritmo di approssimazione.</p>
 <h3 id="approccio-euristico">Approccio euristico</h3>
 <p>Per ovviare al problema della stella, è naturale raffinare la scelta greedy: invece di un nodo a caso, scegliamo il nodo che "paga di più", ovvero quello che copre il maggior numero di archi in un colpo solo.</p>
 <div class="highlight"><pre><span></span><code>Algorithm Greedy-VC-MaxDegree(G = (V, E))
@@ -853,15 +853,15 @@ Anche la versione decisionale del Vertex Cover è difficile almeno quanto la ver
 <p><strong>Il Limite Teorico (Perché fallisce)</strong>:</p>
 <p>Mentre per la stella funziona, esistono grafi appositamente costruiti in cui l'algoritmo viene "ingannato" nel preferire una lunga sequenza di nodi a grado medio-alto, invece di pochi nodi ottimi.</p>
 <p>È noto in letteratura (dimostrazione di Chvátal, 1979 per Set Cover, applicabile qui) che questo algoritmo ha un fattore di approssimazione logaritmico:
-$<span class="arithmatex">\(\rho \approx \ln(n)\)</span>$
-Dove <span class="arithmatex">\(\ln(n)\)</span> è il logaritmo naturale del numero di vertici. Sebbene <span class="arithmatex">\(\ln(n)\)</span> cresca molto lentamente, non è un numero costante (come 2 o 1.5). Per grafi molto grandi, l'errore può diventare arbitrariamente grande.</p>
+$$\rho \approx \ln(n)$$
+Dove $\ln(n)$ è il logaritmo naturale del numero di vertici. Sebbene $\ln(n)$ cresca molto lentamente, non è un numero costante (come 2 o 1.5). Per grafi molto grandi, l'errore può diventare arbitrariamente grande.</p>
 <p><strong>Il "Grafo Ingannevole" (Come l'algoritmo viene fregato)</strong> (Super approfondimento)</p>
-<p>Il Vertex Cover è un caso particolare del Set Cover (dove gli "elementi da coprire" sono gli archi e gli "insiemi" sono i nodi). Poiché l'approccio greedy per il Set Cover ha un'approssimazione pari a <span class="arithmatex">\(H_d\)</span> (l'<span class="arithmatex">\(n\)</span>-esimo numero armonico, dove <span class="arithmatex">\(d\)</span> è il grado massimo), il fattore di approssimazione è effettivamente <span class="arithmatex">\(O(\log n)\)</span>.</p>
+<p>Il Vertex Cover è un caso particolare del Set Cover (dove gli "elementi da coprire" sono gli archi e gli "insiemi" sono i nodi). Poiché l'approccio greedy per il Set Cover ha un'approssimazione pari a $H_d$ (l'$n$-esimo numero armonico, dove $d$ è il grado massimo), il fattore di approssimazione è effettivamente $O(\log n)$.</p>
 <p>Per visualizzare il limite teorico, è utile capire come viene costruito il grafo che "inganna" l'algoritmo.</p>
 <p>Immagina un grafo bipartito con due insiemi di nodi, <strong>A</strong> e <strong>B</strong>:</p>
 <ol>
 <li>
-<p><strong>L'insieme A</strong> contiene un numero piccolo di nodi, diciamo <span class="arithmatex">\(k\)</span>. (Questo sarà il Vertex Cover ottimo).</p>
+<p><strong>L'insieme A</strong> contiene un numero piccolo di nodi, diciamo $k$. (Questo sarà il Vertex Cover ottimo).</p>
 </li>
 <li>
 <p><strong>L'insieme B</strong> contiene molti più nodi, suddivisi in "livelli" basati sul loro grado.</p>
@@ -873,7 +873,7 @@ Dove <span class="arithmatex">\(\ln(n)\)</span> è il logaritmo naturale del num
 <p><strong>Cosa fa l'algoritmo?</strong></p>
 <p>L'algoritmo Greedy guarderà il grafo e dirà: <em>"I nodi in B hanno grado più alto, ne prendo uno da B"</em>.</p>
 <p>Una volta rimosso quel nodo e i suoi archi, i gradi si aggiornano, ma la struttura è creata ad arte affinché ci sia <em>sempre</em> un nodo in <strong>B</strong> che sembra migliore dei nodi in <strong>A</strong>, passo dopo passo.</p>
-<p>Alla fine, l'algoritmo sceglie quasi tutti i nodi dell'insieme B (che sono tantissimi), mentre la soluzione ottima era prendere semplicemente i pochi nodi dell'insieme A. È così che si accumula il fattore logaritmico <span class="arithmatex">\(\ln(n)\)</span>.</p>
+<p>Alla fine, l'algoritmo sceglie quasi tutti i nodi dell'insieme B (che sono tantissimi), mentre la soluzione ottima era prendere semplicemente i pochi nodi dell'insieme A. È così che si accumula il fattore logaritmico $\ln(n)$.</p>
 <p>Quello che succede in scala molto piccola è più o meno questo:</p>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_13.png" width="400"/></p>
 <p>Il vero grafo bipartito che inganna l'algoritmo dovrebbe essere questo:</p>
@@ -895,44 +895,44 @@ Preso da https://cgi.csc.liv.ac.uk/~michele/TEACHING/COMP309/2005/Lec10.4.4.pdf<
 7.  return C
 </code></pre></div>
 <p><strong>Analisi della Complessità:</strong></p>
-<p>Il tempo di esecuzione è <span class="arithmatex">\(O(V + E)\)</span>. Possiamo rappresentare il grafo con liste di adiacenza e marcare i vertici man mano che vengono rimossi/coperti. Visitiamo ogni vertice e ogni arco un numero costante di volte.</p>
+<p>Il tempo di esecuzione è $O(V + E)$. Possiamo rappresentare il grafo con liste di adiacenza e marcare i vertici man mano che vengono rimossi/coperti. Visitiamo ogni vertice e ogni arco un numero costante di volte.</p>
 <h4 id="correttezza-e-analisi-del-fattore-di-approssimazione">Correttezza e Analisi del Fattore di Approssimazione</h4>
-<p><strong>Teorema:</strong> <code>APPROX-VERTEX-COVER</code> è un algoritmo di approssimazione polinomiale con fattore <span class="arithmatex">\(\rho = 2\)</span>.</p>
+<p><strong>Teorema:</strong> <code>APPROX-VERTEX-COVER</code> è un algoritmo di approssimazione polinomiale con fattore $\rho = 2$.</p>
 <p><strong>Dimostrazione:</strong></p>
-<p>Sia <span class="arithmatex">\(C\)</span> l'insieme dei <strong>vertici</strong> restituiti dall'algoritmo.
-Sia <span class="arithmatex">\(C^*\)</span> (o <span class="arithmatex">\(OPT\)</span>) una copertura dei <strong>vertici ottima</strong> (di cardinalità minima).
-Sia <span class="arithmatex">\(A\)</span> l'insieme degli <strong>archi</strong> selezionati nella riga 4 dell'algoritmo (questo insieme <span class="arithmatex">\(A\)</span> costituisce un <em>Matching Massimale</em>).</p>
+<p>Sia $C$ l'insieme dei <strong>vertici</strong> restituiti dall'algoritmo.
+Sia $C^*$ (o $OPT$) una copertura dei <strong>vertici ottima</strong> (di cardinalità minima).
+Sia $A$ l'insieme degli <strong>archi</strong> selezionati nella riga 4 dell'algoritmo (questo insieme $A$ costituisce un <em>Matching Massimale</em>).</p>
 <p><strong>Passo 1: Relazione tra C e A</strong></p>
-<p>L'algoritmo inserisce in <span class="arithmatex">\(C\)</span> esattamente i due estremi di ogni arco scelto in <span class="arithmatex">\(A\)</span>. Poiché nessun arco viene scelto due volte e gli archi in <span class="arithmatex">\(A\)</span> sono disgiunti:</p>
-<div class="arithmatex">\[|C| = 2 \cdot |A| \quad \text{(Eq. 1)}\]</div>
-<p><strong>Passo 2: Relazione tra <span class="arithmatex">\(C^*\)</span> e A (Lower Bound)</strong></p>
-<p>Qualsiasi Vertex Cover valido deve coprire tutti gli archi di <span class="arithmatex">\(G\)</span>, inclusi quelli in <span class="arithmatex">\(A\)</span>.</p>
-<p>Poiché gli archi in <span class="arithmatex">\(A\)</span> sono disgiunti (non condividono vertici), nessun singolo vertice può coprire più di un arco di <span class="arithmatex">\(A\)</span>.</p>
-<p>Di conseguenza, per coprire <span class="arithmatex">\(|A|\)</span> archi disgiunti, sono necessari almeno <span class="arithmatex">\(|A|\)</span> vertici distinti.</p>
+<p>L'algoritmo inserisce in $C$ esattamente i due estremi di ogni arco scelto in $A$. Poiché nessun arco viene scelto due volte e gli archi in $A$ sono disgiunti:</p>
+<p>$$|C| = 2 \cdot |A| \quad \text{(Eq. 1)}$$</p>
+<p><strong>Passo 2: Relazione tra $C^*$ e A (Lower Bound)</strong></p>
+<p>Qualsiasi Vertex Cover valido deve coprire tutti gli archi di $G$, inclusi quelli in $A$.</p>
+<p>Poiché gli archi in $A$ sono disgiunti (non condividono vertici), nessun singolo vertice può coprire più di un arco di $A$.</p>
+<p>Di conseguenza, per coprire $|A|$ archi disgiunti, sono necessari almeno $|A|$ vertici distinti.</p>
 <p>Quindi, la soluzione ottima deve avere cardinalità:</p>
-<div class="arithmatex">\[|C^*| \ge |A| \quad \text{(Eq. 2)}\]</div>
+<p>$$|C^*| \ge |A| \quad \text{(Eq. 2)}$$</p>
 <p><em>(Nota: Questo è il passaggio che corregge il refuso delle slide della prof).</em></p>
 <p><strong>Passo 3: Conclusione</strong></p>
 <p>Combinando l'Eq. 1 e l'Eq. 2:</p>
-<p>Dalla (Eq. 2) sappiamo che <span class="arithmatex">\(|A| \le |C^*|\)</span>. Sostituiamo <span class="arithmatex">\(|A|\)</span> nella (Eq. 1):</p>
-<div class="arithmatex">\[|C| = 2 \cdot |A| \le 2 \cdot |C^*|\]</div>
+<p>Dalla (Eq. 2) sappiamo che $|A| \le |C^*|$. Sostituiamo $|A|$ nella (Eq. 1):</p>
+<p>$$|C| = 2 \cdot |A| \le 2 \cdot |C^*|$$</p>
 <p>Riscrivendo in termini di rapporto di approssimazione:</p>
-<div class="arithmatex">\[\frac{|C|}{|C^*|} \le 2\]</div>
+<p>$$\frac{|C|}{|C^*|} \le 2$$</p>
 <p><strong>C.V.D.</strong> (Come Volevasi Dimostrare).</p>
 <h3 id="lanalisi-e-tight-stretta">L'Analisi è "Tight" (Stretta)?</h3>
 <p>Un professore potrebbe chiederti: <em>"Possiamo fare meglio di 2 con questo specifico algoritmo?"</em> o <em>"L'analisi è pessimistica?"</em></p>
 <p>La risposta è: <strong>Sì, l'analisi è tight.</strong> Ci sono casi in cui l'algoritmo sbaglia esattamente di un fattore 2.</p>
-<p><strong>Esempio Formale (Il Grafo Bipartito Completo <span class="arithmatex">\(K_{n,n}\)</span>):</strong></p>
-<p>Immagina un grafo con due insiemi di vertici <span class="arithmatex">\(U = \{u_1, ..., u_n\}\)</span> e <span class="arithmatex">\(W = \{w_1, ..., w_n\}\)</span>, dove tutti gli <span class="arithmatex">\(u\)</span> sono collegati a tutti i <span class="arithmatex">\(w\)</span>.</p>
+<p><strong>Esempio Formale (Il Grafo Bipartito Completo $K_{n,n}$):</strong></p>
+<p>Immagina un grafo con due insiemi di vertici $U = {u_1, ..., u_n}$ e $W = {w_1, ..., w_n}$, dove tutti gli $u$ sono collegati a tutti i $w$.</p>
 <ul>
 <li>
-<p><strong>Soluzione Ottima (<span class="arithmatex">\(OPT\)</span>):</strong> Basta prendere tutti i vertici di <span class="arithmatex">\(U\)</span> (o tutti quelli di <span class="arithmatex">\(W\)</span>). Cardinalità <span class="arithmatex">\(= n\)</span>.</p>
+<p><strong>Soluzione Ottima ($OPT$):</strong> Basta prendere tutti i vertici di $U$ (o tutti quelli di $W$). Cardinalità $= n$.</p>
 </li>
 <li>
-<p><strong>Soluzione Algoritmo Greedy:</strong> L'algoritmo potrebbe sfortunatamente scegliere una serie di archi disgiunti come <span class="arithmatex">\((u_1, w_1), (u_2, w_2), ..., (u_n, w_n)\)</span>. Per ogni arco, prende <em>entrambi</em> i vertici. Cardinalità <span class="arithmatex">\(= 2n\)</span>.</p>
+<p><strong>Soluzione Algoritmo Greedy:</strong> L'algoritmo potrebbe sfortunatamente scegliere una serie di archi disgiunti come $(u_1, w_1), (u_2, w_2), ..., (u_n, w_n)$. Per ogni arco, prende <em>entrambi</em> i vertici. Cardinalità $= 2n$.</p>
 </li>
 </ul>
-<p>Rapporto: <span class="arithmatex">\(2n / n = 2\)</span>.</p>
+<p>Rapporto: $2n / n = 2$.</p>
 <p>Questo dimostra che non possiamo dimostrare un fattore inferiore a 2 per questo algoritmo specifico.</p>
 <hr/>
 <h2 id="vertex-cover-non-pesato">Vertex Cover Non Pesato</h2>
@@ -957,13 +957,13 @@ Gli altri metodi di approssimazione hanno un fattore di approssimazione troppo a
 <h3 id="approssimiamo-lalgoritmo">Approssimiamo l'algoritmo</h3>
 <p>Vediamo i dettagli formali per applicare l'approssimazione Relax&amp;Round per il VertexCover</p>
 <h4 id="passo-1-formulazione-ilp-integer-linear-programming">Passo 1: Formulazione ILP (Integer Linear Programming)</h4>
-<p>Immagina di associare a ogni vertice <span class="arithmatex">\(v\)</span> una variabile <span class="arithmatex">\(x_v\)</span>.</p>
+<p>Immagina di associare a ogni vertice $v$ una variabile $x_v$.</p>
 <ul>
-<li><span class="arithmatex">\(x_v = 1\)</span>: il vertice è nel cover.</li>
-<li><span class="arithmatex">\(x_v = 0\)</span>: il vertice non è nel cover.</li>
+<li>$x_v = 1$: il vertice è nel cover.</li>
+<li>$x_v = 0$: il vertice non è nel cover.</li>
 </ul>
-<p>Vogliamo minimizzare il numero di vertici scelti (<span class="arithmatex">\(\sum x_v\)</span>) con il vincolo che ogni arco <span class="arithmatex">\((u,v)\)</span> sia coperto, cioè almeno uno dei due estremi deve essere scelto (<span class="arithmatex">\(x_u + x_v \ge 1\)</span>).</p>
-<p>Il vincolo difficile è che <span class="arithmatex">\(x_v \in \{0, 1\}\)</span>. Questo vincolo di "interezza" rende il problema difficile.</p>
+<p>Vogliamo minimizzare il numero di vertici scelti ($\sum x_v$) con il vincolo che ogni arco $(u,v)$ sia coperto, cioè almeno uno dei due estremi deve essere scelto ($x_u + x_v \ge 1$).</p>
+<p>Il vincolo difficile è che $x_v \in {0, 1}$. Questo vincolo di "interezza" rende il problema difficile.</p>
 <p>Abbiamo quindi: 
 $$
 \begin{aligned}
@@ -975,7 +975,7 @@ $$
 \end{aligned}
 $$</p>
 <h4 id="passo-2-rilassamento-relax">Passo 2: Rilassamento (Relax)</h4>
-<p>Rimuoviamo il vincolo rigido <span class="arithmatex">\(x_v \in \{0, 1\}\)</span> e lo sostituiamo con <span class="arithmatex">\(0 \le x_v \le 1\)</span>.</p>
+<p>Rimuoviamo il vincolo rigido $x_v \in {0, 1}$ e lo sostituiamo con $0 \le x_v \le 1$.</p>
 <p>Abbiamo quindi:
 $$
 \begin{aligned}
@@ -992,93 +992,93 @@ $$</p>
 <p>Possiamo risolverlo in <strong>tempo polinomiale</strong> (è facile per un computer).</p>
 </li>
 <li>
-<p>Otterremo una soluzione ottima <em>frazionaria</em> <span class="arithmatex">\(x^*\)</span>. Ad esempio, potremmo avere <span class="arithmatex">\(x^*_A = 0.5, x^*_B = 0.5, x^*_C = 0\)</span>.</p>
+<p>Otterremo una soluzione ottima <em>frazionaria</em> $x^<em>$. Ad esempio, potremmo avere $x^</em>_A = 0.5, x^<em>_B = 0.5, x^</em>_C = 0$.</p>
 </li>
 </ul>
-<p><strong>Nota importante:</strong> Il costo di questa soluzione ottima frazionaria (<span class="arithmatex">\(Cost(LP)\)</span>) sarà sicuramente <em>minore o uguale</em> al costo della soluzione ottima intera (<span class="arithmatex">\(Cost(OPT)\)</span>), perché abbiamo meno restrizioni.</p>
+<p><strong>Nota importante:</strong> Il costo di questa soluzione ottima frazionaria ($Cost(LP)$) sarà sicuramente <em>minore o uguale</em> al costo della soluzione ottima intera ($Cost(OPT)$), perché abbiamo meno restrizioni.</p>
 <h4 id="passo-3-arrotondamento-round">Passo 3: Arrotondamento (Round)</h4>
 <p>Ora dobbiamo tornare alla realtà. Non possiamo prendere "0.5 vertici". 
 Dobbiamo decidere: 0 o 1?</p>
 <p>La regola è semplice:</p>
 <ul>
 <li>
-<p>Se <span class="arithmatex">\(x^*_v \ge 0.5\)</span>, allora impostiamo <span class="arithmatex">\(x_v = 1\)</span> (prendiamo il vertice).</p>
+<p>Se $x^*_v \ge 0.5$, allora impostiamo $x_v = 1$ (prendiamo il vertice).</p>
 </li>
 <li>
-<p>Se <span class="arithmatex">\(x^*_v &lt; 0.5\)</span>, allora impostiamo <span class="arithmatex">\(x_v = 0\)</span> (scartiamo il vertice).</p>
+<p>Se $x^*_v &lt; 0.5$, allora impostiamo $x_v = 0$ (scartiamo il vertice).</p>
 </li>
 </ul>
 <p><strong>Perché funziona (Correttezza/Ammissibilità)?</strong></p>
 <p>Dobbiamo garantire che tutti gli archi siano coperti.</p>
-<p>Per ogni arco <span class="arithmatex">\((u,v)\)</span>, il vincolo LP diceva che <span class="arithmatex">\(x^*_u + x^*_v \ge 1\)</span>.</p>
-<p>Matematicamente, è impossibile che due numeri siano entrambi strettamente minori di 0.5 e la loro somma sia <span class="arithmatex">\(\ge 1\)</span>.</p>
-<p>Quindi, almeno uno tra <span class="arithmatex">\(x^*_u\)</span> e <span class="arithmatex">\(x^*_v\)</span> deve essere <span class="arithmatex">\(\ge 0.5\)</span>.</p>
+<p>Per ogni arco $(u,v)$, il vincolo LP diceva che $x^<em>_u + x^</em>_v \ge 1$.</p>
+<p>Matematicamente, è impossibile che due numeri siano entrambi strettamente minori di 0.5 e la loro somma sia $\ge 1$.</p>
+<p>Quindi, almeno uno tra $x^<em>_u$ e $x^</em>_v$ deve essere $\ge 0.5$.</p>
 <p>Di conseguenza, il nostro algoritmo arrotonderà almeno uno dei due a 1, coprendo l'arco.</p>
 <p>Ovviamente non siamo certi che la soluzione sia ottima, ma possiamo dire che sia ammissibile.</p>
 <hr/>
 <h3 id="3-analisi-del-fattore-di-approssimazione-cruciale">3. Analisi del Fattore di Approssimazione (Cruciale!)</h3>
-<p>Vogliamo dimostrare che il costo della soluzione restituita dal nostro algoritmo <span class="arithmatex">\(Cost(APPROX)\)</span> è al massimo il doppio del costo della soluzione ottima ideale <span class="arithmatex">\(Cost(OPT)\)</span>.</p>
+<p>Vogliamo dimostrare che il costo della soluzione restituita dal nostro algoritmo $Cost(APPROX)$ è al massimo il doppio del costo della soluzione ottima ideale $Cost(OPT)$.</p>
 <p>Definiamo i tre "attori" in gioco:</p>
 <ol>
 <li>
-<p><strong><span class="arithmatex">\(Cost(OPT)\)</span></strong>: Il costo della soluzione ottima <strong>Intera</strong> (il "vero" ottimo del problema, spesso impossibile da calcolare).</p>
+<p><strong>$Cost(OPT)$</strong>: Il costo della soluzione ottima <strong>Intera</strong> (il "vero" ottimo del problema, spesso impossibile da calcolare).</p>
 </li>
 <li>
-<p><strong><span class="arithmatex">\(Cost(X^*)\)</span></strong>: Il costo della soluzione ottima <strong>Rilassata/Frazionaria</strong> (calcolata tramite LP).</p>
+<p><strong>$Cost(X^*)$</strong>: Il costo della soluzione ottima <strong>Rilassata/Frazionaria</strong> (calcolata tramite LP).</p>
 <ul>
-<li><em>Nota Bene:</em> La soluzione <span class="arithmatex">\(X^*\)</span> è matematicamente perfetta per il problema rilassato, ma è <strong>quasi sempre INAMMISSIBILE</strong> per il problema originale (non puoi comprare "mezzo nodo"). Tuttavia, ci serve come punto di riferimento matematico (Lower Bound).</li>
+<li><em>Nota Bene:</em> La soluzione $X^<em>$ è matematicamente perfetta per il problema rilassato, ma è </em><em>quasi sempre INAMMISSIBILE</em>* per il problema originale (non puoi comprare "mezzo nodo"). Tuttavia, ci serve come punto di riferimento matematico (Lower Bound).</li>
 </ul>
 </li>
 <li>
-<p><strong><span class="arithmatex">\(Cost(APPROX)\)</span></strong>: Il costo della nostra soluzione <strong>Arrotondata</strong> (la soluzione reale che l'algoritmo restituisce, valida e intera).</p>
+<p><strong>$Cost(APPROX)$</strong>: Il costo della nostra soluzione <strong>Arrotondata</strong> (la soluzione reale che l'algoritmo restituisce, valida e intera).</p>
 </li>
 </ol>
 <h4 id="passo-1-relazione-tra-rilassato-lp-e-ottimo-ilp">Passo 1: Relazione tra Rilassato (LP) e Ottimo (ILP)</h4>
 <p>Il problema rilassato (LP) cerca il minimo in uno spazio di soluzioni molto più ampio di quello intero (ILP), poiché ammette anche le frazioni.</p>
 <p>Essendo meno vincolato, il problema LP riesce a trovare un costo <em>più basso o uguale</em> rispetto a quando siamo costretti a usare solo numeri interi.</p>
 <p>Quindi, il costo frazionario è un <strong>Lower Bound</strong> (limite inferiore) del costo vero:</p>
-<div class="arithmatex">\[Cost(X^*) \le Cost(OPT)\]</div>
-<p>_(Intuizione: <span class="arithmatex">\(X^*\)</span> costa poco perché "bara" usando le frazioni; <span class="arithmatex">\(OPT\)</span> costa di più perché deve rispettare le regole dell'interezza).*</p>
+<p>$$Cost(X^*) \le Cost(OPT)$$</p>
+<p>_(Intuizione: $X^<em>$ costa poco perché "bara" usando le frazioni; $OPT$ costa di più perché deve rispettare le regole dell'interezza).</em></p>
 <h4 id="passo-2-relazione-tra-arrotondamento-e-rilassato">Passo 2: Relazione tra Arrotondamento e Rilassato</h4>
-<p>Analizziamo il <strong>costo introdotto dalla fase di arrotondamento</strong> per ogni singolo vertice <span class="arithmatex">\(v\)</span>.</p>
-<p>La nostra regola è: se <span class="arithmatex">\(x^*_v \ge 0.5 \implies x_v = 1\)</span>, altrimenti <span class="arithmatex">\(0\)</span>.</p>
-<p>Confrontiamo il valore arrotondato <span class="arithmatex">\(x_v\)</span> con il valore frazionario originale <span class="arithmatex">\(x^*_v\)</span>:</p>
+<p>Analizziamo il <strong>costo introdotto dalla fase di arrotondamento</strong> per ogni singolo vertice $v$.</p>
+<p>La nostra regola è: se $x^*_v \ge 0.5 \implies x_v = 1$, altrimenti $0$.</p>
+<p>Confrontiamo il valore arrotondato $x_v$ con il valore frazionario originale $x^*_v$:</p>
 <ul>
 <li>
-<p>Se <span class="arithmatex">\(x_v = 0\)</span>: il costo è nullo, la disuguaglianza <span class="arithmatex">\(0 \le 2 \cdot x^*_v\)</span> regge sempre.</p>
+<p>Se $x_v = 0$: il costo è nullo, la disuguaglianza $0 \le 2 \cdot x^*_v$ regge sempre.</p>
 </li>
 <li>
-<p>Se <span class="arithmatex">\(x_v = 1\)</span>: questo accade solo se <span class="arithmatex">\(x^*_v \ge 0.5\)</span>.</p>
+<p>Se $x_v = 1$: questo accade solo se $x^*_v \ge 0.5$.</p>
 <ul>
 <li>
-<p>Matematicamente: <span class="arithmatex">\(1 \le 2 \cdot 0.5\)</span>.</p>
+<p>Matematicamente: $1 \le 2 \cdot 0.5$.</p>
 </li>
 <li>
-<p>Quindi: <span class="arithmatex">\(x_v \le 2 \cdot x^*_v\)</span>.</p>
+<p>Quindi: $x_v \le 2 \cdot x^*_v$.</p>
 </li>
 </ul>
 </li>
 </ul>
 <p>In entrambi i casi, paghiamo al massimo il doppio del valore frazionario:</p>
-<div class="arithmatex">\[x_v \le 2 \cdot x^*_v \quad \forall v \in V\]</div>
+<p>$$x_v \le 2 \cdot x^*_v \quad \forall v \in V$$</p>
 <h4 id="passo-3-conclusione-la-catena-di-disuguaglianze">Passo 3: Conclusione (La Catena di Disuguaglianze)</h4>
-<p>Sommiamo i costi su tutti i vertici per ottenere il costo totale della nostra soluzione (<span class="arithmatex">\(Cost(APPROX)\)</span>):</p>
-<div class="arithmatex">\[\begin{aligned} Cost(APPROX) &amp;= \sum_{v \in V} x_v \\ &amp;\le \sum_{v \in V} 2 \cdot x^*_v &amp;&amp; \text{(per il Passo 2)} \\ &amp;= 2 \cdot \sum_{v \in V} x^*_v \\ &amp;= 2 \cdot Cost(X^*) \end{aligned}\]</div>
-<p>Ora sostituiamo <span class="arithmatex">\(Cost(X^*)\)</span> usando la disuguaglianza del <strong>Passo 1</strong>:</p>
-<div class="arithmatex">\[Cost(APPROX) \le 2 \cdot Cost(X^*) \le 2 \cdot Cost(OPT)\]</div>
+<p>Sommiamo i costi su tutti i vertici per ottenere il costo totale della nostra soluzione ($Cost(APPROX)$):</p>
+<p>$$\begin{aligned} Cost(APPROX) &amp;= \sum_{v \in V} x_v \ &amp;\le \sum_{v \in V} 2 \cdot x^<em><em _in="\in" v="V">v &amp;&amp; \text{(per il Passo 2)} \ &amp;= 2 \cdot \sum</em> x^</em>_v \ &amp;= 2 \cdot Cost(X^*) \end{aligned}$$</p>
+<p>Ora sostituiamo $Cost(X^<em>)$ usando la disuguaglianza del </em><em>Passo 1</em>*:</p>
+<p>$$Cost(APPROX) \le 2 \cdot Cost(X^*) \le 2 \cdot Cost(OPT)$$</p>
 <p><strong>Teorema Dimostrato:</strong> L'algoritmo Relax &amp; Round restituisce una soluzione valida con un costo che non supera mai il doppio dell'ottimo.</p>
 <h3 id="bonus-spiegazione-del-fattore-2">Bonus: spiegazione del fattore 2</h3>
 <p>Il fattore <strong>2</strong> non è casuale, ma è conseguenza diretta della necessità di garantire una soluzione valida (<strong>Safety</strong>).</p>
 <ol>
 <li>
 <p><strong>Il Vincolo (Safety):</strong></p>
-<p>Per coprire un arco <span class="arithmatex">\((u,v)\)</span>, la somma delle variabili frazionarie deve essere <span class="arithmatex">\(\ge 1\)</span>. Nel caso peggiore, la soluzione LP ripartisce il peso equamente: <span class="arithmatex">\(x^*_u = 0.5\)</span> e <span class="arithmatex">\(x^*_v = 0.5\)</span>.</p>
+<p>Per coprire un arco $(u,v)$, la somma delle variabili frazionarie deve essere $\ge 1$. Nel caso peggiore, la soluzione LP ripartisce il peso equamente: $x^<em>_u = 0.5$ e $x^</em>_v = 0.5$.</p>
 <p>Per non lasciare l'arco scoperto, siamo <strong>costretti</strong> a porre la soglia di arrotondamento a <strong>0.5</strong> (se fosse più alta, arrotonderemmo entrambi a 0 e l'arco non sarebbe coperto).</p>
 </li>
 <li>
 <p><strong>Il Calcolo (Efficiency):</strong></p>
 <p>Il fattore di approssimazione è il rapporto massimo tra il costo che paghiamo (1, il nodo intero) e il costo che aveva calcolato l'LP (la soglia minima che fa scattare l'acquisto).</p>
-<div class="arithmatex">\[\text{Fattore} = \frac{\text{Costo Arrotondato}}{\text{Soglia Minima}} = \frac{1}{0.5} = \mathbf{2}\]</div>
+<p>$$\text{Fattore} = \frac{\text{Costo Arrotondato}}{\text{Soglia Minima}} = \frac{1}{0.5} = \mathbf{2}$$</p>
 </li>
 </ol>
 <p><strong>In breve:</strong> Poiché dobbiamo accettare valori bassi fino a <strong>1/2</strong> per garantire la correttezza, il nostro errore massimo sarà l'inverso di quel valore, ovvero <strong>2</strong>.</p>
@@ -1087,33 +1087,33 @@ Dobbiamo decidere: 0 o 1?</p>
 <p>_Riprendiamo il discorso sul commesso viaggiatore, poi al massimo lo spostiamo dopo</p>
 <hr/>
 <h2 id="tsp-generale-e-approssimabile">TSP generale è approssimabile?</h2>
-<h1 id="teorema-se-p-neq-np-allora-per-ogni-costante-rho-ge-1-non-esiste-un-algoritmo-di-approssimazione-polinomiale-per-il-tsp-generale-con-fattore-rho">TEOREMA  <em>Se <span class="arithmatex">\(P \neq NP\)</span>, allora per ogni costante <span class="arithmatex">\(\rho \ge 1\)</span> non esiste un algoritmo di approssimazione polinomiale per il TSP generale con fattore <span class="arithmatex">\(\rho\)</span>.</em></h1>
-<h4 id="1-la-riduzione-costruzione-del-grafo-g">1. La riduzione (Costruzione del Grafo <span class="arithmatex">\(G'\)</span>)</h4>
-<p>Partiamo da un’istanza del problema del <strong>Ciclo Hamiltoniano (HC)</strong>: un grafo <span class="arithmatex">\(G = (V, E)\)</span>. Vogliamo sapere se <span class="arithmatex">\(G\)</span> ha un ciclo che tocca tutti i vertici. Costruiamo un nuovo grafo completo <span class="arithmatex">\(G' = (V, E')\)</span> per il TSP:</p>
+<h1 id="teorema-se-p-neq-np-allora-per-ogni-costante-rho-ge-1-non-esiste-un-algoritmo-di-approssimazione-polinomiale-per-il-tsp-generale-con-fattore-rho">TEOREMA  <em>Se $P \neq NP$, allora per ogni costante $\rho \ge 1$ non esiste un algoritmo di approssimazione polinomiale per il TSP generale con fattore $\rho$.</em></h1>
+<h4 id="1-la-riduzione-costruzione-del-grafo-g">1. La riduzione (Costruzione del Grafo $G'$)</h4>
+<p>Partiamo da un’istanza del problema del <strong>Ciclo Hamiltoniano (HC)</strong>: un grafo $G = (V, E)$. Vogliamo sapere se $G$ ha un ciclo che tocca tutti i vertici. Costruiamo un nuovo grafo completo $G' = (V, E')$ per il TSP:</p>
 <ul>
-<li>Se un arco <span class="arithmatex">\(e\)</span> era presente nel grafo originale <span class="arithmatex">\(G\)</span>, gli assegniamo costo <strong>1</strong>.</li>
-<li>Se l'arco <span class="arithmatex">\(e\)</span> <strong>non</strong> era in <span class="arithmatex">\(G\)</span>, gli assegniamo un costo pesantissimo: <strong><span class="arithmatex">\(\rho|V| + 1\)</span></strong>.</li>
+<li>Se un arco $e$ era presente nel grafo originale $G$, gli assegniamo costo <strong>1</strong>.</li>
+<li>Se l'arco $e$ <strong>non</strong> era in $G$, gli assegniamo un costo pesantissimo: <strong>$\rho|V| + 1$</strong>.</li>
 </ul>
 <h4 id="2-analisi-dei-due-casi">2. Analisi dei due casi</h4>
 <ul>
 <li>
-<p><strong>Caso SI (G ha un ciclo hamiltoniano):</strong> In <span class="arithmatex">\(G'\)</span> esiste un tour di costo esattamente <strong><span class="arithmatex">\(|V|\)</span></strong> (composto da <span class="arithmatex">\(|V|\)</span> archi di costo 1). Questo è il valore ottimo <span class="arithmatex">\(OPT\)</span>. Un algoritmo di approssimazione <span class="arithmatex">\(A\)</span> con fattore <span class="arithmatex">\(\rho\)</span> deve restituire una soluzione <span class="arithmatex">\(SOL \le \rho \cdot OPT\)</span>. Quindi <span class="arithmatex">\(SOL \le \rho \cdot |V|\)</span>.</p>
+<p><strong>Caso SI (G ha un ciclo hamiltoniano):</strong> In $G'$ esiste un tour di costo esattamente <strong>$|V|$</strong> (composto da $|V|$ archi di costo 1). Questo è il valore ottimo $OPT$. Un algoritmo di approssimazione $A$ con fattore $\rho$ deve restituire una soluzione $SOL \le \rho \cdot OPT$. Quindi $SOL \le \rho \cdot |V|$.</p>
 </li>
 <li>
-<p><strong>Caso NO (G non ha un ciclo hamiltoniano):</strong> Qualsiasi tour in <span class="arithmatex">\(G'\)</span> deve usare almeno un arco che non era in <span class="arithmatex">\(G\)</span> (quelli che costano <span class="arithmatex">\(\rho|V| + 1\)</span>). Il costo del tour ottimo in <span class="arithmatex">\(G'\)</span> sarà almeno <span class="arithmatex">\((\rho|V| + 1) + (|V| - 1)\)</span>, che è <strong>strettamente maggiore</strong> di <span class="arithmatex">\(\rho|V|\)</span>. Di conseguenza, anche l'algoritmo <span class="arithmatex">\(A\)</span> dovrà restituire un valore <span class="arithmatex">\(SOL &gt; \rho|V|\)</span>.</p>
+<p><strong>Caso NO (G non ha un ciclo hamiltoniano):</strong> Qualsiasi tour in $G'$ deve usare almeno un arco che non era in $G$ (quelli che costano $\rho|V| + 1$). Il costo del tour ottimo in $G'$ sarà almeno $(\rho|V| + 1) + (|V| - 1)$, che è <strong>strettamente maggiore</strong> di $\rho|V|$. Di conseguenza, anche l'algoritmo $A$ dovrà restituire un valore $SOL &gt; \rho|V|$.</p>
 </li>
 </ul>
 <h4 id="3-conclusione">3. Conclusione</h4>
-<p>Se avessimo l'algoritmo <span class="arithmatex">\(A\)</span>, basterebbe guardare il costo della soluzione prodotta:</p>
+<p>Se avessimo l'algoritmo $A$, basterebbe guardare il costo della soluzione prodotta:</p>
 <ol>
 <li>
-<p>Se <span class="arithmatex">\(costo \le \rho|V|\)</span>, allora <span class="arithmatex">\(G\)</span> ha un ciclo hamiltoniano.</p>
+<p>Se $costo \le \rho|V|$, allora $G$ ha un ciclo hamiltoniano.</p>
 </li>
 <li>
-<p>Se <span class="arithmatex">\(costo &gt; \rho|V|\)</span>, allora <span class="arithmatex">\(G\)</span> non lo ha.</p>
+<p>Se $costo &gt; \rho|V|$, allora $G$ non lo ha.</p>
 </li>
 </ol>
-<p>Avremmo risolto un problema NP-completo in tempo polinomiale, il che implicherebbe <span class="arithmatex">\(P = NP\)</span>.
+<p>Avremmo risolto un problema NP-completo in tempo polinomiale, il che implicherebbe $P = NP$.
 E questo <strong>sarebbe assurdo</strong>.</p>
 <hr/>
 <h3 id="contesto-generale">Contesto generale</h3>
@@ -1128,15 +1128,15 @@ $$
 \forall i,j,k \in V:\quad c(i,j) \le c(i,k) + c(k,j)
 $$</p>
 <p>📌 <strong>Intuizione</strong><br/>
-    Andare <strong>direttamente</strong> da <span class="arithmatex">\(i\)</span> a <span class="arithmatex">\(j\)</span> non costa più che passare per un nodo intermedio.</p>
+    Andare <strong>direttamente</strong> da $i$ a $j$ non costa più che passare per un nodo intermedio.</p>
 <h3 id="definizione-formale-del-problema">Definizione formale del problema</h3>
 <p><strong>Problema del Commesso Viaggiatore con disuguaglianza triangolare (TSPdt)</strong></p>
 <p><strong>Input</strong>
-- Grafo completo non diretto <span class="arithmatex">\(G = (V,E)\)</span>
-- Funzione costo <span class="arithmatex">\(c : E \rightarrow \mathbb{R}^+\)</span>
-- <span class="arithmatex">\(c\)</span> soddisfa la disuguaglianza triangolare</p>
+- Grafo completo non diretto $G = (V,E)$
+- Funzione costo $c : E \rightarrow \mathbb{R}^+$
+- $c$ soddisfa la disuguaglianza triangolare</p>
 <p><strong>Output</strong>
-- Un <strong>ciclo hamiltoniano</strong> su <span class="arithmatex">\(G\)</span> di <strong>costo minimo</strong></p>
+- Un <strong>ciclo hamiltoniano</strong> su $G$ di <strong>costo minimo</strong></p>
 <h2 id="approssimazione-per-tspdt">Approssimazione per TSPdt</h2>
 <p>Per questo problema, un algoritmo di approssimazione deve restituire <strong>una soluzione ammissibile</strong>, cioè un ciclo hamiltoniano, che può avere un costo maggiore di quello ottimo.<br/>
 Nel seguito verranno presentati <strong>due algoritmi progettati ad-hoc</strong> per il TSPdt; il secondo rappresenta un miglioramento del primo.</p>
@@ -1156,7 +1156,7 @@ Un ciclo euleriano è un cammino chiuso che attraversa <strong>esattamente una v
 Quando questa condizione è soddisfatta, il ciclo euleriano può essere trovato in <strong>tempo polinomiale</strong>.</p>
 <h2 id="proprieta-fondamentale-della-disuguaglianza-triangolare">Proprietà fondamentale della disuguaglianza triangolare</h2>
 <h1 id="teorema-accorciamento-dei-cammini-nei-grafi-metrici">Teorema — <strong>Accorciamento dei cammini nei grafi metrici</strong></h1>
-<p>Sia <span class="arithmatex">\(G\)</span> un grafo con archi pesati tale che la funzione costo soddisfi la <strong>disuguaglianza triangolare</strong>, cioè:
+<p>Sia $G$ un grafo con archi pesati tale che la funzione costo soddisfi la <strong>disuguaglianza triangolare</strong>, cioè:
 $$
 \forall i,j,k \in V:\quad c(i,j) \le c(i,k) + c(k,j)
 $$</p>
@@ -1164,7 +1164,7 @@ $$</p>
 $$
 C = \langle v_1, v_2, \dots, v_{k+1} \rangle
 $$
-un <strong>cammino semplice</strong> in <span class="arithmatex">\(G\)</span>, composto da <span class="arithmatex">\(k\)</span> archi.</p>
+un <strong>cammino semplice</strong> in $G$, composto da $k$ archi.</p>
 <p>Allora vale:
 $$
 c(v_1, v_{k+1}) \le \sum_{i=1}^{k} c(v_i, v_{i+1})
@@ -1176,13 +1176,13 @@ Se si percorre un cammino passando per nodi intermedi, il costo complessivo non 
 <p>Geometricamente, è l’equivalente del fatto che <strong>la linea retta è il percorso più breve</strong>.</p>
 <h3 id="dimostrazione">Dimostrazione</h3>
 <p><strong>Idea generale della dimostrazione</strong></p>
-<p>La dimostrazione si basa su un’<strong>induzione sulla lunghezza del cammino</strong>, cioè sul numero di archi <span class="arithmatex">\(k\)</span>.</p>
+<p>La dimostrazione si basa su un’<strong>induzione sulla lunghezza del cammino</strong>, cioè sul numero di archi $k$.</p>
 <p>L’idea è quella di:
 - spezzare il cammino in parti più corte,
 - usare la disuguaglianza triangolare per eliminare nodi intermedi,
 - ridurre progressivamente il cammino fino a collegare direttamente i due estremi.</p>
 <p><strong>Caso base</strong></p>
-<p>Nel caso <span class="arithmatex">\(k = 2\)</span>, il cammino è:
+<p>Nel caso $k = 2$, il cammino è:
 $$
 v_1 \rightarrow v_2 \rightarrow v_3
 $$</p>
@@ -1192,7 +1192,7 @@ c(v_1, v_3) \le c(v_1, v_2) + c(v_2, v_3)
 $$</p>
 <p>Questa è <strong>esattamente la disuguaglianza triangolare</strong>, quindi il caso base è immediatamente verificato.</p>
 <p><strong>Passo induttivo</strong></p>
-<p>Si assume che la tesi sia vera per tutti i cammini di lunghezza minore di <span class="arithmatex">\(k\)</span> e si considera un cammino di lunghezza <span class="arithmatex">\(k\)</span>:
+<p>Si assume che la tesi sia vera per tutti i cammini di lunghezza minore di $k$ e si considera un cammino di lunghezza $k$:
 $$
 C = \langle v_1, v_2, \dots, v_{k-1}, v_k, v_{k+1} \rangle
 $$</p>
@@ -1208,7 +1208,7 @@ $$</p>
 $$
 c(v_{k-1}, v_k) + c(v_k, v_{k+1}) \ge c(v_{k-1}, v_{k+1})
 $$</p>
-<p>Inoltre, per ipotesi induttiva, il costo del sottocammino che va da <span class="arithmatex">\(v_1\)</span> a <span class="arithmatex">\(v_{k-1}\)</span> è almeno:
+<p>Inoltre, per ipotesi induttiva, il costo del sottocammino che va da $v_1$ a $v_{k-1}$ è almeno:
 $$
 c(v_1, v_{k-1})
 $$</p>
@@ -1229,35 +1229,35 @@ Ripetendo questo processo, il cammino viene progressivamente “raddrizzato” f
 <p><strong>Grazie alla disuguaglianza triangolare, ogni cammino può essere accorciato collegando direttamente i suoi estremi senza aumentare il costo totale.</strong></p>
 <hr/>
 <h2 id="algoritmo-di-2-approssimazione-per-tsp-con-disuguaglianza-triangolare">Algoritmo di 2-approssimazione per TSP con disuguaglianza triangolare</h2>
-<p>Consideriamo il problema del <strong>TSP con disuguaglianza triangolare</strong> (TSPdt), cioè su un grafo completo <span class="arithmatex">\(G = (V,E)\)</span> con funzione di costo <span class="arithmatex">\(c\)</span> tale che:
-$<span class="arithmatex">\(c(u,w) \le c(u,v) + c(v,w) \quad \forall u,v,w \in V\)</span>$</p>
+<p>Consideriamo il problema del <strong>TSP con disuguaglianza triangolare</strong> (TSPdt), cioè su un grafo completo $G = (V,E)$ con funzione di costo $c$ tale che:
+$$c(u,w) \le c(u,v) + c(v,w) \quad \forall u,v,w \in V$$</p>
 <h3 id="descrizione-dellalgoritmo-mst-based">Descrizione dell’algoritmo (MST-based)</h3>
 <p>L’algoritmo di 2-approssimazione procede come segue:</p>
 <ol>
-<li>Si calcola un <strong>Minimum Spanning Tree</strong> <span class="arithmatex">\(T\)</span> di <span class="arithmatex">\(G\)</span> e si sceglie un nodo <span class="arithmatex">\(r\)</span> come radice;</li>
-<li>Si <strong>raddoppiano tutti gli archi di <span class="arithmatex">\(T\)</span></strong>, ottenendo un multigrafo in cui ogni nodo ha grado pari;</li>
-<li>Si calcola un <strong>ciclo euleriano</strong> <span class="arithmatex">\(E\)</span> sul multigrafo;</li>
-<li>A partire da <span class="arithmatex">\(E\)</span>, si costruisce un <strong>ciclo hamiltoniano</strong> <span class="arithmatex">\(H\)</span> saltando i nodi già visitati (shortcut);</li>
-<li>Si restituisce <span class="arithmatex">\(H\)</span>.</li>
+<li>Si calcola un <strong>Minimum Spanning Tree</strong> $T$ di $G$ e si sceglie un nodo $r$ come radice;</li>
+<li>Si <strong>raddoppiano tutti gli archi di $T$</strong>, ottenendo un multigrafo in cui ogni nodo ha grado pari;</li>
+<li>Si calcola un <strong>ciclo euleriano</strong> $E$ sul multigrafo;</li>
+<li>A partire da $E$, si costruisce un <strong>ciclo hamiltoniano</strong> $H$ saltando i nodi già visitati (shortcut);</li>
+<li>Si restituisce $H$.</li>
 </ol>
 <hr/>
 <h2 id="concetti-da-ripassare">Concetti da ripassare</h2>
 <h3 id="minimum-spanning-tree-mst">Minimum Spanning Tree (MST)</h3>
 <p><strong>Definizione</strong>
-Dato un grafo <strong>non orientato</strong>, <strong>connesso</strong> e pesato <span class="arithmatex">\(G=(V,E)\)</span> con pesi <span class="arithmatex">\(w(e)\ge 0\)</span>, un <strong>Minimum Spanning Tree</strong> è un sottoinsieme di archi <span class="arithmatex">\(T \subseteq E\)</span> tale che:
-- <span class="arithmatex">\(T\)</span> connette tutti i vertici (è uno <strong>spanning tree</strong>),
+Dato un grafo <strong>non orientato</strong>, <strong>connesso</strong> e pesato $G=(V,E)$ con pesi $w(e)\ge 0$, un <strong>Minimum Spanning Tree</strong> è un sottoinsieme di archi $T \subseteq E$ tale che:
+- $T$ connette tutti i vertici (è uno <strong>spanning tree</strong>),
 - non contiene cicli,
 - ha costo totale minimo:
 $$ w(T)=\sum_{e\in T} w(e) $$
-tra tutti gli spanning tree di <span class="arithmatex">\(G\)</span>.</p>
-<p>Uno spanning tree su <span class="arithmatex">\(n=|V|\)</span> nodi ha sempre <strong>esattamente</strong> <span class="arithmatex">\(n-1\)</span> archi.</p>
+tra tutti gli spanning tree di $G$.</p>
+<p>Uno spanning tree su $n=|V|$ nodi ha sempre <strong>esattamente</strong> $n-1$ archi.</p>
 <p><strong>Intuizione</strong>
 L’MST è il modo <strong>più economico</strong> di collegare tutti i nodi senza “sprechi” (cioè senza cicli).
 Non è necessariamente unico: se ci sono pesi uguali, possono esistere più MST.</p>
 <h4 id="proprieta-chiave-utili-per-dimostrazioni">Proprietà chiave (utili per dimostrazioni)</h4>
 <p><strong>Cut Property (proprietà del taglio)</strong>
-Considera un taglio <span class="arithmatex">\((S, V\setminus S)\)</span>.<br/>
-Se <span class="arithmatex">\(e\)</span> è l’arco di <strong>peso minimo</strong> che attraversa quel taglio, allora esiste un MST che contiene <span class="arithmatex">\(e\)</span> (in molte formulazioni: <span class="arithmatex">\(e\)</span> è “safe”).</p>
+Considera un taglio $(S, V\setminus S)$.<br/>
+Se $e$ è l’arco di <strong>peso minimo</strong> che attraversa quel taglio, allora esiste un MST che contiene $e$ (in molte formulazioni: $e$ è “safe”).</p>
 <p>Questa proprietà giustifica perché algoritmi greedy come Kruskal/Prim funzionano.</p>
 <p><strong>Cycle Property (proprietà del ciclo)</strong>
 In qualunque ciclo, un arco di <strong>peso massimo</strong> nel ciclo <strong>non</strong> può appartenere a un MST (se è strettamente maggiore degli altri), perché togliendolo resti connesso ma spendi meno.</p>
@@ -1265,22 +1265,22 @@ In qualunque ciclo, un arco di <strong>peso massimo</strong> nel ciclo <strong>n
 <h4 id="algoritmi-classici">Algoritmi classici</h4>
 <p><strong>Kruskal (edge-based)</strong>
 Idea greedy: ordina gli archi per peso crescente e aggiungili se <strong>non creano un ciclo</strong> (tipicamente con Union-Find).
-- Output: una foresta che diventa albero quando raggiunge <span class="arithmatex">\(n-1\)</span> archi.
-- Tempo tipico: <span class="arithmatex">\(O(m \log m)\)</span> (ordinamento), con <span class="arithmatex">\(m=|E|\)</span>.</p>
+- Output: una foresta che diventa albero quando raggiunge $n-1$ archi.
+- Tempo tipico: $O(m \log m)$ (ordinamento), con $m=|E|$.</p>
 <p><strong>Prim (vertex-based)</strong>
 Idea greedy: cresci un albero partendo da una radice, aggiungendo ogni volta l’arco minimo che collega l’albero a un nodo esterno (con coda di priorità).
-- Tempo tipico: <span class="arithmatex">\(O(m \log n)\)</span> con heap.</p>
+- Tempo tipico: $O(m \log n)$ con heap.</p>
 <h4 id="perche-serve-nel-tsp-con-disuguaglianza-triangolare">Perché serve nel TSP con disuguaglianza triangolare</h4>
-<p>Nel 2-approx per TSPdt si usa l’MST perché è un <strong>lower bound</strong> sul costo del tour ottimo <span class="arithmatex">\(H^*\)</span>:
-togliendo un arco da un tour ottimo ottieni uno spanning tree <span class="arithmatex">\(T'\)</span> con
+<p>Nel 2-approx per TSPdt si usa l’MST perché è un <strong>lower bound</strong> sul costo del tour ottimo $H^<em>$:
+togliendo un arco da un tour ottimo ottieni uno spanning tree $T'$ con
 $$
-w(T') \le w(H^<em>)
+w(T') \le w(H^</em>)
 $$
-e poiché <span class="arithmatex">\(T\)</span> è minimo,
+e poiché $T$ è minimo,
 $$
-w(T) \le w(T') \le w(H^</em>)
+w(T) \le w(T') \le w(H^<em>)
 $$
-Quindi <span class="arithmatex">\(w(T)\le w(H^*)\)</span>.</p>
+Quindi $w(T)\le w(H^</em>)$.</p>
 <h3 id="dfs-depth-first-search-e-ordini-di-visita">DFS (Depth-First Search) e ordini di visita</h3>
 <p><img alt="" src="../assets/1_teoria_della_complessita_images/image_15.png"/>
 <strong>Idea della DFS</strong>
@@ -1295,12 +1295,12 @@ La <strong>DFS</strong> (<em>Depth-First Search</em>, ricerca in profondità) es
 <hr/>
 <h2 id="correttezza-dei-passi-dellalgoritmo">Correttezza dei passi dell’algoritmo</h2>
 <h4 id="a-esistenza-e-calcolo-del-ciclo-euleriano">(a) Esistenza e calcolo del ciclo euleriano</h4>
-<p>Dopo il raddoppio degli archi di <span class="arithmatex">\(T\)</span>, ogni nodo ha grado pari, perché il grado di ciascun nodo raddoppia rispetto a quello nell’albero.</p>
+<p>Dopo il raddoppio degli archi di $T$, ogni nodo ha grado pari, perché il grado di ciascun nodo raddoppia rispetto a quello nell’albero.</p>
 <p>Per il <strong>teorema di Eulero</strong>, un grafo connesso in cui tutti i nodi hanno grado pari ammette un ciclo euleriano.<br/>
-Il ciclo <span class="arithmatex">\(E\)</span> può essere calcolato in tempo polinomiale, ad esempio seguendo una visita DFS in pre-ordine dell’albero <span class="arithmatex">\(T\)</span>.</p>
+Il ciclo $E$ può essere calcolato in tempo polinomiale, ad esempio seguendo una visita DFS in pre-ordine dell’albero $T$.</p>
 <h4 id="b-costruzione-del-ciclo-hamiltoniano">(b) Costruzione del ciclo hamiltoniano</h4>
-<p>Il ciclo hamiltoniano <span class="arithmatex">\(H\)</span> si ottiene visitando i nodi nell’ordine in cui compaiono in <span class="arithmatex">\(E\)</span>, includendo ogni nodo <strong>solo la prima volta</strong> e saltando le visite successive.</p>
-<p>Questa operazione è sempre possibile perché il grafo di partenza <span class="arithmatex">\(G\)</span> è <strong>completo</strong>: tra ogni coppia di nodi esiste un arco, anche se non appartiene a <span class="arithmatex">\(E\)</span>.</p>
+<p>Il ciclo hamiltoniano $H$ si ottiene visitando i nodi nell’ordine in cui compaiono in $E$, includendo ogni nodo <strong>solo la prima volta</strong> e saltando le visite successive.</p>
+<p>Questa operazione è sempre possibile perché il grafo di partenza $G$ è <strong>completo</strong>: tra ogni coppia di nodi esiste un arco, anche se non appartiene a $E$.</p>
 <p>Grazie alla disuguaglianza triangolare, la sostituzione di un cammino con un arco diretto (<strong>shortcut</strong>) non aumenta il costo.</p>
 <hr/>
 <h3 id="teorema-fattore-di-approssimazione">Teorema – Fattore di approssimazione</h3>
@@ -1308,14 +1308,14 @@ Il ciclo <span class="arithmatex">\(E\)</span> può essere calcolato in tempo po
 <h4 id="dimostrazione_1">Dimostrazione</h4>
 <p>La dimostrazione si basa su due osservazioni fondamentali.</p>
 <p><strong>(1) Bound superiore sul costo della soluzione approssimata</strong></p>
-<p>Il ciclo euleriano <span class="arithmatex">\(E\)</span> percorre ogni arco di <span class="arithmatex">\(T\)</span> esattamente due volte, quindi:
+<p>Il ciclo euleriano $E$ percorre ogni arco di $T$ esattamente due volte, quindi:
 $$ cost(E) = 2 \cdot cost(T) $$.</p>
-<p>Poiché il ciclo hamiltoniano <span class="arithmatex">\(H\)</span> si ottiene da <span class="arithmatex">\(E\)</span> tramite shortcut che non aumentano il costo, vale:
+<p>Poiché il ciclo hamiltoniano $H$ si ottiene da $E$ tramite shortcut che non aumentano il costo, vale:
 $$ cost(H) \le cost(E) \le 2 \cdot cost(T) $$.</p>
 <p><strong>(2) Bound inferiore sul costo della soluzione ottima</strong></p>
-<p>Sia <span class="arithmatex">\(H^*\)</span> un ciclo hamiltoniano ottimo. Rimuovendo un arco da <span class="arithmatex">\(H^*\)</span> otteniamo un albero di copertura <span class="arithmatex">\(T'\)</span>, per cui:
+<p>Sia $H^<em>$ un ciclo hamiltoniano ottimo. Rimuovendo un arco da $H^</em>$ otteniamo un albero di copertura $T'$, per cui:
 $$ cost(T') \le cost(H^*) $$</p>
-<p>Poiché <span class="arithmatex">\(T\)</span> è un minimum spanning tree, vale anche:
+<p>Poiché $T$ è un minimum spanning tree, vale anche:
 $$ cost(T) \le cost(T') $$</p>
 <p>Combinando le disuguaglianze otteniamo:
 $$ cost(H^*) \ge cost(T) $$</p>
@@ -1324,18 +1324,18 @@ $$ cost(H^*) \ge cost(T) $$</p>
 $$ cost(H) \le 2 \cdot cost(H^*) $$</p>
 <hr/>
 <h3 id="tightness-dellanalisi">Tightness dell’analisi</h3>
-<p>Il fattore di approssimazione <span class="arithmatex">\(2\)</span> è <strong>tight</strong>, cioè non migliorabile per questo algoritmo.</p>
+<p>Il fattore di approssimazione $2$ è <strong>tight</strong>, cioè non migliorabile per questo algoritmo.</p>
 <h4 id="esempio">Esempio</h4>
-<p>Consideriamo un grafo completo con <span class="arithmatex">\(n\)</span> nodi e pesi definiti come segue:
-- <span class="arithmatex">\(c(1,v) = 1\)</span> per ogni <span class="arithmatex">\(v = 2, \dots, n\)</span>;
-- <span class="arithmatex">\(c(v,v+1) = 1\)</span> per <span class="arithmatex">\(v = 1, \dots, n-1\)</span> e <span class="arithmatex">\(c(n,1) = 1\)</span>;
-- tutti gli altri archi hanno costo <span class="arithmatex">\(2\)</span>.</p>
+<p>Consideriamo un grafo completo con $n$ nodi e pesi definiti come segue:
+- $c(1,v) = 1$ per ogni $v = 2, \dots, n$;
+- $c(v,v+1) = 1$ per $v = 1, \dots, n-1$ e $c(n,1) = 1$;
+- tutti gli altri archi hanno costo $2$.</p>
 <p>Esiste un ciclo hamiltoniano ottimo di costo:
 $$ cost(H^*) = n $$</p>
-<p>Il minimum spanning tree può essere una <strong>stella centrata nel nodo 1</strong>, di costo <span class="arithmatex">\(n-1\)</span>.
+<p>Il minimum spanning tree può essere una <strong>stella centrata nel nodo 1</strong>, di costo $n-1$.
 Il ciclo euleriano risultante passa ripetutamente dal centro e, dopo le shortcut, il ciclo hamiltoniano approssimato utilizza:
-- <span class="arithmatex">\(n-2\)</span> archi di costo <span class="arithmatex">\(2\)</span>,
-- <span class="arithmatex">\(2\)</span> archi di costo <span class="arithmatex">\(1\)</span>.</p>
+- $n-2$ archi di costo $2$,
+- $2$ archi di costo $1$.</p>
 <p>Il costo totale è quindi:
 $$ cost(H) = 2(n-2) + 2 = 2n - 2 $$</p>
 <p>Il rapporto di approssimazione è:
@@ -1345,8 +1345,8 @@ $$ \frac{cost(H)}{cost(H^*)} = \frac{2n-2}{n} \to 2 \quad \text{per } n \to \inf
 <hr/>
 <h1 id="312-algoritmo-di-christofides-tspdt-32-approssimazione">3.1.2 Algoritmo di Christofides (TSPdt) — 3/2-approssimazione</h1>
 <h2 id="contesto-e-assunzioni">Contesto e assunzioni</h2>
-<p>Consideriamo <strong>TSP con disuguaglianza triangolare</strong> su grafo completo <span class="arithmatex">\(G=(V,E)\)</span> con costi <span class="arithmatex">\(c\)</span> tali che:
-<span class="arithmatex">\(c(u,w) \le c(u,v) + c(v,w)\ \ \forall u,v,w \in V\)</span>.
+<p>Consideriamo <strong>TSP con disuguaglianza triangolare</strong> su grafo completo $G=(V,E)$ con costi $c$ tali che:
+$c(u,w) \le c(u,v) + c(v,w)\ \ \forall u,v,w \in V$.
 L’idea è costruire un <strong>multigrafo euleriano più economico</strong> rispetto al “raddoppia-MST” della 2-approssimazione.  </p>
 <hr/>
 <h2 id="matching-e-perfect-matching">Matching e Perfect Matching</h2>
@@ -1358,57 +1358,57 @@ Condizione necessaria: il numero di nodi deve essere <strong>pari</strong>. </li
 <hr/>
 <h2 id="algoritmo-di-christofides-schema">Algoritmo di Christofides (schema)</h2>
 <ol>
-<li>Calcola un <strong>MST</strong> <span class="arithmatex">\(T^*\)</span> di <span class="arithmatex">\(G\)</span>.</li>
-<li>Sia <span class="arithmatex">\(V_d\)</span> l’insieme dei nodi di <strong>grado dispari</strong> in <span class="arithmatex">\(T^*\)</span>. Considera il sottografo completo <span class="arithmatex">\(G_d\)</span> indotto da <span class="arithmatex">\(V_d\)</span>.</li>
-<li>Calcola un <strong>minimum-weight perfect matching</strong> <span class="arithmatex">\(M^*\)</span> su <span class="arithmatex">\(G_d\)</span>.</li>
-<li>Costruisci il multigrafo <span class="arithmatex">\(G' = T^* \uplus M^*\)</span> (unione multinsieme degli archi).</li>
-<li>Calcola un <strong>ciclo euleriano</strong> <span class="arithmatex">\(E\)</span> in <span class="arithmatex">\(G'\)</span>.</li>
-<li>Da <span class="arithmatex">\(E\)</span> costruisci un <strong>ciclo hamiltoniano</strong> <span class="arithmatex">\(H\)</span> facendo <strong>shortcut</strong> (salti i nodi già visitati).</li>
-<li>Restituisci <span class="arithmatex">\(H\)</span>. </li>
+<li>Calcola un <strong>MST</strong> $T^*$ di $G$.</li>
+<li>Sia $V_d$ l’insieme dei nodi di <strong>grado dispari</strong> in $T^*$. Considera il sottografo completo $G_d$ indotto da $V_d$.</li>
+<li>Calcola un <strong>minimum-weight perfect matching</strong> $M^*$ su $G_d$.</li>
+<li>Costruisci il multigrafo $G' = T^<em> \uplus M^</em>$ (unione multinsieme degli archi).</li>
+<li>Calcola un <strong>ciclo euleriano</strong> $E$ in $G'$.</li>
+<li>Da $E$ costruisci un <strong>ciclo hamiltoniano</strong> $H$ facendo <strong>shortcut</strong> (salti i nodi già visitati).</li>
+<li>Restituisci $H$. </li>
 </ol>
 <hr/>
 <h2 id="perche-lalgoritmo-e-sempre-eseguibile">Perché l’algoritmo è sempre eseguibile</h2>
-<h3 id="a-esistenza-del-perfect-matching-su-g_d">(a) Esistenza del perfect matching su <span class="arithmatex">\(G_d\)</span></h3>
-<p>Serve che <span class="arithmatex">\(|V_d|\)</span> sia pari. Questo vale sempre perché in qualunque grafo la somma dei gradi è <span class="arithmatex">\(2|E|\)</span> (pari). Separando la somma dei gradi pari e la somma dei gradi dispari, la seconda deve essere pari; una somma di numeri dispari è pari <strong>solo se</strong> ci sono <strong>un numero pari di termini</strong>, quindi i nodi di grado dispari sono in numero pari. </p>
-<p>Dato che <span class="arithmatex">\(G_d\)</span> è completo sui vertici <span class="arithmatex">\(V_d\)</span>, l’esistenza del perfect matching segue, e il matching minimo si calcola in tempo polinomiale con algoritmi noti. </p>
-<h3 id="b-esistenza-del-ciclo-euleriano-in-g">(b) Esistenza del ciclo euleriano in <span class="arithmatex">\(G'\)</span></h3>
-<p>In <span class="arithmatex">\(T^*\)</span> i nodi in <span class="arithmatex">\(V_d\)</span> hanno grado dispari. Aggiungendo <span class="arithmatex">\(M^*\)</span>, ogni nodo di <span class="arithmatex">\(V_d\)</span> riceve <strong>esattamente un arco in più</strong>, quindi diventa di grado pari; i nodi già pari restano pari. Quindi <strong>tutti i gradi in <span class="arithmatex">\(G'\)</span> sono pari</strong> ⇒ esiste un ciclo euleriano <span class="arithmatex">\(E\)</span>. </p>
+<h3 id="a-esistenza-del-perfect-matching-su-g_d">(a) Esistenza del perfect matching su $G_d$</h3>
+<p>Serve che $|V_d|$ sia pari. Questo vale sempre perché in qualunque grafo la somma dei gradi è $2|E|$ (pari). Separando la somma dei gradi pari e la somma dei gradi dispari, la seconda deve essere pari; una somma di numeri dispari è pari <strong>solo se</strong> ci sono <strong>un numero pari di termini</strong>, quindi i nodi di grado dispari sono in numero pari. </p>
+<p>Dato che $G_d$ è completo sui vertici $V_d$, l’esistenza del perfect matching segue, e il matching minimo si calcola in tempo polinomiale con algoritmi noti. </p>
+<h3 id="b-esistenza-del-ciclo-euleriano-in-g">(b) Esistenza del ciclo euleriano in $G'$</h3>
+<p>In $T^<em>$ i nodi in $V_d$ hanno grado dispari. Aggiungendo $M^</em>$, ogni nodo di $V_d$ riceve <strong>esattamente un arco in più</strong>, quindi diventa di grado pari; i nodi già pari restano pari. Quindi <strong>tutti i gradi in $G'$ sono pari</strong> ⇒ esiste un ciclo euleriano $E$. </p>
 <h3 id="c-shortcut-per-ottenere-un-ciclo-hamiltoniano">(c) Shortcut per ottenere un ciclo hamiltoniano</h3>
-<p>Come nella 2-approssimazione: seguendo l’ordine di <span class="arithmatex">\(E\)</span>, si include un nodo solo la prima volta. Essendo <span class="arithmatex">\(G\)</span> completo e valendo la triangolare, gli shortcut sono sempre possibili e non aumentano il costo. </p>
+<p>Come nella 2-approssimazione: seguendo l’ordine di $E$, si include un nodo solo la prima volta. Essendo $G$ completo e valendo la triangolare, gli shortcut sono sempre possibili e non aumentano il costo. </p>
 <hr/>
-<h2 id="teorema-fattore-di-approssimazione-32">Teorema: fattore di approssimazione <span class="arithmatex">\(3/2\)</span></h2>
-<p><strong>Teorema.</strong> Christofides è una <strong><span class="arithmatex">\(3/2\)</span>-approssimazione</strong> per TSPdt. </p>
+<h2 id="teorema-fattore-di-approssimazione-32">Teorema: fattore di approssimazione $3/2$</h2>
+<p><strong>Teorema.</strong> Christofides è una <strong>$3/2$-approssimazione</strong> per TSPdt. </p>
 <h3 id="idee-chiave-della-prova">Idee chiave della prova</h3>
-<p>Sia <span class="arithmatex">\(H^*\)</span> un tour ottimo.</p>
+<p>Sia $H^*$ un tour ottimo.</p>
 <p>1) <strong>Lower bound da MST</strong><br/>
-Togliendo un arco da <span class="arithmatex">\(H^*\)</span> otteniamo uno spanning tree, quindi:
-<span class="arithmatex">\(cost(H^*) \ge cost(T^*)\)</span>. </p>
+Togliendo un arco da $H^<em>$ otteniamo uno spanning tree, quindi:
+$cost(H^</em>) \ge cost(T^*)$. </p>
 <p>2) <strong>Bound sul matching minimo</strong>
-Considera <span class="arithmatex">\(V_d\)</span> (nodi dispari di <span class="arithmatex">\(T^*\)</span>). Dal tour ottimo <span class="arithmatex">\(H^*\)</span> otteniamo tramite shortcut un ciclo <span class="arithmatex">\(\Gamma\)</span> che visita solo <span class="arithmatex">\(V_d\)</span> e:
-<span class="arithmatex">\(cost(\Gamma) \le cost(H^*)\)</span> (triangolare). </p>
-<p>Poiché <span class="arithmatex">\(|V_d|\)</span> è pari, <span class="arithmatex">\(\Gamma\)</span> ha lunghezza pari e si può decomporre alternando gli archi in due matching disgiunti <span class="arithmatex">\(M_1\)</span> e <span class="arithmatex">\(M_2\)</span>:
-<span class="arithmatex">\(cost(\Gamma)=cost(M_1)+cost(M_2)\ge 2\cdot cost(M^*)\)</span>,
+Considera $V_d$ (nodi dispari di $T^<em>$). Dal tour ottimo $H^</em>$ otteniamo tramite shortcut un ciclo $\Gamma$ che visita solo $V_d$ e:
+$cost(\Gamma) \le cost(H^*)$ (triangolare). </p>
+<p>Poiché $|V_d|$ è pari, $\Gamma$ ha lunghezza pari e si può decomporre alternando gli archi in due matching disgiunti $M_1$ e $M_2$:
+$cost(\Gamma)=cost(M_1)+cost(M_2)\ge 2\cdot cost(M^<em>)$,
 da cui:
-<span class="arithmatex">\(cost(M^*) \le \frac{cost(H^*)}{2}\)</span>.  </p>
+$cost(M^</em>) \le \frac{cost(H^*)}{2}$.  </p>
 <p>3) <strong>Costo del tour euleriano e shortcut</strong>
-Il ciclo euleriano usa tutti gli archi di <span class="arithmatex">\(T^*\)</span> e <span class="arithmatex">\(M^*\)</span>:
-<span class="arithmatex">\(cost(E)=cost(T^*)+cost(M^*)\)</span>,
+Il ciclo euleriano usa tutti gli archi di $T^<em>$ e $M^</em>$:
+$cost(E)=cost(T^<em>)+cost(M^</em>)$,
 e lo shortcut non aumenta:
-<span class="arithmatex">\(cost(H)\le cost(E)\)</span>. </p>
+$cost(H)\le cost(E)$. </p>
 <h3 id="conclusione">Conclusione</h3>
-<p><span class="arithmatex">\(cost(H)\le cost(T^*)+cost(M^*) \le cost(H^*)+\frac{cost(H^*)}{2}=\frac{3}{2}cost(H^*)\)</span>.</p>
+<p>$cost(H)\le cost(T^<em>)+cost(M^</em>) \le cost(H^<em>)+\frac{cost(H^</em>)}{2}=\frac{3}{2}cost(H^*)$.</p>
 <hr/>
 <h2 id="complessita-alto-livello">Complessità (alto livello)</h2>
 <ul>
-<li>MST: tipicamente <span class="arithmatex">\(O(m\log n)\)</span> (su completo <span class="arithmatex">\(m=\Theta(n^2)\)</span>).</li>
-<li>Step dominante: <strong>minimum-weight perfect matching</strong> su <span class="arithmatex">\(|V_d|\le n\)</span>, tipicamente <span class="arithmatex">\(O(n^3)\)</span> (come ordine di grandezza).
+<li>MST: tipicamente $O(m\log n)$ (su completo $m=\Theta(n^2)$).</li>
+<li>Step dominante: <strong>minimum-weight perfect matching</strong> su $|V_d|\le n$, tipicamente $O(n^3)$ (come ordine di grandezza).
 Quindi il costo è dominato dal matching.</li>
 </ul>
 <hr/>
 <h2 id="note-utili-per-lorale">Note utili per l’orale</h2>
 <ul>
 <li>Il “trucco” rispetto alla 2-approx è sostituire il raddoppio dell’MST con l’aggiunta di un matching minimo solo sui nodi dispari: così rendi euleriano il grafo spendendo “circa metà OPT” invece di “+MST intero”.</li>
-<li>La parte delicata della prova è mostrare <span class="arithmatex">\(cost(M^*)\le OPT/2\)</span> usando <span class="arithmatex">\(\Gamma\)</span> e la decomposizione in due matching.</li>
+<li>La parte delicata della prova è mostrare $cost(M^*)\le OPT/2$ usando $\Gamma$ e la decomposizione in due matching.</li>
 </ul></div>
 </div>
 </div>
@@ -1422,6 +1422,7 @@ Quindi il costo è dominato dal matching.</li>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
 <script src="../js/base.js"></script>
+<script src="../javascripts/mathjax_config.js"></script>
 <script src="../javascripts/pdf_mathjax_hook.js"></script>
 <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="../search/main.js"></script>

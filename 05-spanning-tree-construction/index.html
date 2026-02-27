@@ -142,41 +142,41 @@
 <div class="col-md-9" role="main">
 <h2 id="spanning-tree">Spanning Tree</h2>
 <p><img alt="" src="../assets/5_spanning_tree_construction_images/image_1.png" width="300"/>
-Uno <strong>spanning tree</strong> (in italiano: <em>albero di copertura</em>) di un grafo connesso <span class="arithmatex">\(G=(V,E)\)</span> è un <strong>sottografo</strong> <span class="arithmatex">\(T=(V,E’)\)</span> tale che:</p>
+Uno <strong>spanning tree</strong> (in italiano: <em>albero di copertura</em>) di un grafo connesso $G=(V,E)$ è un <strong>sottografo</strong> $T=(V,E’)$ tale che:</p>
 <ol>
-<li>contiene <strong>tutti</strong> i vertici di <span class="arithmatex">\(G\)</span> (quindi “spanning” = <em>che copre/spazia</em> su tutti i nodi):$<span class="arithmatex">\(V(T)=V(G)\)</span>$</li>
-<li>usa solo alcuni archi del grafo originale: $<span class="arithmatex">\(E’ \subseteq E\)</span>$ </li>
+<li>contiene <strong>tutti</strong> i vertici di $G$ (quindi “spanning” = <em>che copre/spazia</em> su tutti i nodi):$$V(T)=V(G)$$</li>
+<li>usa solo alcuni archi del grafo originale: $$E’ \subseteq E$$ </li>
 <li>è un <strong>albero</strong>, cioè è <strong>connesso e aciclico</strong> (non contiene cicli).</li>
 </ol>
 <p><strong>Proprietà super importante</strong>
-Se <span class="arithmatex">\(G\)</span> è connesso e ha <span class="arithmatex">\(n=|V|\)</span> nodi, allora <strong>ogni spanning tree ha esattamente <span class="arithmatex">\(n-1\)</span> archi</strong>.
+Se $G$ è connesso e ha $n=|V|$ nodi, allora <strong>ogni spanning tree ha esattamente $n-1$ archi</strong>.
 È la proprietà classica degli alberi;
 nel testo CLRS viene richiamata quando parla di spanning tree come sottoinsieme aciclico che connette tutti i vertici.</p>
-<p>Nei protocolli distribuiti spesso si costruisce prima uno spanning tree e poi si eseguono broadcast/traversal <strong>solo sull’albero</strong> per ridurre i messaggi: sull’albero, ad esempio, il broadcast costa esattamente <span class="arithmatex">\(n-1\)</span> messaggi. </p>
+<p>Nei protocolli distribuiti spesso si costruisce prima uno spanning tree e poi si eseguono broadcast/traversal <strong>solo sull’albero</strong> per ridurre i messaggi: sull’albero, ad esempio, il broadcast costa esattamente $n-1$ messaggi. </p>
 <p><strong>Cosa “sanno” i nodi a fine costruzione</strong>
-Nel problema <strong>SPT</strong> (spanning tree construction) in ambiente distribuito, alla fine non è richiesto che un nodo conosca tutto <span class="arithmatex">\(T\)</span>: ogni nodo <span class="arithmatex">\(x\)</span> deve selezionare localmente un insieme Tree-neighbors(x) ⊆ N(x) che rappresenta <strong>quali vicini sono collegati a lui nell’albero</strong>.</p>
+Nel problema <strong>SPT</strong> (spanning tree construction) in ambiente distribuito, alla fine non è richiesto che un nodo conosca tutto $T$: ogni nodo $x$ deve selezionare localmente un insieme Tree-neighbors(x) ⊆ N(x) che rappresenta <strong>quali vicini sono collegati a lui nell’albero</strong>.</p>
 <h1 id="spanning-tree-construction-spt">Spanning Tree Construction (SPT)</h1>
 <h3 id="problema-e-output-locale">Problema e output “locale”</h3>
-<p>Dato un grafo connesso <span class="arithmatex">\(G=(V,E)\)</span>, vogliamo costruire uno <strong>spanning tree</strong> <span class="arithmatex">\(T=(V,E')\)</span> con <span class="arithmatex">\(E'\subseteq E\)</span> e <span class="arithmatex">\(T\)</span> aciclico e connesso. Nella versione distribuita, <strong>alla fine ogni nodo non conosce tutto l’albero</strong>, ma solo quali tra i suoi vicini sono collegati a lui tramite un arco di <span class="arithmatex">\(T\)</span> (variabile tipo <code>Tree-neighbours(x)</code>). </p>
+<p>Dato un grafo connesso $G=(V,E)$, vogliamo costruire uno <strong>spanning tree</strong> $T=(V,E')$ con $E'\subseteq E$ e $T$ aciclico e connesso. Nella versione distribuita, <strong>alla fine ogni nodo non conosce tutto l’albero</strong>, ma solo quali tra i suoi vicini sono collegati a lui tramite un arco di $T$ (variabile tipo <code>Tree-neighbours(x)</code>). </p>
 <p>Assunzioni:
 - <strong>Single initiator</strong>, link bidirezionali, affidabilità totale, grafo connesso.  </p>
 <h3 id="idea-1-costruire-lo-spanning-tree-da-broadcast">Idea 1: costruire lo spanning tree “da broadcast”</h3>
-<p>C’è un fatto generale molto utile: <strong>l’esecuzione di un qualunque protocollo di broadcast</strong> (con unico iniziatore) <strong>induce uno spanning tree</strong>: per ogni nodo <span class="arithmatex">\(x\neq s\)</span>, definisci <code>parent(x)</code> come il vicino da cui <span class="arithmatex">\(x\)</span> riceve l’informazione <strong>per la prima volta</strong>; la relazione “parent” definisce un albero radicato nell’iniziatore.</p>
+<p>C’è un fatto generale molto utile: <strong>l’esecuzione di un qualunque protocollo di broadcast</strong> (con unico iniziatore) <strong>induce uno spanning tree</strong>: per ogni nodo $x\neq s$, definisci <code>parent(x)</code> come il vicino da cui $x$ riceve l’informazione <strong>per la prima volta</strong>; la relazione “parent” definisce un albero radicato nell’iniziatore.</p>
 <p>Ma attenzione: sapere solo <code>parent(x)</code> <strong>non basta</strong> per risolvere SPT come definito nel corso/libro, perché ogni nodo deve anche determinare <strong>chi sono i figli</strong> e quali vicini <strong>non</strong> sono tree-neighbors; questo richiede ulteriore “feedback” (es. messaggi YES/NO). </p>
 <hr/>
 <h2 id="protocollo-shout">Protocollo SHOUT</h2>
 <p><em>costruzione per “richieste Q” + risposte YES/NO</em></p>
 <p><strong>Intuizione:</strong> l’iniziatore chiede ai vicini di diventare suoi vicini nell’albero; ogni nodo dice <strong>YES</strong> solo alla <strong>prima</strong> richiesta che riceve (scegliendo così il proprio parent) e risponde <strong>NO</strong> alle richieste successive.</p>
 <p><strong>Stati:</strong>
-- <span class="arithmatex">\(S=\{\text{INITIATOR},\text{IDLE},\text{ACTIVE},\text{DONE}\}\)</span>
-- <span class="arithmatex">\(S_{init}=\{\text{INITIATOR},\text{IDLE}\}\)</span>
--  <span class="arithmatex">\(S_{term}=\{\text{DONE}\}\)</span></p>
+- $S={\text{INITIATOR},\text{IDLE},\text{ACTIVE},\text{DONE}}$
+- $S_{init}={\text{INITIATOR},\text{IDLE}}$
+-  $S_{term}={\text{DONE}}$</p>
 <p><strong>Messaggi</strong>:
-- <span class="arithmatex">\(Q\)</span> richiesta di collegamento
-- <span class="arithmatex">\(YES/NO\)</span> risposta</p>
+- $Q$ richiesta di collegamento
+- $YES/NO$ risposta</p>
 <p><img alt="" src="../assets/5_spanning_tree_construction_images/image_2.png" width="600"/></p>
 <p><strong>Variabili tipiche:</strong>
-- <code>parent</code>, <code>root</code>, <code>Tree-neighbours(x)</code> (insieme dei vicini in <span class="arithmatex">\(T\)</span>), <code>counter</code> (conta le risposte ricevute dai vicini). </p>
+- <code>parent</code>, <code>root</code>, <code>Tree-neighbours(x)</code> (insieme dei vicini in $T$), <code>counter</code> (conta le risposte ricevute dai vicini). </p>
 <p><strong>Correttezza (idea chiave):</strong>
 - Ogni nodo (tranne l’iniziatore) manda <strong>esattamente un YES</strong> ⇒ ogni nodo sceglie un solo parent.
 - La relazione costruita da <code>Tree-neighbours</code> definisce un <strong>albero connesso</strong> che contiene tutti i nodi (terminazione locale). </p>
@@ -218,16 +218,16 @@ riceve NO da sender:
 <h3 id="calcolo-complessita-messaggi">Calcolo complessità messaggi</h3>
 <h4 id="notazione">Notazione</h4>
 <ul>
-<li>Grafo <span class="arithmatex">\(G=(V,E)\)</span></li>
-<li><span class="arithmatex">\(n=|V|\)</span> numero di nodi</li>
-<li><span class="arithmatex">\(m=|E|\)</span> numero di archi</li>
-<li><span class="arithmatex">\(N(x)\)</span> = insieme dei vicini di <span class="arithmatex">\(x\)</span></li>
-<li>INITIATOR <span class="arithmatex">\(s\)</span></li>
-<li>Diametro <span class="arithmatex">\(D(G)\)</span></li>
+<li>Grafo $G=(V,E)$</li>
+<li>$n=|V|$ numero di nodi</li>
+<li>$m=|E|$ numero di archi</li>
+<li>$N(x)$ = insieme dei vicini di $x$</li>
+<li>INITIATOR $s$</li>
+<li>Diametro $D(G)$</li>
 </ul>
-<p>Intanto partiamo da quello che abbiamo già analizzato: sappiamo che il <strong>Flooding (broadcast)</strong> prevede  <strong><span class="arithmatex">\(2m-(n-1)\)</span></strong> messaggi.</p>
+<p>Intanto partiamo da quello che abbiamo già analizzato: sappiamo che il <strong>Flooding (broadcast)</strong> prevede  <strong>$2m-(n-1)$</strong> messaggi.</p>
 <blockquote>
-<p><strong>Interpretazione intuitiva</strong>: in ogni arco passerebbero due messaggi se ogni nodo mandasse a tutti i suoi vicini il messaggio “<span class="arithmatex">\(2m\)</span>”, ma nel flooding ottimizzato <strong>ogni nodo non-initiator</strong> “risparmi” 1 messaggio perché <strong>non rispedisce al sender</strong> ⇒ risparmi <span class="arithmatex">\(n-1\)</span>.</p>
+<p><strong>Interpretazione intuitiva</strong>: in ogni arco passerebbero due messaggi se ogni nodo mandasse a tutti i suoi vicini il messaggio “$2m$”, ma nel flooding ottimizzato <strong>ogni nodo non-initiator</strong> “risparmi” 1 messaggio perché <strong>non rispedisce al sender</strong> ⇒ risparmi $n-1$.</p>
 </blockquote>
 <p><strong>SHOUT = FLOODING + REPLY</strong></p>
 <p>Analizzando il caso dello SHOUT dobbiamo capire quanti messaggi vengono mandati per ogni tipo: <strong>Q</strong>, <strong>YES</strong>, <strong>NO</strong>.</p>
@@ -238,14 +238,14 @@ riceve NO da sender:
 <li>
 <p><strong>Q–YES</strong>, dove la richiesta di entrare nell'albero è accettata (tree). </p>
 <ul>
-<li>Questi casi si verificano negli archi dello spanning tree:  <span class="arithmatex">\(n-1\)</span>.</li>
+<li>Questi casi si verificano negli archi dello spanning tree:  $n-1$.</li>
 </ul>
 </li>
 <li>
 <p><strong>Q–Q</strong>, negli archi non-tree possono passare 2 messaggi Q dai due nodi (INITIATOR, o appena entrati in IDLE). </p>
 <ul>
-<li>Gli archi non appartenenti all'albero sono: <span class="arithmatex">\(m-(n-1)\)</span> </li>
-<li><strong>2 Q per arco</strong> ⇒ <span class="arithmatex">\(2[m-(n-1)]\)</span>.</li>
+<li>Gli archi non appartenenti all'albero sono: $m-(n-1)$  </li>
+<li><strong>2 Q per arco</strong> ⇒ $2[m-(n-1)]$.</li>
 </ul>
 </li>
 </ul>
@@ -255,35 +255,35 @@ Q_{tot} = (n-1) + 2[m-(n-1)] = 2m - n + 1
 $$</p>
 <p><strong>Messaggi NO</strong></p>
 <p>Sfruttiamo l'analisi fatta prima, i messaggi di NO si presentano nel caso in cui un nodo non sia entrato nello spanning tree, quindi la quantità di messaggi è uguale a Q - Q:
-$<span class="arithmatex">\(NO_{tot}=2m - n + 1\)</span>$</p>
+$$NO_{tot}=2m - n + 1$$</p>
 <p><strong>Messaggi YES</strong></p>
 <p>Anche qui sfruttiamo l'analisi fatta prima, i messaggi di YES si presentano solo nel caso in cui un nodo sia entrato nello spanning tree, quindi:
-$<span class="arithmatex">\(YES_{tot}=n-1\)</span>$</p>
+$$YES_{tot}=n-1$$</p>
 <h4 id="sommando-tutto">Sommando tutto</h4>
-<div class="arithmatex">\[
+<p>$$
 M(\text{SHOUT}) = Q_{tot} + NO_{tot} + YES_{tot}
 $$
 tra cui
 $$
 M(\text{SHOUT}) = (2m-n+1) + 2[m-(n-1)] + (n-1)
-\]</div>
+$$</p>
 <p>Semplificando diventa:</p>
-<div class="arithmatex">\[
+<p>$$
 M(\text{SHOUT}) = (2m-n+1) + (2m-2n+2) + (n-1) = 4m - 2n + 2
-\]</div>
+$$</p>
 <p><strong>Quindi abbiamo</strong>
-$<span class="arithmatex">\(M(\text{SHOUT}) = 4m - 2n + 2 = 2\cdot(2m-n+1).\)</span>$</p>
+$$M(\text{SHOUT}) = 4m - 2n + 2 = 2\cdot(2m-n+1).$$</p>
 <p>In confronto al flooding abbiamo il doppio dei messaggi:</p>
-<div class="arithmatex">\[
+<p>$$
 M(\text{SHOUT}) = 2(2m-n+1)=2\cdot M(\text{Flooding})
-\]</div>
+$$</p>
 <p><em>Possiamo ottimizzare?</em></p>
 <hr/>
 <h3 id="protocollo-shout-ottimizzazione-senza-no">Protocollo SHOUT+ (ottimizzazione: senza NO)</h3>
-<p>I messaggi NO sono superflui e potremmo dedurli: quando un nodo ACTIVE riceve una richiesta <span class="arithmatex">\(Q\)</span>, la interpreta implicitamente come “NO” (incrementa <code>counter</code> e basta).
+<p>I messaggi NO sono superflui e potremmo dedurli: quando un nodo ACTIVE riceve una richiesta $Q$, la interpreta implicitamente come “NO” (incrementa <code>counter</code> e basta).
 In questo modo:
-- su ogni link transitano esattamente <strong>due messaggi</strong> (o <span class="arithmatex">\(Q\)</span>–YES oppure <span class="arithmatex">\(Q\)</span>–<span class="arithmatex">\(Q\)</span>), quindi:
-$<span class="arithmatex">\(M(\text{SHOUT}^+) = 2m.\)</span>$</p>
+- su ogni link transitano esattamente <strong>due messaggi</strong> (o $Q$–YES oppure $Q$–$Q$), quindi:
+$$M(\text{SHOUT}^+) = 2m.$$</p>
 <p><strong>Entità ACTIVE</strong>
 </p><div class="highlight"><pre><span></span><code>riceve Q da sender:
   counter ← counter + 1
@@ -298,7 +298,7 @@ riceve YES da sender:
 <h3 id="importante-cosa-succede-con-piu-iniziatori">Importante: cosa succede con più iniziatori?</h3>
 <p><img alt="" src="../assets/5_spanning_tree_construction_images/image_3.png" width="400"/>
 Se togli l’assunzione “single initiator”, i protocolli progettati per unico iniziatore <strong>possono fallire</strong>: ad esempio SHOUT con due initiator può costruire una <strong>foresta</strong> (non connessa). </p>
-<p>Risultato teorico (libro): <strong>SPT è deterministically unsolvable sotto le sole restrizioni standard <span class="arithmatex">\(R\)</span></strong> (cioè senza imporre un unico iniziatore o assunzioni extra).</p>
+<p>Risultato teorico (libro): <strong>SPT è deterministically unsolvable sotto le sole restrizioni standard $R$</strong> (cioè senza imporre un unico iniziatore o assunzioni extra).</p>
 <hr/>
 <h3 id="spanning-tree-construction-by-traversal-depth-first-traversal">Spanning Tree Construction by Traversal (Depth-First Traversal)</h3>
 <p>Un’altra famiglia di soluzioni costruisce lo spanning tree tramite una <strong>visita DFS distribuita</strong> usando un <strong>token</strong> (Forward/Return/Back-edge).
@@ -308,7 +308,7 @@ Se togli l’assunzione “single initiator”, i protocolli progettati per unic
 <h1 id="spanning-tree-construction-by-traversal">Spanning Tree Construction by Traversal</h1>
 <p><em>Depth-First Traversal (DFT)</em></p>
 <h2 id="obiettivo-e-idea-di-base">Obiettivo e idea di base</h2>
-<p>Dato un grafo di comunicazione connesso <span class="arithmatex">\(G=(V,E)\)</span>, vogliamo costruire uno <strong>spanning tree</strong> usando una <strong>traversal</strong> (visita) che renda i nodi <strong>visited in modo sequenziale</strong> (uno alla volta). L’algoritmo parte da un <strong>initiator</strong> già visited, mentre tutti gli altri sono inizialmente unvisited.</p>
+<p>Dato un grafo di comunicazione connesso $G=(V,E)$, vogliamo costruire uno <strong>spanning tree</strong> usando una <strong>traversal</strong> (visita) che renda i nodi <strong>visited in modo sequenziale</strong> (uno alla volta). L’algoritmo parte da un <strong>initiator</strong> già visited, mentre tutti gli altri sono inizialmente unvisited.</p>
 <p>Una traversal distribuita usa un messaggio speciale chiamato <strong>token</strong>: quando un nodo riceve il token, viene considerato <strong>visited</strong>. Se la traversal è <strong>depth-first</strong>, gli archi usati “alla prima visita” formano uno spanning tree.</p>
 <blockquote>
 <p>Intuizione DFS: “si prova a mandare avanti il token il più possibile” (profondità), e si torna indietro solo quando non ci sono più vicini utili.</p>
@@ -332,17 +332,17 @@ Se togli l’assunzione “single initiator”, i protocolli progettati per unic
 <h2 id="spanning-tree-ottenuto-rootparentchildren">Spanning tree ottenuto (root/parent/children)</h2>
 <p>Dopo l’esecuzione:
 - <strong>Root</strong> = l’<strong>initiator</strong> 
-- <strong>Parent di <span class="arithmatex">\(x\)</span></strong> = il nodo da cui <span class="arithmatex">\(x\)</span> ha ricevuto <strong>per la prima volta</strong> il token (il suo <code>entry</code>) 
-- <strong>Children di <span class="arithmatex">\(x\)</span></strong> = i vicini di <span class="arithmatex">\(x\)</span> che <strong>non</strong> risultano collegati a <span class="arithmatex">\(x\)</span> da una back-edge (in pratica: i vicini effettivamente esplorati come figli nel DFS)</p>
+- <strong>Parent di $x$</strong> = il nodo da cui $x$ ha ricevuto <strong>per la prima volta</strong> il token (il suo <code>entry</code>) 
+- <strong>Children di $x$</strong> = i vicini di $x$ che <strong>non</strong> risultano collegati a $x$ da una back-edge (in pratica: i vicini effettivamente esplorati come figli nel DFS)</p>
 <hr/>
 <h2 id="stato-locale-e-variabili">Stato locale e variabili</h2>
 <h3 id="stati">Stati</h3>
-<p>$<span class="arithmatex">\(S=\{\text{INITIATOR, IDLE, VISITED, DONE}\}\)</span>$
-- Stati iniziali possibili: <span class="arithmatex">\(S_{init}=\{\text{INITIATOR, IDLE}\}\)</span>
-- Stato terminale: <span class="arithmatex">\(S_{term}=\{\text{DONE}\}\)</span></p>
-<h3 id="variabili-locali-per-ogni-nodo-x">Variabili locali per ogni nodo <span class="arithmatex">\(x\)</span></h3>
+<p>$$S={\text{INITIATOR, IDLE, VISITED, DONE}}$$
+- Stati iniziali possibili: $S_{init}={\text{INITIATOR, IDLE}}$
+- Stato terminale: $S_{term}={\text{DONE}}$</p>
+<h3 id="variabili-locali-per-ogni-nodo-x">Variabili locali per ogni nodo $x$</h3>
 <ul>
-<li><code>entry</code>: il vicino da cui <span class="arithmatex">\(x\)</span> ha ricevuto il <strong>primo</strong> <code>ForwardToken</code> (definisce il <strong>parent</strong>)</li>
+<li><code>entry</code>: il vicino da cui $x$ ha ricevuto il <strong>primo</strong> <code>ForwardToken</code> (definisce il <strong>parent</strong>)</li>
 <li><code>Unvisited</code>: insieme dei vicini “ancora da provare”</li>
 <li>iniziatore: <code>Unvisited := N(x)</code></li>
 <li>nodo non iniziatore, alla prima ricezione: <code>Unvisited := N(x)\{sender}</code></li>
@@ -404,30 +404,30 @@ on receiving BackEdgeToken:
 <p><img alt="" src="../assets/5_spanning_tree_construction_images/image_8.png" width="500"/></p>
 <p>Dato che ad ogni Forward corrisponde una risposta con un Return o Backedge, allora sono 2 i messaggi per ogni arco.
 Ogni link viene “coinvolto” in modo tale che il totale risulta:
-$<span class="arithmatex">\(\text{Message(DFT)} = 2m\)</span>$</p>
+$$\text{Message(DFT)} = 2m$$</p>
 <p>e non si può migliorare in ordine di grandezza:</p>
-<p>$<span class="arithmatex">\(\text{Message(DFT(G))} \in \Omega(m)\)</span>$
+<p>$$\text{Message(DFT(G))} \in \Omega(m)$$
 (l’idea della dimostrazione è analoga al lower bound del broadcast).</p>
 <h3 id="time-complexity"><strong>Time complexity</strong></h3>
 <p>La traversal richiede che <strong>un solo nodo alla volta</strong> possieda il token (l’idea di traversal è proprio “passare il token sequenzialmente”). Quindi <strong>non puoi avere due token in giro</strong>, e non puoi esplorare due rami in parallelo. </p>
 <p><strong>Quanti “passi” servono? (catena più lunga)</strong></p>
-<p>Nel protocollo DF Traversal (DFT) su ogni link <span class="arithmatex">\((x,y)\)</span> succede:</p>
+<p>Nel protocollo DF Traversal (DFT) su ogni link $(x,y)$ succede:</p>
 <ul>
 <li>
-<p>se <span class="arithmatex">\(x\)</span> manda T (ForwardToken) a <span class="arithmatex">\(y\)</span>, allora <span class="arithmatex">\(y\)</span> risponde a <span class="arithmatex">\(x\)</span> con <strong>uno</strong> tra Return oppure Backedge.</p>
+<p>se $x$ manda T (ForwardToken) a $y$, allora $y$ risponde a $x$ con <strong>uno</strong> tra Return oppure Backedge.</p>
 <p>Quindi <strong>su ogni link passano esattamente 2 messaggi</strong>. </p>
 </li>
 </ul>
-<p>Totale messaggi = <span class="arithmatex">\(2m\)</span> e siccome <strong>sono inviati in sequenza (uno dopo l’altro)</strong>, la catena temporale più lunga è lunga <span class="arithmatex">\(2m\)</span>:
-$<span class="arithmatex">\(T[\text{DFT}] = 2m.\)</span>$</p>
+<p>Totale messaggi = $2m$ e siccome <strong>sono inviati in sequenza (uno dopo l’altro)</strong>, la catena temporale più lunga è lunga $2m$:
+$$T[\text{DFT}] = 2m.$$</p>
 <p>Le slide lo dicono esplicitamente: “Since traversal is sequential, and 2m messages are sent sequentially… TIME COMPLEXITY = 2m”. </p>
-<p>Il libro fa la stessa osservazione: “Since the traversal is sequential, <span class="arithmatex">\(T=M\)</span>; hence <span class="arithmatex">\(T=M=2m\)</span>.” </p>
+<p>Il libro fa la stessa osservazione: “Since the traversal is sequential, $T=M$; hence $T=M=2m$.” </p>
 <blockquote>
 <p><strong>Intuizione:</strong> in un grafo denso (molti archi), la DFS “perde tempo” a tentare vicini che poi risultano back-edge: ogni tentativo costa comunque un messaggio T + risposta (Backedge), e tutto avviene in coda, uno alla volta.</p>
 </blockquote>
-<p><strong>Lower bound: perché non puoi fare meno di <span class="arithmatex">\(n-1\)</span></strong></p>
+<p><strong>Lower bound: perché non puoi fare meno di $n-1$</strong></p>
 <p>Anche se potessi eliminare ogni spreco, devi comunque far sì che ogni nodo venga visitato almeno una volta, in modo sequenziale:</p>
-<div class="arithmatex">\[T(\text{DFT}(G)) \ge n-1.\]</div>
+<p>$$T(\text{DFT}(G)) \ge n-1.$$</p>
 <hr/>
 <h2 id="miglioramento-evitare-di-mandare-il-token-sulle-back-edges-visitedack"><strong>Miglioramento</strong>: evitare di mandare il token sulle back-edges (Visited/Ack)</h2>
 <h3 id="problema-del-protocollo-base"><strong>Problema del protocollo base</strong></h3>
@@ -461,25 +461,25 @@ $<span class="arithmatex">\(T[\text{DFT}] = 2m.\)</span>$</p>
 <h3 id="time-complexity-del-miglioramento"><strong>Time complexity del miglioramento</strong></h3>
 <p>Le slide scompongono il tempo in due blocchi: <strong>Token lungo l’albero (sequenziale)</strong> e  <strong>Handshake Visited/Ack (parallelo)</strong></p>
 <p><img alt="" src="../assets/5_spanning_tree_construction_images/image_11.png" width="600"/></p>
-<p><strong>La parte “token lungo l’albero” resta sequenziale: catena lunga <span class="arithmatex">\(2(n-1)\)</span>.</strong></p>
+<p><strong>La parte “token lungo l’albero” resta sequenziale: catena lunga $2(n-1)$.</strong></p>
 <p>Se eviti di mandare il token sui back-edge, il token attraversa solo gli archi dell’albero DFS costruito.</p>
-<p>Un albero ha <span class="arithmatex">\(n-1\)</span> archi, e su ciascun arco dell’albero il token fa “andata e ritorno” (Forward + Return), quindi:
-$<span class="arithmatex">\(2(n-1)\)</span>$
+<p>Un albero ha $n-1$ archi, e su ciascun arco dell’albero il token fa “andata e ritorno” (Forward + Return), quindi:
+$$2(n-1)$$
 messaggi in <strong>catena sequenziale</strong>. </p>
-<p>Gli scambi <strong>Visited/Ack</strong> <span class="arithmatex">\((2n)\)</span> verso i vicini avvengono in parallelo per ogni nodo (catena lunga 2 per nodo), e il contributo massimo complessivo porta alla stima:</p>
-<p>$<span class="arithmatex">\(2(n-1) + 2n = 4n - 2\)</span>$
-quindi:$<span class="arithmatex">\(\text{Time} \in O(n)\)</span>$
-<strong>Intuizione decisiva:</strong> con Visited/Ack, il costo che prima dipendeva da <span class="arithmatex">\(m\)</span> (tentativi su tanti archi) viene “spostato” in una fase locale parallela; la parte davvero sequenziale resta legata alla dimensione dell’albero (<span class="arithmatex">\(n-1\)</span>), non alla densità del grafo.</p>
+<p>Gli scambi <strong>Visited/Ack</strong> $(2n)$ verso i vicini avvengono in parallelo per ogni nodo (catena lunga 2 per nodo), e il contributo massimo complessivo porta alla stima:</p>
+<p>$$2(n-1) + 2n = 4n - 2$$
+quindi:$$\text{Time} \in O(n)$$
+<strong>Intuizione decisiva:</strong> con Visited/Ack, il costo che prima dipendeva da $m$ (tentativi su tanti archi) viene “spostato” in una fase locale parallela; la parte davvero sequenziale resta legata alla dimensione dell’albero ($n-1$), non alla densità del grafo.</p>
 <h3 id="message-complexity-del-miglioramento"><strong>Message complexity del miglioramento</strong></h3>
 <p>Conteggio come nelle slide:</p>
 <ul>
 <li>
-<p>per ogni arco dell’albero: <span class="arithmatex">\(2\)</span> messaggi di token</p>
+<p>per ogni arco dell’albero: $2$ messaggi di token</p>
 </li>
 <li>
-<p>per ogni arco non d’albero: fino a <span class="arithmatex">\(4\)</span> messaggi (Visited/Ack in entrambe le direzioni, concettualmente)</p>
-<p>Totale:$<span class="arithmatex">\(2(n-1) + 2(n-1) + 4(m-(n-1)) = 4m\)</span>$
-quindi:$<span class="arithmatex">\(\text{Message} \in O(m)\)</span>$</p>
+<p>per ogni arco non d’albero: fino a $4$ messaggi (Visited/Ack in entrambe le direzioni, concettualmente)</p>
+<p>Totale:$$2(n-1) + 2(n-1) + 4(m-(n-1)) = 4m$$
+quindi:$$\text{Message} \in O(m)$$</p>
 </li>
 </ul>
 <p>TODO: da qui</p>
@@ -487,10 +487,10 @@ quindi:$<span class="arithmatex">\(\text{Message} \in O(m)\)</span>$</p>
 <h2 id="confronto-qualitativo-con-shout-e-nota-sul-diametro"><strong>Confronto qualitativo con SHOUT+ e nota sul diametro</strong></h2>
 <ul>
 <li>
-<p><span class="arithmatex">\(\text{Message(SHOUT+)} = 2m\)</span></p>
+<p>$\text{Message(SHOUT+)} = 2m$</p>
 </li>
 <li>
-<p><span class="arithmatex">\(\text{Message(DFT)} = 2m\)</span> (più eventuali overhead se usi l’ottimizzazione con Visited/Ack, che porta a un costante maggiore) </p>
+<p>$\text{Message(DFT)} = 2m$ (più eventuali overhead se usi l’ottimizzazione con Visited/Ack, che porta a un costante maggiore) </p>
 </li>
 </ul>
 <p><strong>Punto importante</strong>: tecniche diverse costruiscono spanning tree diversi; inoltre, lo stesso protocollo sullo stesso grafo può produrre alberi diversi in esecuzioni diverse (dipende dall’ordine con cui scegli pick(Unvisited) e dai tempi). Con SHOUT non puoi prevedere quale spanning tree ottieni. </p>
@@ -508,10 +508,10 @@ quindi:$<span class="arithmatex">\(\text{Message} \in O(m)\)</span>$</p>
 <p>Perché “rimuovendo le back-edges” ottieni un albero</p>
 </li>
 <li>
-<p>Complessità base: $<span class="arithmatex">\(2m\)</span>$ messaggi e $<span class="arithmatex">\(2m\)</span>$ tempo; LB tempo $<span class="arithmatex">\(\ge n-1\)</span>$</p>
+<p>Complessità base: $$2m$$ messaggi e $$2m$$ tempo; LB tempo $$\ge n-1$$</p>
 </li>
 <li>
-<p>Ottimizzazione Visited/Ack: tempo $<span class="arithmatex">\(O(n)\)</span>$ e messaggi $<span class="arithmatex">\(O(m)\)</span>$ con costante <span class="arithmatex">\(\approx 4m\)</span></p>
+<p>Ottimizzazione Visited/Ack: tempo $$O(n)$$ e messaggi $$O(m)$$ con costante $\approx 4m$</p>
 </li>
 </ul></div>
 </div>
@@ -526,6 +526,7 @@ quindi:$<span class="arithmatex">\(\text{Message} \in O(m)\)</span>$</p>
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
 <script src="../js/base.js"></script>
+<script src="../javascripts/mathjax_config.js"></script>
 <script src="../javascripts/pdf_mathjax_hook.js"></script>
 <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="../search/main.js"></script>

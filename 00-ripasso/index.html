@@ -120,9 +120,9 @@
 <h2 id="problema-computazionale"><strong>Problema Computazionale</strong></h2>
 <p>Un <strong>problema computazionale</strong> Π è una questione generale che dipende da parametri i cui valori non sono specificati. Si definisce tramite:</p>
 <ul>
-<li><strong>INPUT</strong>: insieme <span class="arithmatex">\(I\)</span> di possibili assegnamenti ai parametri</li>
-<li><strong>OUTPUT</strong>: insieme <span class="arithmatex">\(S\)</span> di possibili soluzioni</li>
-<li><strong>Funzione</strong>: <span class="arithmatex">\(Π : I → S\)</span></li>
+<li><strong>INPUT</strong>: insieme $I$ di possibili assegnamenti ai parametri</li>
+<li><strong>OUTPUT</strong>: insieme $S$ di possibili soluzioni</li>
+<li><strong>Funzione</strong>: $Π : I → S$</li>
 </ul>
 <p>Un'<strong>istanza</strong> del problema si ottiene assegnando valori specifici ai parametri.
 <em>Per esempio, definisco il problema "Ordinare una sequenza di numeri" e un'istanza del problema può essere "Ordinare la sequenza {5, 2, 9, 1}".</em></p>
@@ -133,7 +133,7 @@
 <li>
 <p><strong>Problemi Decisionali</strong>: la risposta è binaria (<strong>SÌ/NO</strong>)</p>
 <ul>
-<li><em>Esempio:</em> "Il numero <span class="arithmatex">\(x\)</span> è primo?" o "Esiste un cammino da A a B di lunghezza <span class="arithmatex">\(\le K\)</span>?"</li>
+<li><em>Esempio:</em> "Il numero $x$ è primo?" o "Esiste un cammino da A a B di lunghezza $\le K$?"</li>
 </ul>
 </li>
 <li>
@@ -152,7 +152,7 @@
 <hr/>
 <h2 id="algoritmi"><strong>Algoritmi</strong></h2>
 <p>Un <strong>algoritmo</strong> è una procedura generale per risolvere un problema definita tramite una <strong>sequenza di passi finita</strong>, <strong>ben ordinata</strong>, <strong>non ambigua</strong>, effettivamente <strong>realizzabile</strong> e che <strong>termina</strong> in tempo finito.</p>
-<p>Un algoritmo per il problema Π è <strong>corretto</strong> se, per ogni istanza <span class="arithmatex">\(i ∈ I\)</span>, produce la soluzione corrispondente <span class="arithmatex">\(Π(i) ∈ S\)</span>.</p>
+<p>Un algoritmo per il problema Π è <strong>corretto</strong> se, per ogni istanza $i ∈ I$, produce la soluzione corrispondente $Π(i) ∈ S$.</p>
 <p>Due proprietà chiave:
 - <strong>Correttezza:</strong> L'algoritmo deve terminare e produrre l'output corretto per <em>ogni</em> istanza valida
 - <strong>Efficienza:</strong> Misuriamo quanto "costa" l'algoritmo in termini di risorse (indipendentemente dalla macchina).
@@ -167,17 +167,17 @@
 </ul>
 <hr/>
 <h2 id="analisi-asintotica">Analisi Asintotica</h2>
-<p>Non misuriamo il <strong>tempo</strong> in secondi, ma in <strong>numero di operazioni elementari</strong> in funzione della dimensione dell'input (<span class="arithmatex">\(n\)</span>).</p>
+<p>Non misuriamo il <strong>tempo</strong> in secondi, ma in <strong>numero di operazioni elementari</strong> in funzione della dimensione dell'input ($n$).</p>
 <ul>
 <li>
-<p><strong>Caso Peggiore (Worst Case):</strong> Il tempo massimo richiesto per un input di dimensione <span class="arithmatex">\(n\)</span>. È la garanzia che diamo.</p>
+<p><strong>Caso Peggiore (Worst Case):</strong> Il tempo massimo richiesto per un input di dimensione $n$. È la garanzia che diamo.</p>
 </li>
 <li>
 <p><strong>Notazioni:</strong></p>
 <ul>
-<li><strong><span class="arithmatex">\(O(f(n))\)</span>:</strong> Limite superiore (non va peggio di così).</li>
-<li><strong><span class="arithmatex">\(\Omega(f(n))\)</span>:</strong> Limite inferiore (serve almeno questo tempo).</li>
-<li><strong><span class="arithmatex">\(\Theta(f(n))\)</span>:</strong> Ordine di grandezza esatto (limite superiore e inferiore coincidono).</li>
+<li><strong>$O(f(n))$:</strong> Limite superiore (non va peggio di così).</li>
+<li><strong>$\Omega(f(n))$:</strong> Limite inferiore (serve almeno questo tempo).</li>
+<li><strong>$\Theta(f(n))$:</strong> Ordine di grandezza esatto (limite superiore e inferiore coincidono).</li>
 </ul>
 </li>
 </ul>
@@ -187,7 +187,7 @@
 <p>In base al costo computazionale, i problemi si classificano in:</p>
 <ol>
 <li>
-<p><strong>Problemi Trattabili (facili, classe P)</strong>: Esiste un algoritmo che li risolve in tempo <strong>polinomiale</strong> <em>(es. <span class="arithmatex">\(O(n), O(n^2), O(n \log n)\)</span>)</em> $$ T(n) ∈ O(n^k), k ≥ 0 $$</p>
+<p><strong>Problemi Trattabili (facili, classe P)</strong>: Esiste un algoritmo che li risolve in tempo <strong>polinomiale</strong> <em>(es. $O(n), O(n^2), O(n \log n)$)</em> $$ T(n) ∈ O(n^k), k ≥ 0 $$</p>
 <ul>
 <li><em>Esempi:</em> Ordinamento, Cammino Minimo (Dijkstra), Spanning Tree.</li>
 <li><em>Perché:</em> Se raddoppio l'input, il tempo aumenta di un fattore gestibile.</li>
@@ -197,7 +197,7 @@
 <p><strong>Problemi Presumibilmente Intrattabili (difficili)</strong>: non abbiamo un algoritmo di costo polinomiale, ma non è stato dimostrato che non esista</p>
 </li>
 <li>
-<p><strong>Problemi Intrattabili</strong>: si può dimostrare che non esiste un algoritmo di costo polinomiale. Il costo è <strong>esponenziale</strong> (es. <span class="arithmatex">\(O(2^n), O(n!)\)</span>).</p>
+<p><strong>Problemi Intrattabili</strong>: si può dimostrare che non esiste un algoritmo di costo polinomiale. Il costo è <strong>esponenziale</strong> (es. $O(2^n), O(n!)$).</p>
 <ul>
 <li><em>Esempi:</em> Tutti i possibili sottoinsiemi, tutte le permutazioni (TSP forza bruta), Torre di Hanoi.</li>
 <li><em>Perché:</em> Basta aggiungere un piccolo elemento all'input (es. una città in più nel TSP) e il tempo di calcolo raddoppia o peggio. Diventa inutilizzabile molto presto.</li>
@@ -237,6 +237,7 @@
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
 <script src="../js/base.js"></script>
+<script src="../javascripts/mathjax_config.js"></script>
 <script src="../javascripts/pdf_mathjax_hook.js"></script>
 <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
 <script src="../search/main.js"></script>
