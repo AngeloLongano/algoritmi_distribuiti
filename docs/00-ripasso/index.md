@@ -1,4 +1,4 @@
-# Riassunto - Problemi e Algoritmi
+# Ripasso
 
 ## **Problema Computazionale**
 
@@ -58,7 +58,7 @@ Non misuriamo il **tempo** in secondi, ma in **numero di operazioni elementari**
     - **$\Omega(f(n))$:** Limite inferiore (serve almeno questo tempo).
     - **$\Theta(f(n))$:** Ordine di grandezza esatto (limite superiore e inferiore coincidono).
 
-![[assets/0_ripasso_complessità_images/image_1.png]]
+![](../assets/0_ripasso_complessita_images/image_1.png)
 ***
 ## **Classificazione dei Problemi per Difficoltà**
 

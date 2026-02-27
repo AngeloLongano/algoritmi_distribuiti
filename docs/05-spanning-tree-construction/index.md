@@ -1,5 +1,5 @@
 ## Spanning Tree
-![[assets/5_spanning_tree_construction_images/image_1.png|300]]
+<img src="../assets/5_spanning_tree_construction_images/image_1.png" width="300" alt="">
 Uno **spanning tree** (in italiano: _albero di copertura_) di un grafo connesso $G=(V,E)$ è un **sottografo** $T=(V,E’)$ tale che:
 
 1. contiene **tutti** i vertici di $G$ (quindi “spanning” = _che copre/spazia_ su tutti i nodi):$$V(T)=V(G)$$
@@ -45,7 +45,7 @@ _costruzione per “richieste Q” + risposte YES/NO_
 - $Q$ richiesta di collegamento
 - $YES/NO$ risposta
 
-![[assets/5_spanning_tree_construction_images/image_2.png|600]]
+<img src="../assets/5_spanning_tree_construction_images/image_2.png" width="600" alt="">
 
 **Variabili tipiche:**
 - `parent`, `root`, `Tree-neighbours(x)` (insieme dei vicini in $T$), `counter` (conta le risposte ricevute dai vicini). 
@@ -149,7 +149,9 @@ $$
 tra cui
 $$
 M(\text{SHOUT}) = (2m-n+1) + 2[m-(n-1)] + (n-1)
-$$semplificando diventa
+$$
+
+Semplificando diventa:
 
 $$
 M(\text{SHOUT}) = (2m-n+1) + (2m-2n+2) + (n-1) = 4m - 2n + 2
@@ -162,9 +164,7 @@ $$M(\text{SHOUT}) = 4m - 2n + 2 = 2\cdot(2m-n+1).$$
 In confronto al flooding abbiamo il doppio dei messaggi:
 
 $$
-
 M(\text{SHOUT}) = 2(2m-n+1)=2\cdot M(\text{Flooding})
-
 $$
 
 _Possiamo ottimizzare?_
@@ -192,7 +192,7 @@ riceve YES da sender:
 ---
 
 ### Importante: cosa succede con più iniziatori?
-![[assets/5_spanning_tree_construction_images/image_3.png|400]]
+<img src="../assets/5_spanning_tree_construction_images/image_3.png" width="400" alt="">
 Se togli l’assunzione “single initiator”, i protocolli progettati per unico iniziatore **possono fallire**: ad esempio SHOUT con due initiator può costruire una **foresta** (non connessa). 
 
 Risultato teorico (libro): **SPT è deterministically unsolvable sotto le sole restrizioni standard $R$** (cioè senza imporre un unico iniziatore o assunzioni extra).
@@ -311,21 +311,21 @@ Quando un nodo è DONE, non riceve più messaggi (ha concluso)
 ## Esempio grafico
 
 _Legenda_
-![[assets/5_spanning_tree_construction_images/image_4.png|400]]
+<img src="../assets/5_spanning_tree_construction_images/image_4.png" width="400" alt="">
 
 _La root inizia a mandare il Forward Token_
 
-![[assets/5_spanning_tree_construction_images/image_5.png]]
+![](../assets/5_spanning_tree_construction_images/image_5.png)
 _A questo punto l'ultimo nodo ha finito i nodi a cui mandare il Forward Token, quindi manda il Return Token_
-![[assets/5_spanning_tree_construction_images/image_6.png]]
+![](../assets/5_spanning_tree_construction_images/image_6.png)
 _Quando il Return Token arriva alla root, abbiamo lo spanning tree del grafo._
-![[assets/5_spanning_tree_construction_images/image_7.png]]
+![](../assets/5_spanning_tree_construction_images/image_7.png)
 
 ## Complessità del protocollo base DFT
 
 ### **Message complexity**
 
-![[assets/5_spanning_tree_construction_images/image_8.png|500]]
+<img src="../assets/5_spanning_tree_construction_images/image_8.png" width="500" alt="">
   
 Dato che ad ogni Forward corrisponde una risposta con un Return o Backedge, allora sono 2 i messaggi per ogni arco.
 Ogni link viene “coinvolto” in modo tale che il totale risulta:
@@ -376,7 +376,7 @@ Nel protocollo base, un nodo può ricevere il token “inutilmente” da più vi
 
 Quando un nodo riceve il token **la prima volta** (vale anche per l’initiator):
 
-![[assets/5_spanning_tree_construction_images/image_9.png|400]]
+<img src="../assets/5_spanning_tree_construction_images/image_9.png" width="400" alt="">
 
 1. manda Visited a tutti i vicini
 2. aspetta un Ack da ciascun vicino
@@ -384,7 +384,7 @@ Quando un nodo riceve il token **la prima volta** (vale anche per l’initiator)
 
 Quando un nodo riceve un messaggio Visited:
 
-![[assets/5_spanning_tree_construction_images/image_10.png|400]]
+<img src="../assets/5_spanning_tree_construction_images/image_10.png" width="400" alt="">
 - risponde con Ack
 - elimina il sender dal proprio insieme Unvisited (così non proverà più a visitarlo col token) 
 
@@ -409,7 +409,7 @@ Le slide dicono:
 
 Le slide scompongono il tempo in due blocchi: **Token lungo l’albero (sequenziale)** e  **Handshake Visited/Ack (parallelo)**
 
-![[assets/5_spanning_tree_construction_images/image_11.png|600]]
+<img src="../assets/5_spanning_tree_construction_images/image_11.png" width="600" alt="">
 
 **La parte “token lungo l’albero” resta sequenziale: catena lunga $2(n-1)$.**
 

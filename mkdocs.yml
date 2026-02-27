@@ -1,0 +1,41 @@
+site_name: Algoritmi Distribuiti Notes
+site_url: https://angelolongano.github.io/algoritmi_distribuiti/
+docs_dir: docs
+use_directory_urls: false
+theme:
+  name: mkdocs
+
+plugins:
+  - search
+  - exporter:
+      theme:
+        name: readthedocs
+      formats:
+        pdf:
+          enabled: true
+          stylesheets:
+            - scripts/pdf_export.css
+          aggregator:
+            enabled: true
+            output: pdf/algoritmi_distribuiti.pdf
+            covers: none
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/pdf_mathjax_hook.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - 0 Ripasso: 00-ripasso/index.md
+  - 1 Teoria della Complessita: 01-teoria-della-complessita/index.md
+  - 4 Fondamenti Algoritmi Distribuiti: 04-fondamenti-algoritmi-distribuiti/index.md
+  - 5 Spanning Tree Construction: 05-spanning-tree-construction/index.md

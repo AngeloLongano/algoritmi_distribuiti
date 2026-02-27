@@ -56,7 +56,7 @@ Questi sono i problemi "chiave". Sono sia in NP che NP-Hard.
 
 ### Come rappresentiamo queste classi di problemi mantenendo il dubbio che in futuro si possano trovare degli algoritmi polinomiali risolutori dei problemi NP?
 A sinistra siamo nel caso in cui i problemi NP potrebbero essere risolti in tempo polinomiale, a destra nel caso sia stato dimostrato che non esiste un algoritmo polinomiale per i problemi NP.
-![[assets/1_teoria_della_complessita_images/image_1.png]]
+![](../assets/1_teoria_della_complessita_images/image_1.png)
 
 | **Classe**      | **Trovare Soluzione (Tempo Polinomiale)** | **Verificare Soluzione (Tempo Polinomiale)** | **Relazione Insiemistica**                  |
 | --------------- | ----------------------------------------- | -------------------------------------------- | ------------------------------------------- |
@@ -79,7 +79,7 @@ A sinistra siamo nel caso in cui i problemi NP potrebbero essere risolti in temp
 - Il problema $B$ non è più facile di $A$ (un algoritmo per $B$ può risolvere $A$)
 - Il problema $A$ non è più difficile di $B$
 
-![[assets/1_teoria_della_complessita_images/image_2.png]]
+![](../assets/1_teoria_della_complessita_images/image_2.png)
 
 ## **Conseguenze**
 
@@ -91,8 +91,8 @@ Se $A \leq_p B$ allora:
 
 **Proprietà**: La riduzione polinomiale è **transitiva**: $A \leq_p B \land B \leq_p C \Rightarrow A \leq_p C$.
 
-![[assets/1_teoria_della_complessita_images/image_3.png|400]] ![[assets/1_teoria_della_complessita_images/image_4.png|400]]
-![[assets/1_teoria_della_complessita_images/image_5.png|400]]
+<img src="../assets/1_teoria_della_complessita_images/image_3.png" width="400" alt=""> <img src="../assets/1_teoria_della_complessita_images/image_4.png" width="400" alt="">
+<img src="../assets/1_teoria_della_complessita_images/image_5.png" width="400" alt="">
 
 ***
 ## **Classe NP (Non-deterministic Polynomial Time)**
@@ -102,7 +102,7 @@ Se $A \leq_p B$ allora:
 - **INPUT**: Grafo $G = (V, E)$
 - **OUTPUT**: Esiste un ciclo in $G$ che passa per tutti i nodi esattamente una volta?
 
-![[assets/1_teoria_della_complessita_images/image_6.png|500]]
+<img src="../assets/1_teoria_della_complessita_images/image_6.png" width="500" alt="">
 
 Per questo problema:
 
@@ -110,7 +110,7 @@ Per questo problema:
 - Un algoritmo forza bruta richiede tempo **fattoriale**
 - Possiamo **verificare** una soluzione in tempo polinomiale: data una permutazione dei nodi, possiamo verificare in tempo lineare se rappresenta un ciclo hamiltoniano
 
-![[assets/1_teoria_della_complessita_images/image_7.png|400]]
+<img src="../assets/1_teoria_della_complessita_images/image_7.png" width="400" alt="">
 
 ## **Classe NP-Completo**
 
@@ -160,7 +160,7 @@ Per dimostrare che $A$ è NP-hard:
 1. Scegliere un problema $B$ già dimostrato NP-completo
 2. Dimostrare che $B \leq_p A$
 
-![[assets/1_teoria_della_complessita_images/image_8.png]]
+![](../assets/1_teoria_della_complessita_images/image_8.png)
 
 _N.B.: Non è detto che A abbia un algoritmo verificatore polinomiale_
 
@@ -195,7 +195,7 @@ L'idea chiave è penalizzare l'uso di archi non esistenti:
 
 In questo modo, il costo totale del tour fungerà da "rivelatore": se il costo è 0, il tour non ha mai "barato" (ha usato solo archi esistenti); se il costo è $\ge 1$, il tour è stato costretto a "barare" (ha usato archi che non c'erano in origine).
 
-![[assets/1_teoria_della_complessita_images/image_9.png]]
+![](../assets/1_teoria_della_complessita_images/image_9.png)
 
 #### **2. Definizione Formale della Riduzione**
 
@@ -210,7 +210,7 @@ Costruiamo un algoritmo di trasformazione $f$ che mappa un'istanza $G$ di HC in 
 3. Pesi: Per ogni coppia $(u, v)$, il peso è definito come:$$c(u, v) = \begin{cases} 0 & \text{se } (u, v) \in E \quad (\text{arco originale}) \\ 1 & \text{se } (u, v) \notin E \quad (\text{arco fittizio}) \end{cases}$$
 _Nota: La costruzione di $G'$ richiede di iterare su tutte le coppie di nodi, impiegando un tempo $O(|V|^2)$, che è polinomiale.
 
-![[assets/1_teoria_della_complessita_images/image_10.png|500]]
+<img src="../assets/1_teoria_della_complessita_images/image_10.png" width="500" alt="">
 #### **3. Dimostrazione di Correttezza**
 
 Sia $C_{min}$ il valore della soluzione ottima restituita dal TSP su $G'$. 
@@ -449,7 +449,7 @@ In pratica: non conosciamo (e probabilmente non esiste) un algoritmo che trovi l
 Dato che la versione decisionale del Vertex Cover è NP-completo, definiamo la riduzione $VCD \le_p VC$ .
 Il Vertex Cover (ottimizzazione) è difficile almeno quanto il Vertex Cover Decisionale.
 
-![[assets/1_teoria_della_complessita_images/image_11.png|600]]
+<img src="../assets/1_teoria_della_complessita_images/image_11.png" width="600" alt="">
 La riduzione è molto semplice perché l'istanza dell'input dei due algoritmi è la stessa, ci serve solo definire una trasformazione polinomiale dell'output.
 
 Quindi:
@@ -569,7 +569,7 @@ _Sebbene l'algoritmo produca sempre una copertura valida in tempo polinomiale, i
 
 **Controesempio** (Grafo a Stella):
 
-![[assets/1_teoria_della_complessita_images/image_12.png|500]]
+<img src="../assets/1_teoria_della_complessita_images/image_12.png" width="500" alt="">
 
 Consideriamo un grafo a stella $S_k$ composto da un nodo centrale $c$ collegato a $k$ foglie $l_1, l_2, ..., l_k$.
 
@@ -635,12 +635,12 @@ Alla fine, l'algoritmo sceglie quasi tutti i nodi dell'insieme B (che sono tanti
 
 Quello che succede in scala molto piccola è più o meno questo:
 
-![[assets/1_teoria_della_complessita_images/image_13.png|400]]
+<img src="../assets/1_teoria_della_complessita_images/image_13.png" width="400" alt="">
 
 Il vero grafo bipartito che inganna l'algoritmo dovrebbe essere questo:
 
->[!caption|right|300]
->![[assets/1_teoria_della_complessita_images/image_14.png]]
+> **Caption**
+> <img src="../assets/1_teoria_della_complessita_images/image_14.png" width="300" alt="">
 > Preso da https://cgi.csc.liv.ac.uk/~michele/TEACHING/COMP309/2005/Lec10.4.4.pdf
 
 
@@ -1161,14 +1161,18 @@ Idea greedy: cresci un albero partendo da una radice, aggiungendo ogni volta l�
 #### Perché serve nel TSP con disuguaglianza triangolare
 Nel 2-approx per TSPdt si usa l’MST perché è un **lower bound** sul costo del tour ottimo $H^*$:
 togliendo un arco da un tour ottimo ottieni uno spanning tree $T'$ con
-$$ w(T') \le w(H^*) $$,
+$$
+w(T') \le w(H^*)
+$$
 e poiché $T$ è minimo,
-$$ w(T) \le w(T') \le w(H^*) $$.
+$$
+w(T) \le w(T') \le w(H^*)
+$$
 Quindi $w(T)\le w(H^*)$.
 
 ### DFS (Depth-First Search) e ordini di visita
 
-![[assets/1_teoria_della_complessita_images/image_15.png]]
+![](../assets/1_teoria_della_complessita_images/image_15.png)
 **Idea della DFS**
 La **DFS** (*Depth-First Search*, ricerca in profondità) esplora un grafo/albero seguendo questa strategia: da un nodo corrente si visita **un vicino non ancora visitato** e si continua “andando avanti” il più possibile lungo quel ramo. Quando non ci sono più vicini non visitati, si **torna indietro** (backtracking) all’ultimo nodo che aveva ancora alternative e si riprende da lì.
 

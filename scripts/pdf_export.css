@@ -1,0 +1,184 @@
+/* PDF-only cleanup for MkDocs base theme */
+.navbar,
+.navbar.fixed-top,
+.navbar-brand,
+.navbar-nav,
+.navbar-text,
+.navbar-toggler,
+.navbar-collapse,
+.navbar-header,
+.bs-sidebar,
+.affix,
+.navbar + .container .col-md-3,
+.navbar + .container .navbar-expand-md,
+header,
+nav[role="navigation"],
+footer,
+.modal,
+#mkdocs_search_modal,
+#mkdocs_keyboard_modal {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+@page {
+  size: A4;
+  margin: 18mm 16mm 20mm 16mm;
+}
+
+body {
+  padding-top: 0 !important;
+  color: #111;
+  background: #fff;
+  font-family: "Charter", "Cambria", "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.45;
+}
+
+.navbar + .container,
+.container,
+.col-md-9,
+[role="main"] {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.row {
+  margin: 0 !important;
+}
+
+[role="main"] > *:first-child {
+  margin-top: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #111;
+  page-break-after: avoid;
+  break-after: avoid-page;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 24pt;
+  margin: 0 0 10mm 0;
+  border-bottom: 1px solid #bbb;
+  padding-bottom: 4mm;
+}
+
+h2 {
+  font-size: 16pt;
+  margin-top: 10mm;
+}
+
+h3 {
+  font-size: 13pt;
+  margin-top: 7mm;
+}
+
+p,
+ul,
+ol,
+table,
+pre,
+blockquote {
+  margin-top: 0;
+  margin-bottom: 3.5mm;
+}
+
+p,
+li {
+  orphans: 3;
+  widows: 3;
+}
+
+ul,
+ol {
+  padding-left: 6mm;
+}
+
+li + li {
+  margin-top: 1.2mm;
+}
+
+a {
+  color: #111;
+  text-decoration: none;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+}
+
+pre {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 2.5mm;
+  background: #fafafa;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+
+code {
+  font-size: 0.92em;
+}
+
+blockquote {
+  border-left: 3px solid #ccc;
+  padding-left: 3mm;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 2mm;
+  vertical-align: top;
+}
+
+img {
+  display: block;
+  margin: 3mm auto;
+  max-width: 100%;
+  height: auto;
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+
+figure,
+.admonition,
+details {
+  page-break-inside: avoid;
+  break-inside: avoid-page;
+}
+
+.arithmatex,
+mjx-container {
+  overflow-wrap: anywhere;
+}

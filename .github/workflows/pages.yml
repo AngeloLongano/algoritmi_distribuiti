@@ -1,0 +1,60 @@
+name: Build, Deploy Pages and Export PDF
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Sync dependencies
+        run: uv sync --locked
+
+      - name: Install Playwright Chromium
+        run: uv run playwright install --with-deps chromium
+
+      - name: Build MkDocs site
+        run: uv run mkdocs build --strict
+
+      - name: Keep only combined PDF in site output
+        run: find site -type f -name '*.pdf' ! -path 'site/pdf/algoritmi_distribuiti.pdf' -delete
+
+      - name: Collect single PDF
+        run: |
+          mkdir -p dist
+          test -f site/pdf/algoritmi_distribuiti.pdf
+          cp site/pdf/algoritmi_distribuiti.pdf dist/algoritmi_distribuiti.pdf
+
+      - name: Verify PDF output
+        run: test -f dist/algoritmi_distribuiti.pdf
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: algoritmi_distribuiti_pdf
+          path: dist/algoritmi_distribuiti.pdf
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
