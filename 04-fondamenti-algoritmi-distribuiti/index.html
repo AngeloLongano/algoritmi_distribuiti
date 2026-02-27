@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://angelolongano.github.io/algoritmi_distribuiti/04-fondamenti-algoritmi-distribuiti/index.html" rel="canonical"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>4 Fondamenti Algoritmi Distribuiti - Algoritmi Distribuiti Notes</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/fontawesome.min.css" rel="stylesheet"/>
+<link href="../css/brands.min.css" rel="stylesheet"/>
+<link href="../css/solid.min.css" rel="stylesheet"/>
+<link href="../css/v4-font-face.min.css" rel="stylesheet"/>
+<link href="../css/base.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" id="hljs-light" rel="stylesheet"/>
+<link disabled="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-dark" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
+<a class="navbar-brand" href="../index.html">Algoritmi Distribuiti Notes</a>
+<!-- Expander button -->
+<button aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar-collapse" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse" id="navbar-collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Home</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../00-ripasso/index.html">0 Ripasso</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../01-teoria-della-complessita/index.html">1 Teoria della Complessita</a>
+</li>
+<li class="nav-item">
+<a aria-current="page" class="nav-link active" href="index.html">4 Fondamenti Algoritmi Distribuiti</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../05-spanning-tree-construction/index.html">5 Spanning Tree Construction</a>
+</li>
+</ul>
+<ul class="nav navbar-nav ms-md-auto">
+<li class="nav-item">
+<a class="nav-link" data-bs-target="#mkdocs_search_modal" data-bs-toggle="modal" href="#">
+<i class="fa fa-search"></i> Search
+                            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../01-teoria-della-complessita/index.html" rel="prev">
+<i class="fa fa-arrow-left"></i> Previous
+                                </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../05-spanning-tree-construction/index.html" rel="next">
+                                    Next <i class="fa fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+<div class="navbar-header">
+<button class="navbar-toggler collapsed" data-bs-target="#toc-collapse" data-bs-toggle="collapse" title="Table of Contents" type="button">
+<span class="fa fa-angle-down"></span>
+</button>
+</div>
+<div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#introduzione-agli-algoritmi-distribuiti">Introduzione agli algoritmi distribuiti</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#che-cose-un-sistema-distribuito">Che cos’è un sistema distribuito</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#distribuito-vs-parallelo-da-non-confondere-allesame">Distribuito vs parallelo (da non confondere all’esame)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#il-modello">Il modello</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#comportamento-e-simmetria">Comportamento e simmetria</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#assiomi-del-modello-cose-sempre-vere-nel-modello-base">Assiomi del modello (cose sempre vere nel modello base)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#restrizioni-assunzioni-del-modello-sempre-esplicitarle">Restrizioni (assunzioni del modello): sempre esplicitarle</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#misure-di-complessita-nel-distribuito">Misure di complessità nel distribuito</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#broadcast-bcast-e-protocollo-flooding">Broadcast (Bcast) e protocollo FLOODING</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#problema-broadcast">Problema (Broadcast)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#prima-idea-ingenua">Prima idea (ingenua)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#seconda-idea-invio-una-sola-volta-stato-done">Seconda idea: invio “una sola volta” + stato DONE</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#protocollo-flooding-broadcast-standard">Protocollo FLOODING (broadcast “standard”)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#ottimizzazione-se-un-nodo-riceve-i-da-sender-non-serve-rimandarglielo-indietro-grazie-alla-local-orientation-posso-distinguere-il-mittente-e-inviare-a-nxsetminussender">Ottimizzazione: se un nodo riceve \(I\) da sender, non serve rimandarglielo indietro; grazie alla local orientation posso distinguere il mittente e inviare a \(N(x)\setminus\{sender\}\).</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#calcolo-della-complessita">Calcolo della complessità</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#misure-di-complessita-nel-distribuito-messaggi-vs-tempo">Misure di complessità nel distribuito: messaggi vs tempo</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#message-complexity-di-flooding">Message complexity di FLOODING</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#motivazione-la-somma-dei-gradi-e-2m-perche-se-ci-pensi-in-un-grafo-connesso-quando-calcoli-il-grado-di-tutti-i-nodi-in-realta-stai-contando-ogni-arco-due-volte-infatti-ogni-arco-deve-essere-conteggiato-e-viene-conteggiato-2-volte-perche-ha-due-nodi-collegati">Motivazione: la somma dei gradi è \(2m\) perché se ci pensi in un grafo connesso quando calcoli il grado di tutti i nodi, in realtà stai contando ogni arco due volte. Infatti ogni arco deve essere conteggiato e viene conteggiato 2 volte perché ha due nodi collegati</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#time-complexity-di-flooding">Time complexity di FLOODING</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#perche-e-thetadg">perché è \(\Theta(D(G))\)</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#lower-bound-sui-messaggi-per-broadcast-da-n-1-a-m">Lower bound sui messaggi per Broadcast: da \(n-1\) a \(m\)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#risultato-finale">Risultato finale</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#wake-up-problem">Wake-up problem</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#obiettivo-tutti-i-nodi-che-siano-in-stato-awake-sveglio">Obiettivo Tutti i nodi che siano in stato \(AWAKE\) (sveglio)</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#intuizione-rispetto-al-broadcast-in-generale-e-non-maggiore-perche-un-nodo-puo-essere-piu-vicino-a-qualche-initiator">Intuizione: rispetto al broadcast, in generale è non maggiore perché un nodo può essere più vicino a qualche initiator.</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</div>
+</div></div>
+<div class="col-md-9" role="main">
+<h1 id="introduzione-agli-algoritmi-distribuiti">Introduzione agli algoritmi distribuiti</h1>
+<h2 id="che-cose-un-sistema-distribuito">Che cos’è un sistema distribuito</h2>
+<p>Un <strong>sistema distribuito</strong> è una collezione finita di entità computazionali eterogenee che comunicano tramite <strong>scambio di messaggi</strong> per raggiungere un obiettivo comune. 
+L’obiettivo è sempre quello di progettare <strong>algoritmi distribuiti</strong> che siano:
+- <strong>corretti</strong> (risolvono davvero il problema richiesto),
+- <strong>efficienti</strong> (hanno un costo “piccolo” rispetto alle risorse disponibili).  </p>
+<p>Esempi di ambienti distribuiti: web, reti di comunicazione, sensor networks, reti robotiche, mobile agents.</p>
+<h3 id="perche-usare-sistemi-distribuiti">Perché usare sistemi distribuiti</h3>
+<p>Motivazioni tipiche:
+- <strong>condivisione di risorse</strong> (stampanti, file, pagine web, …),
+- <strong>tolleranza ai guasti</strong> (il sistema resta disponibile anche se alcune parti sono temporaneamente “out of order”),
+- <strong>scalabilità</strong> (in dimensione, distribuzione geografica, amministrazione).  </p>
+<hr/>
+<h2 id="distribuito-vs-parallelo-da-non-confondere-allesame">Distribuito vs parallelo (da non confondere all’esame)</h2>
+<ul>
+<li><strong>Macchina sequenziale</strong>: 1 CPU, 1 memoria, operazioni sequenziali.</li>
+<li><strong>Sistema parallelo</strong>: più processori con (tipicamente) <strong>memoria condivisa</strong>, distanze piccole → i problemi principali sono sincronizzazione e mutua esclusione.</li>
+<li><strong>Sistema distribuito</strong>: molti processori con <strong>memorie separate</strong>, distanze grandi → la comunicazione via messaggi è centrale e introduce nuovi problemi (ritardi, coordinamento, conoscenza parziale). </li>
+</ul>
+<p>In un ambiente distribuito emergono tre proprietà chiave:
+1. <strong>Molteplicità</strong>: molte entità.
+2. <strong>Autonomia</strong>: memoria privata e clock locali (non necessariamente sincronizzati).
+3. <strong>Interazione</strong>: cooperazione tramite messaggi per “fare di più” rispetto al singolo nodo. </p>
+<hr/>
+<h1 id="il-modello">Il modello</h1>
+<p>Il modello standard del corso è:
+- una <strong>rete</strong> rappresentata come un <strong>grafo</strong> <span class="arithmatex">\(G=(V,E)\)</span>,
+  - nodi <span class="arithmatex">\(V\)</span> = entità (processi/nodi/siti/agenti…),
+  - archi <span class="arithmatex">\(E\)</span> = link di comunicazione,
+- comunicazione <strong>message-passing</strong> (scambio di messaggi su link). </p>
+<h3 id="proprieta-di-base-delle-entita">Proprietà “di base” delle entità</h3>
+<p>Ogni entità:
+- ha un <strong>input</strong> (anche vuoto),
+- esegue lo <strong>stesso codice</strong> (protocollo),
+- deve produrre lo <strong>stesso tipo di output</strong> (tutte risolvono lo stesso problema). </p>
+<h3 id="stato">Stato</h3>
+<p>Ogni entità <span class="arithmatex">\(x\)</span> ha un registro <strong><span class="arithmatex">\(status(x)\)</span></strong> che indica lo stato corrente.
+Esiste un insieme finito <span class="arithmatex">\(S\)</span> di stati possibili (es. idle, waiting, computing, …) e in ogni istante <span class="arithmatex">\(x \in S\)</span>.</p>
+<h3 id="eventi">Eventi</h3>
+<p>Il comportamento è <strong>reattivo</strong>: senza evento non c’è azione.
+Eventi tipici:
+- <strong>tick del clock</strong> (interno),
+- <strong>arrivo di un messaggio</strong> (interno),
+- <strong>impulso spontaneo</strong> dall’ambiente (esterno).</p>
+<h3 id="azioni">Azioni</h3>
+<p>Un’azione è una sequenza di attività consentite (computare, inviare messaggi, cambiare stato, leggere/scrivere memoria interna, set/reset del clock, oppure NIL).
+Le azioni sono:
+- <strong>atomiche</strong> (non interrompibili),
+- <strong>terminanti</strong> (finiscono in tempo finito). </p>
+<hr/>
+<h2 id="comportamento-e-simmetria">Comportamento e simmetria</h2>
+<p>Il <strong>behaviour</strong> (comportamento) di un’entità è l’insieme delle regole “per ogni stato e per ogni evento, che azione eseguo?”.
+$<span class="arithmatex">\(Stato,Evento \implies Azione\)</span>$
+Molto spesso si assume un sistema <strong>simmetrico</strong>: tutte le entità hanno lo stesso behaviour (stesso protocollo). Differenze di ruolo (es. initiator vs sleeping) si modellano tramite stati/variabili locali. </p>
+<h3 id="comunicazione">Comunicazione</h3>
+<p>La comunicazione può essere unidirezionale o bidirezionale.
+Il <strong>vicinato</strong> di un nodo <span class="arithmatex">\(x\)</span> è l’insieme dei nodi con cui <span class="arithmatex">\(x\)</span> può comunicare, indicato spesso come <span class="arithmatex">\(N(x)\)</span>. 
+In particolare:
+- <span class="arithmatex">\(N_{o}(x) \implies\)</span> Vicini a cui mandare messaggi (out-neighbours)
+- <span class="arithmatex">\(N_{i}(x) \implies\)</span> Vicini da cui ricevere messaggi (in-neighbours)
+$<span class="arithmatex">\(N(x)=N_{o}(x) \cup N_{i}(x)\)</span>$</p>
+<hr/>
+<h2 id="assiomi-del-modello-cose-sempre-vere-nel-modello-base">Assiomi del modello (cose <strong>sempre</strong> vere nel modello base)</h2>
+<p>Il <strong>modello generale</strong> non parte da “mille assunzioni”, ma da <strong>pochi assiomi minimi</strong>. Tutto ciò che aggiungi oltre questi assiomi si chiama <strong>restrizione</strong> (o <em>submodel</em>): rende il protocollo applicabile solo a certi sistemi/reti. </p>
+<h3 id="assioma-1-ritardi-di-comunicazione-finiti-finite-communicationtransmission-delays">Assioma 1 — Ritardi di comunicazione finiti (Finite Communication/Transmission Delays)</h3>
+<p><strong>Enunciato (idea):</strong> <em>in assenza di guasti</em>, un messaggio inviato da un’entità <span class="arithmatex">\(x\)</span> a un suo out-neighbor <span class="arithmatex">\(y\)</span> <strong>arriva</strong> a <span class="arithmatex">\(y\)</span> in <strong>tempo finito</strong> e senza corruzione. </p>
+<p><strong>Cosa implica davvero</strong>
+- Non esiste “perdita” di messaggi <strong>se</strong> non ci sono failure.
+- Non puoi avere ritardi infiniti: prima o poi il messaggio viene ricevuto.</p>
+<p><strong>Cosa NON implica</strong>
+- Non dice che esista un limite superiore noto o costante: il ritardo può essere <em>arbitrariamente grande</em> e imprevedibile (quindi il sistema è naturalmente <strong>asincrono</strong>). </p>
+<p>Conseguenza: se vuoi ragionare “a round” o con tempi deterministici, devi <strong>aggiungere restrizioni temporali</strong> (es. <em>Bounded delay</em> <span class="arithmatex">\(\Delta\)</span>, <em>unitary delay</em>, <em>synchronized clocks</em>). </p>
+<h3 id="assioma-2-orientamento-locale-local-orientation">Assioma 2 — Orientamento locale (Local Orientation)</h3>
+<p><strong>Enunciato (idea):</strong> ogni entità riesce a <strong>distinguere tra i propri vicini</strong>:
+- distingue tra i suoi <strong>out-neighbors</strong> (a chi può inviare),
+- distingue tra i suoi <strong>in-neighbors</strong> (da chi può ricevere),
+e quando riceve un messaggio sa <strong>da quale “porta”/vicino</strong> è arrivato. </p>
+<p><strong>Interpretazione operativa (porte / port numbers)</strong>
+- Ogni nodo assegna etichette locali (porte) ai suoi link incidenti: sono <strong>locali</strong> e iniettive (porte diverse per vicini diversi).
+- Quindi puoi dire: “manda al vicino sulla porta 3” oppure “ho ricevuto dalla porta 2”. </p>
+<p><strong>Perché è fondamentale</strong>
+- Senza local orientation, molte primitive (flooding controllato, costruzione di alberi, instradamento su base locale) non sono nemmeno formulabili in modo utile: non potresti scegliere un vicino specifico, né distinguere chi ti ha scritto.</p>
+<h3 id="assiomi-vs-restrizioni-da-ricordare">Assiomi vs restrizioni (da ricordare)</h3>
+<ul>
+<li><strong>Assiomi</strong>: proprietà minime del modello base (valgono sempre).</li>
+<li><strong>Restrizioni</strong>: proprietà aggiuntive usate dal protocollo (es. “link bidirezionali”, “total reliability”, “grafo connesso”, “IDs distinti”, “delay bounded <span class="arithmatex">\(\Delta\)</span>”…). Ogni restrizione aumenta la “forza” del sistema ma riduce i casi in cui il protocollo è applicabile. </li>
+</ul>
+<hr/>
+<h2 id="restrizioni-assunzioni-del-modello-sempre-esplicitarle">Restrizioni (assunzioni del modello): sempre esplicitarle</h2>
+<p>Nel distribuito, la (im)possibilità e la complessità dei problemi dipendono in modo cruciale dalle <strong>restrizioni</strong> assunte. Ogni protocollo va letto insieme alle sue assunzioni. </p>
+<p>Categorie tipiche:
+- <strong>Restrizioni di comunicazione</strong>: es. ordinamento FIFO su un link; link bidirezionali (grafo non orientato). 
+- <strong>Restrizioni di affidabilità</strong>: consegna garantita; modelli di affidabilità parziale/totale; meccanismi di fault detection (se presenti).
+- <strong>Restrizioni topologiche / di conoscenza</strong>: connettività del grafo; conoscenza di <span class="arithmatex">\(n\)</span>, <span class="arithmatex">\(m\)</span>, diametro, ecc.
+- <strong>Restrizioni temporali</strong>: asincrono (default del corso se non detto), delay bounded (esiste <span class="arithmatex">\(\Delta\)</span>), unitary delay, clock sincronizzati.</p>
+<hr/>
+<h2 id="misure-di-complessita-nel-distribuito">Misure di complessità nel distribuito</h2>
+<p>Per algoritmi sequenziali guardiamo tipicamente tempo e spazio; nel distribuito invece sono centrali:
+1. <strong>Amount of communication</strong>: numero di messaggi scambiati (o più fine: numero di bit).
+2. <strong>Tempo</strong>: ritardo massimo che possiamo avere durante la comunicazione.
+       - <em>tempo ideale</em> (<strong>sincrono</strong>): 1 unità di tempo per trasmettere 1 messaggio,
+       - <em>tempo realistico (</em><em>asincrono</em><em>): i ritardi sono imprevedibili → spesso si conta la lunghezza della </em><em>catena di messaggi</em>* più lunga (dipendenza causale) in un’esecuzione.</p>
+<p><em>N.B. A differenza dello studio di complessità degli algoritmi classici, mi concentro di più sulla comunicazione tra le varie entità, rispetto a considerare il costo computazionale nelle singole macchine.</em></p>
+<hr/>
+<h1 id="broadcast-bcast-e-protocollo-flooding">Broadcast (Bcast) e protocollo FLOODING</h1>
+<h2 id="problema-broadcast">Problema (Broadcast)</h2>
+<p><img alt="" src="../assets/4_fondamenti_algoritmi_distribuiti_images/image_1.png"/></p>
+<p>Dato un sistema distribuito su un grafo di comunicazione <span class="arithmatex">\(G=(V,E)\)</span>, <strong>un solo nodo</strong> (l’<strong>initiator</strong>) possiede un’informazione <span class="arithmatex">\(I\)</span> e vuole far sì che <strong>tutti</strong> gli altri nodi la apprendano <strong>in tempo finito</strong>.  </p>
+<p>Il requisito “un solo nodo inizia” è l’assunzione <strong>Unique Initiator</strong> (spesso indicata come <span class="arithmatex">\(UI^+\)</span>: l’initiator è proprio quello che inizialmente ha <span class="arithmatex">\(I\)</span>). </p>
+<h3 id="restrizioni-tipiche-standard">Restrizioni tipiche (standard)</h3>
+<p>Per discutere Bcast e FLOODING si assumono spesso le <strong>standard restrictions</strong>
+$<span class="arithmatex">\(R=\{BL, CN, TR\}\)</span>$
+dove:
+-  <span class="arithmatex">\(BL\)</span> (<strong>Bidirectional Links</strong>): il grafo non è orientato<br/>
+- <span class="arithmatex">\(CN\)</span> (<strong>Connectivity</strong>): il grafo è connesso (tutti raggiungibili)<br/>
+- <span class="arithmatex">\(TR\)</span> (<strong>Total Reliability</strong>): nessun guasto durante l’esecuzione </p>
+<hr/>
+<h2 id="prima-idea-ingenua">Prima idea (ingenua)</h2>
+<p>Idea: INITIATOR invia <span class="arithmatex">\(I\)</span> a tutti i vicini; 
+ogni nodo SLEEPING che riceve <span class="arithmatex">\(I\)</span> lo invia a tutti i vicini.</p>
+<ul>
+<li>Stati S = {INITIATIOR, SLEEPING}</li>
+<li>Informazione I</li>
+</ul>
+<p><strong>Entità INITIATOR</strong>
+</p><div class="highlight"><pre><span></span><code>quando parte:
+    manda I a tutti i vicini
+    diventa DONE
+
+se riceve I:
+    ignora
+</code></pre></div>
+<p><strong>Entità SLEEPING</strong>
+</p><div class="highlight"><pre><span></span><code>quando parte:
+    dorme
+
+se riceve I:
+    manda I a tutti i vicini
+</code></pre></div>
+<p>Questa idea può <strong>non terminare</strong>: alcuni nodi possono continuare a rimandarsi <span class="arithmatex">\(I\)</span> all’infinito (loop di messaggi). </p>
+<h3 id="cosa-vuol-dire-algoritmo-corretto-nel-distribuito">Cosa vuol dire “algoritmo corretto” nel distribuito</h3>
+<p>Per la correttezza servono <strong>due</strong> proprietà:
+1. <strong>Safety / Solves the problem</strong>: tutti apprendono <span class="arithmatex">\(I\)</span>
+2. <strong>Termination</strong>: l’esecuzione termina (almeno localmente)</p>
+<hr/>
+<h2 id="seconda-idea-invio-una-sola-volta-stato-done">Seconda idea: invio “una sola volta” + stato DONE</h2>
+<p>Per evitare loop: <em>quando un nodo impara <span class="arithmatex">\(I\)</span> lo inoltra e poi passa a stato <strong>DONE</strong>, così non invia più messaggi.</em></p>
+<ul>
+<li>Stati <span class="arithmatex">\(S=\{\text{INITIATOR},\ \text{SLEEPING},\ \text{DONE}\}\)</span></li>
+<li>Informazione <span class="arithmatex">\(I\)</span></li>
+</ul>
+<p><strong>Entità INITIATOR</strong>  
+</p><div class="highlight"><pre><span></span><code>quando parte:  
+    manda I a tutti i vicini  
+    diventa DONE  
+
+se riceve I:  
+    ignora  
+</code></pre></div>
+<p><strong>Entità SLEEPING</strong>  
+</p><div class="highlight"><pre><span></span><code>quando parte:  
+    dorme  
+
+se riceve I:  
+    manda I a tutti i vicini  
+    diventa DONE 
+</code></pre></div>
+<p><strong>Entità DONE</strong>   
+</p><div class="highlight"><pre><span></span><code>qualunque cosa succeda:  
+    ignora
+</code></pre></div>
+<p>Questo porta a due osservazioni fondamentali:
+- esiste <strong>local termination</strong> (i nodi finiscono in istanti diversi quando diventano DONE);
+- non esiste <strong>global termination</strong> “conosciuta”: nessun nodo sa quando l’intero processo è finito → <strong>termination detection problem</strong>.</p>
+<hr/>
+<h2 id="protocollo-flooding-broadcast-standard">Protocollo FLOODING (broadcast “standard”)</h2>
+<h1 id="ottimizzazione-se-un-nodo-riceve-i-da-sender-non-serve-rimandarglielo-indietro-grazie-alla-local-orientation-posso-distinguere-il-mittente-e-inviare-a-nxsetminussender">Ottimizzazione: se un nodo riceve <span class="arithmatex">\(I\)</span> da <code>sender</code>, non serve rimandarglielo indietro; grazie alla <strong>local orientation</strong> posso distinguere il mittente e inviare a <span class="arithmatex">\(N(x)\setminus\{sender\}\)</span>.</h1>
+<ul>
+<li>Stati <span class="arithmatex">\(S=\{\text{INITIATOR},\ \text{SLEEPING},\ \text{DONE}\}\)</span></li>
+<li>Informazione <span class="arithmatex">\(I\)</span></li>
+</ul>
+<p><strong>Entità INITIATOR</strong>  
+</p><div class="highlight"><pre><span></span><code>quando parte:  
+    manda I a tutti i vicini  
+    diventa DONE
+
+se riceve I:  
+    ignora  
+</code></pre></div>
+<p><strong>Entità SLEEPING</strong>  
+</p><div class="highlight"><pre><span></span><code>se riceve I da `sender`:
+  per ogni vicino y ∈ N(x):
+    se y ≠ sender:
+      manda I a y
+  diventa DONE
+</code></pre></div>
+<p><strong>Entità DONE</strong>  
+</p><div class="highlight"><pre><span></span><code>qualunque cosa succeda:  
+    ignora  
+</code></pre></div>
+<h3 id="correttezza-schema-di-dimostrazione-da-esame">Correttezza (schema di dimostrazione “da esame”)</h3>
+<h4 id="tutti-ricevono-i">Tutti ricevono <span class="arithmatex">\(I\)</span></h4>
+<p>Sotto <span class="arithmatex">\(CN\)</span> (Connectivity) e <span class="arithmatex">\(TR\)</span> (Total Reliability) , esiste un cammino dal INITIATOR a qualunque nodo. 
+Il primo nodo sul cammino che riceve <span class="arithmatex">\(I\)</span> lo inoltra (una sola volta) ai suoi vicini “in avanti”, e così via: per induzione lungo il cammino, ogni nodo viene raggiunto e riceve <span class="arithmatex">\(I\)</span>.  </p>
+<h4 id="terminazione">Terminazione</h4>
+<p>Ogni nodo (a parte INITIATOR) quando riceve <span class="arithmatex">\(I\)</span> esegue <strong>una sola</strong> azione di invio e poi passa a DONE;
+in DONE non invia più nulla. Quindi ogni nodo termina localmente. </p>
+<h1 id="calcolo-della-complessita">Calcolo della complessità</h1>
+<h4 id="notazione">Notazione</h4>
+<ul>
+<li>Grafo <span class="arithmatex">\(G=(V,E)\)</span></li>
+<li><span class="arithmatex">\(n=|V|\)</span> numero di nodi</li>
+<li><span class="arithmatex">\(m=|E|\)</span> numero di archi</li>
+<li><span class="arithmatex">\(N(x)\)</span> = insieme dei vicini di <span class="arithmatex">\(x\)</span></li>
+<li>INITIATOR <span class="arithmatex">\(s\)</span></li>
+<li>Diametro <span class="arithmatex">\(D(G)\)</span></li>
+</ul>
+<h2 id="misure-di-complessita-nel-distribuito-messaggi-vs-tempo"><strong>Misure di complessità nel distribuito: messaggi vs tempo</strong></h2>
+<p>Nel distribuito si misurano soprattutto:</p>
+<ol>
+<li><strong>Amount of communication</strong>: numero di messaggi (o bit) scambiati.</li>
+<li>
+<p><strong>Tempo</strong>: dipende dal <strong>modello temporale</strong> assunto.</p>
+<ul>
+<li>
+<p><strong>Total synchrony / Ideal time</strong>: 1 unità di tempo per trasmettere 1 messaggio (ragionamento “a hop/round”).</p>
+</li>
+<li>
+<p><strong>Asynchrony / Casual time</strong>: clock non sincronizzati e ritardi imprevedibili; si misura il tempo come <strong>lunghezza della longest message chain</strong> tra tutte le possibili esecuzioni.</p>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>Nota importante: <strong>la message complexity non dipende</strong> dal fatto che il sistema sia sincrono o asincrono; la <strong>time complexity sì</strong>, perché cambia la nozione di “quanto dura” un’esecuzione.</p>
+</blockquote>
+<hr/>
+<h2 id="message-complexity-di-flooding">Message complexity di FLOODING</h2>
+<p>Facendo una stima banale, potremmo dire che dato che ogni nodo riceve, invia e poi si ferma: in ogni arco passeranno al massimo 2 messaggi.
+Quindi potremmo stimare che i messaggi inviati siano <span class="arithmatex">\(2m ∈ O(m)\)</span>.</p>
+<p>Però il nostro algoritmo è più preciso in realtà, quindi potremmo fare un'analisi più attenta per calcolare in modo più preciso la complessità legata ai messaggi.</p>
+<h4 id="passo-1-conta-dei-messaggi-inviati-dal-initiator">Passo 1 — Conta dei messaggi inviati dal INITIATOR</h4>
+<p>L’initiator <span class="arithmatex">\(s\)</span> invia il messaggio una sola volta a tutti i suoi vicini:
+$<span class="arithmatex">\(\text{msg inviati da } s = |N(s)|\)</span>$</p>
+<h4 id="passo-2-conta-dei-messaggi-inviati-dagli-altri-nodi">Passo 2 — Conta dei messaggi inviati dagli altri nodi</h4>
+<p>Ogni nodo <span class="arithmatex">\(x\neq s\)</span> quando riceve <span class="arithmatex">\(I\)</span> lo inoltra a tutti i vicini <strong>tranne</strong> il <code>sender</code>.<br/>
+Quindi invia esattamente <span class="arithmatex">\(|N(x)|-1\)</span> messaggi:
+$<span class="arithmatex">\(\text{msg inviati da } x \neq s = |N(x)|-1\)</span>$</p>
+<h4 id="passo-3-somma-totale">Passo 3 — Somma totale</h4>
+<p>Sommo su tutti i nodi:
+$<span class="arithmatex">\(M(\text{Flooding}(G))=|N(s)|+\sum_{x\neq s}(|N(x)|-1)\)</span>$
+Sviluppo:
+$$
+\begin{aligned}
+M(\text{Flooding}(G))
+&amp;= |N(s)|+\sum_{x\neq s}|N(x)| - \sum_{x\neq s}1 \
+&amp;= \sum_x |N(x)| - (n-1)
+\end{aligned}
+$$</p>
+<h3 id="passo-4-uso-dellidentita-sum_x-nx-2m-grafo-non-orientato">Passo 4 — Uso dell’identità <span class="arithmatex">\(\sum_x |N(x)| = 2m\)</span> (grafo non orientato)</h3>
+<p>In un grafo con link bidirezionali (non orientato), la somma dei gradi vale:
+$<span class="arithmatex">\(\sum_x |N(x)| = 2m\)</span>$
+Sostituendo:
+$<span class="arithmatex">\(M(\text{Flooding}(G)) = 2m - (n-1) = 2m - n + 1\)</span>$</p>
+<p><strong>Conclusione:</strong>
+$<span class="arithmatex">\(M(\text{Flooding}(G)) = 2m - n + 1 \in O(m)\)</span>$</p>
+<h1 id="motivazione-la-somma-dei-gradi-e-2m-perche-se-ci-pensi-in-un-grafo-connesso-quando-calcoli-il-grado-di-tutti-i-nodi-in-realta-stai-contando-ogni-arco-due-volte-infatti-ogni-arco-deve-essere-conteggiato-e-viene-conteggiato-2-volte-perche-ha-due-nodi-collegati">Motivazione: <em>la somma dei gradi è <span class="arithmatex">\(2m\)</span> perché se ci pensi in un grafo connesso quando calcoli il grado di tutti i nodi, in realtà stai contando ogni arco due volte. Infatti ogni arco deve essere conteggiato e viene conteggiato 2 volte perché ha due nodi collegati</em></h1>
+<hr/>
+<h2 id="time-complexity-di-flooding">Time complexity di FLOODING</h2>
+<h1 id="perche-e-thetadg">perché è <span class="arithmatex">\(\Theta(D(G))\)</span></h1>
+<h4 id="definizioni">Definizioni</h4>
+<ul>
+<li>Distanza minima in un cammino da <span class="arithmatex">\(a\)</span> a <span class="arithmatex">\(b\)</span>  $<span class="arithmatex">\(d(a,b)\)</span>$</li>
+<li>Eccentricità <em>o Radius</em> (distanza minima tra <span class="arithmatex">\(a\)</span> e il nodo più lontano <span class="arithmatex">\(y\)</span>):
+$<span class="arithmatex">\(r(a)=\max_y d(a,y)\)</span>$</li>
+<li>Diametro (distanza tra i nodi più lontani tra loro nel grafo):
+$<span class="arithmatex">\(D(G)=\max_a r(a)=\max_{x,y} d(x,y)\)</span>$</li>
+</ul>
+<h3 id="a-tempo-sincrono-ideal-time-total-synchrony">A) Tempo  <strong>*sincrono</strong> = Ideal time (total synchrony)</h3>
+<p><strong>Assunzione temporale</strong>: “1 unità di tempo = 1 hop”, cioè in una unità ogni vicino riceve il messaggio (ragionamento a round).</p>
+<h4 id="upper-bound-per-flooding">Upper bound per FLOODING</h4>
+<p><em>tempo impiegato dal INITIATOR a raggiungere tutti</em></p>
+<p>In ideal time (1 unità per hop), dopo <span class="arithmatex">\(t\)</span> unità hanno ricevuto <span class="arithmatex">\(I\)</span> tutti i nodi a distanza <span class="arithmatex">\(\le t\)</span> dal INITIATOR.<br/>
+Quindi il tempo dell’esecuzione con initiator <span class="arithmatex">\(s\)</span> è:
+$<span class="arithmatex">\(T_s \le r(s)=\max_y d(s,y)\)</span>$</p>
+<p>Nel worst-case su tutte le scelte possibili di initiator:
+$<span class="arithmatex">\(T(\text{Flooding}) \le \max_s r(s)=D(G)\)</span>$</p>
+<h4 id="lower-bound-per-qualsiasi-broadcast-non-solo-flooding">Lower bound per qualsiasi broadcast (non solo flooding)</h4>
+<p>Nel caso peggiore l’initiator può essere un nodo “estremo”, e qualche nodo può essere a distanza <span class="arithmatex">\(D(G)\)</span>.<br/>
+Quindi nessun algoritmo può fare meglio di:
+$<span class="arithmatex">\(T(\text{Broadcast}(G)) \ge \max_{x,y} d(x,y)=D(G)\)</span>$ </p>
+<p><strong>Conclusione (tight bound):</strong>
+$<span class="arithmatex">\(T(\text{Flooding}) = \Theta(D(G))\)</span>$ 
+<em>N.B. : il diametro di un grafo può essere massimo <span class="arithmatex">\(n-1\)</span>. Se ci pensi per raggiungere il nodo più lontano dovrai al massimo attraversare tutti gli altri nodi del grafo.</em></p>
+<h3 id="b-tempo-asincrono-casual-time-longest-message-chain">B) Tempo <strong>asincrono</strong>  = Casual time (longest message chain)</h3>
+<p><strong>Assunzione temporale</strong>: clock non sincronizzati, ritardi imprevedibili ma finiti; non ha senso parlare di round globali.</p>
+<p>La misura consigliata nelle slide è la <strong>lunghezza della longest message chain</strong> (dipendenza causale) nel worst-case tra tutte le esecuzioni possibili.</p>
+<p>Per FLOODING, la catena causale che “porta” <span class="arithmatex">\(I\)</span> al nodo più lontano dall’initiator deve attraversare almeno <span class="arithmatex">\(d(s,y)\)</span> hop; nel worst-case:</p>
+<div class="arithmatex">\[T^{async}(\text{Flooding}) \in \Theta(D(G))\]</div>
+<p>dove però l’interpretazione è: <strong>numero di messaggi in catena causale</strong>, non “unità di tempo fisiche”.</p>
+<blockquote>
+<p>In pratica: <strong>stesso ordine <span class="arithmatex">\(\Theta(D(G))\)</span></strong>, ma cambia il significato:</p>
+</blockquote>
+<ul>
+<li>
+<blockquote>
+<p>sincrono: “<span class="arithmatex">\(D(G)\)</span> round (1 hop per round)”</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>asincrono: “<span class="arithmatex">\(D(G)\)</span> dipendenze causali minime lungo il cammino peggiore”</p>
+</blockquote>
+</li>
+</ul>
+<hr/>
+<h2 id="lower-bound-sui-messaggi-per-broadcast-da-n-1-a-m">Lower bound sui messaggi per Broadcast: da <span class="arithmatex">\(n-1\)</span> a <span class="arithmatex">\(m\)</span></h2>
+<h3 id="bound-ovvio-almeno-n-1">Bound “ovvio”: almeno <span class="arithmatex">\(n-1\)</span></h3>
+<p>Alla fine, tutti i <span class="arithmatex">\(n-1\)</span> nodi diversi dall’initiator devono ricevere l’informazione almeno una volta:
+$<span class="arithmatex">\(M(\text{Bcast}) \ge n-1\)</span>$ </p>
+<h3 id="bound-piu-forte-almeno-m-idea-dellarco-non-usato">Bound più forte: almeno <span class="arithmatex">\(m\)</span> (idea dell’arco “non usato”)</h3>
+<p>Si può mostrare che in un’esecuzione corretta deve passare <strong>almeno un messaggio su ogni link</strong> nel worst-case, quindi:
+$<span class="arithmatex">\(M(\text{Bcast}) \ge m\)</span>$ </p>
+<p><strong>Passaggi dell’argomento (versione Santoro):</strong>
+1. Supponi esista un protocollo corretto che usa <span class="arithmatex">\(&lt;m\)</span> messaggi su un grafo <span class="arithmatex">\(G\)</span>.
+2. Allora esiste almeno un arco <span class="arithmatex">\(e=(x,y)\)</span> su cui <strong>non passa mai alcun messaggio</strong> in quell’esecuzione.
+3. Costruisci un nuovo grafo <span class="arithmatex">\(G'\)</span> rimuovendo <span class="arithmatex">\(e\)</span> e aggiungendo un nuovo nodo <span class="arithmatex">\(z\)</span> collegato a <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>.
+4. Ripeti “la stessa esecuzione” su <span class="arithmatex">\(G'\)</span>: siccome su <span class="arithmatex">\(e\)</span> non passava nulla, <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span> non hanno motivo di inviare a <span class="arithmatex">\(z\)</span>.
+5. Quindi <span class="arithmatex">\(z\)</span> non riceve mai <span class="arithmatex">\(I\)</span> → contraddizione con la correttezza del broadcast. </p>
+<p><strong>Conclusione:</strong> qualsiasi broadcast richiede <span class="arithmatex">\(\Omega(m)\)</span> messaggi. </p>
+<h2 id="risultato-finale">Risultato finale</h2>
+<p>Per broadcast sotto le restrizioni standard (e unique initiator), e per FLOODING:
+- <span class="arithmatex">\(M(\text{Flooding}(G)) = 2m - n + 1 \in \Theta(m)\)</span></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(T(\text{Flooding}(G)) \in \Theta(D(G))\)</span></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(T^{ideal}(\text{Flooding}) = \Theta(D(G))\)</span></p>
+</li>
+<li>
+<p><span class="arithmatex">\(T^{async}(\text{Flooding}) = \Theta(D(G)) \text{ (misurato come longest message chain)}\)</span></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="possiamo-fare-meglio-di-cosi">Possiamo fare meglio di così?</h3>
+<p>Facciamo queste due considerazioni:
+- Message complexity minima con un albero: 
+    - In un albero il numero di archi è <span class="arithmatex">\(m=n-1\)</span>
+    - <span class="arithmatex">\(M(\text{Flooding}(G)) = 2m - n + 1 = 2(n-1) - n + 1 = n - 1 =m\)</span></p>
+<ul>
+<li>Message complexity massima con un grafo connesso:<ul>
+<li>In un grafo connesso il numero di archi è <span class="arithmatex">\(m=\binom{n}{2}=\frac{n(n-1)}{2}\)</span></li>
+<li>Quindi <span class="arithmatex">\(M(\text{Flooding}(G)) \in O(n^2)\)</span></li>
+</ul>
+</li>
+</ul>
+<p>Ma dobbiamo per forza usare il flooding asincrono in un grafo connesso?</p>
+<p>Con un broadcast classico avremmo:
+- <span class="arithmatex">\(M(SimpleBroadcast)=n-1\)</span>
+- <span class="arithmatex">\(T^{ideal}(SimpleBroadcast)=1\)</span></p>
+<p>Infatti il flooding è efficiente in un albero, ma non è adatto per i grafi generici.</p>
+<hr/>
+<h1 id="wake-up-problem">Wake-up problem</h1>
+<p><img alt="" src="../assets/4_fondamenti_algoritmi_distribuiti_images/image_2.png"/>
+Il <strong>wake-up problem</strong> è la “versione più generale” del broadcast: devi far partire una computazione che coinvolga <em>tutti</em> i nodi, ma <strong>all’inizio solo alcuni sono attivi</strong> (possono iniziare a mandare messaggi), mentre gli altri sono <strong>ASLEEP</strong> e si “svegliano” solo quando ricevono un messaggio.</p>
+<ul>
+<li>
+<p>Situazione: un task deve coinvolgere <strong>tutte</strong> le entità, ma inizialmente <strong>solo alcune</strong> sono attive (<em>awake</em>) e le altre sono inattive (<em>asleep</em>). </p>
+</li>
+<li>
+<p>Obiettivo: <strong>svegliare tutti i nodi</strong> (portarli nello stato AWAKE).</p>
+</li>
+<li>
+<p>Relazione con Broadcast:</p>
+<ul>
+<li><strong>Broadcast = Wake-up con un solo initiator</strong> (un solo nodo inizialmente awake).</li>
+<li><strong>Wake-up = Broadcast con più initiator</strong> (più nodi inizialmente awake). </li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h3 id="modello-stati-e-restrizioni">Modello (stati e restrizioni)</h3>
+<ul>
+<li>Stati:</li>
+<li><span class="arithmatex">\(S = \{\text{ASLEEP}, \text{AWAKE}\}\)</span> </li>
+<li>Stati iniziali:</li>
+<li><span class="arithmatex">\(S_{init}=\{\text{ASLEEP}\}\)</span> (tutti asleep, ma alcuni possono svegliarsi spontaneamente) </li>
+<li>Stato terminale:</li>
+<li><span class="arithmatex">\(S_{term}=\{\text{AWAKE}\}\)</span> </li>
+<li>Restrizioni: quelle “standard” del modello usato nel corso (nelle note: “R”). </li>
+</ul>
+<hr/>
+<h3 id="protocollo-wflood-wake-up-via-flooding">Protocollo WFlood (wake-up via flooding)</h3>
+<h1 id="obiettivo-tutti-i-nodi-che-siano-in-stato-awake-sveglio">Obiettivo Tutti i nodi che siano in stato <span class="arithmatex">\(AWAKE\)</span> (sveglio)</h1>
+<ul>
+<li>Stati <span class="arithmatex">\(S=\{\text{ASLEEP},\ \text{AWAKE}\}\)</span></li>
+<li>Stato iniziale <span class="arithmatex">\(S_{init}=\{\text{ASLEEP}\}\)</span> (tutti asleep, ma alcuni possono svegliarsi spontaneamente)</li>
+<li>
+<p>Stato terminale <span class="arithmatex">\(S_{term}=\{\text{AWAKE}\}\)</span> </p>
+</li>
+<li>
+<p>Messaggio <span class="arithmatex">\(W\)</span> (richiesta di svegliarsi)</p>
+</li>
+</ul>
+<p><em>Usiamo la <strong>stessa strategia del flooding</strong> del broadcast risolve anche il wake-up.</em> </p>
+<p><strong>Entità ASLEEP</strong>  
+</p><div class="highlight"><pre><span></span><code>quando parte:  
+    manda W a tutti i vicini  
+    diventa AWAKE
+
+se riceve W da `sender`:  
+    per ogni vicino y ∈ N(x):
+        se y ≠ sender:
+          manda W a y
+  diventa AWAKE
+</code></pre></div>
+<hr/>
+<h3 id="complessita-in-messaggi-message-complexity">Complessità in messaggi (message complexity)</h3>
+<ul>
+<li>Caso 1 initiator: coincide col flooding del broadcast<ul>
+<li><span class="arithmatex">\(M = 2m - n + 1\)</span> </li>
+</ul>
+</li>
+<li>Caso generale con <span class="arithmatex">\(k\)</span> initiator:<ul>
+<li><span class="arithmatex">\(M = 2m - (n-k)\)</span> </li>
+</ul>
+</li>
+<li>Caso tutti <span class="arithmatex">\(n\)</span> initiator:<ul>
+<li><span class="arithmatex">\(M = 2m\)</span> </li>
+</ul>
+</li>
+</ul>
+<p>Come si legge <span class="arithmatex">\(2m-(n-k)\)</span>?</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(2m\)</span> è il conteggio “grezzo”: in un grafo non orientato ogni arco può essere percorso al massimo <strong>due volte</strong> (una per direzione).</p>
+</li>
+<li>
+<p>Però <strong>non tutti i nodi fanno l’azione “receiving(W) then forward”</strong>: se un nodo è un iniziatore, si sveglia per spontaneous impulse e <strong>non ha un “sender” da escludere</strong> in quel primo step (di fatto “manca” un inoltro rispetto al caso in cui si svegliasse ricevendo).</p>
+</li>
+<li>
+<p>Ci sono <span class="arithmatex">\(k\)</span> iniziatori, quindi i nodi che <em>non</em> sono iniziatori sono <span class="arithmatex">\(n-k\)</span> e sono proprio quelli che generano quel tipo di inoltro “da ricezione” con esclusione del sender: il termine <span class="arithmatex">\((n-k)\)</span> è la correzione che compare nelle slide.</p>
+</li>
+</ul>
+<p><strong>Bound generali</strong></p>
+<ul>
+<li>Per WFlood vale: $<span class="arithmatex">\(2m \ge M[\text{WFlood}] \ge 2m - n + 1\)</span>$</li>
+<li>Quindi in ordine di grandezza:$<span class="arithmatex">\(M(\text{Wake-Up}/R) \in \Theta(m)\)</span>$</li>
+</ul>
+<p><strong>Caso speciale: Tree</strong>
+- Se <span class="arithmatex">\(G\)</span> è un albero e <span class="arithmatex">\(k'\)</span> è il numero di initiator:$<span class="arithmatex">\(M[\text{WFlood}/\text{Tree}] = n + k' - 2\)</span>$</p>
+<hr/>
+<h3 id="complessita-in-tempo-ideal-time-time-complexity">Complessità in tempo (ideal time / time complexity)</h3>
+<h1 id="intuizione-rispetto-al-broadcast-in-generale-e-non-maggiore-perche-un-nodo-puo-essere-piu-vicino-a-qualche-initiator">Intuizione: rispetto al broadcast, in generale è <strong>non maggiore</strong> perché un nodo può essere più vicino a <em>qualche</em> initiator.</h1>
+<p><strong>Worst case (bound di ordine)</strong>:$<span class="arithmatex">\(T(\text{Wake-Up}/R) \in \Theta(d)\)</span>$ dove <span class="arithmatex">\(d\)</span> è il diametro del grafo (come nelle note “ideal time”). 
+- Caso <span class="arithmatex">\(k=1\)</span> (un solo initiator): il tempo coincide con Flooding, tipicamente <span class="arithmatex">\(O(D)\)</span>.  </p></div>
+</div>
+</div>
+<footer class="col-md-12">
+<hr/>
+<p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+</footer>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+<script src="../js/base.js"></script>
+<script src="../javascripts/pdf_mathjax_hook.js"></script>
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<p>From here you can search these documents. Enter your search terms below.</p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="search"/>
+</div>
+</form>
+<div data-no-results-text="No results found" id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://angelolongano.github.io/algoritmi_distribuiti/00-ripasso/index.html" rel="canonical"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>0 Ripasso - Algoritmi Distribuiti Notes</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/fontawesome.min.css" rel="stylesheet"/>
+<link href="../css/brands.min.css" rel="stylesheet"/>
+<link href="../css/solid.min.css" rel="stylesheet"/>
+<link href="../css/v4-font-face.min.css" rel="stylesheet"/>
+<link href="../css/base.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" id="hljs-light" rel="stylesheet"/>
+<link disabled="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-dark" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
+<a class="navbar-brand" href="../index.html">Algoritmi Distribuiti Notes</a>
+<!-- Expander button -->
+<button aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar-collapse" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse" id="navbar-collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="../index.html">Home</a>
+</li>
+<li class="nav-item">
+<a aria-current="page" class="nav-link active" href="index.html">0 Ripasso</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../01-teoria-della-complessita/index.html">1 Teoria della Complessita</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../04-fondamenti-algoritmi-distribuiti/index.html">4 Fondamenti Algoritmi Distribuiti</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../05-spanning-tree-construction/index.html">5 Spanning Tree Construction</a>
+</li>
+</ul>
+<ul class="nav navbar-nav ms-md-auto">
+<li class="nav-item">
+<a class="nav-link" data-bs-target="#mkdocs_search_modal" data-bs-toggle="modal" href="#">
+<i class="fa fa-search"></i> Search
+                            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../index.html" rel="prev">
+<i class="fa fa-arrow-left"></i> Previous
+                                </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../01-teoria-della-complessita/index.html" rel="next">
+                                    Next <i class="fa fa-arrow-right"></i>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+<div class="navbar-header">
+<button class="navbar-toggler collapsed" data-bs-target="#toc-collapse" data-bs-toggle="collapse" title="Table of Contents" type="button">
+<span class="fa fa-angle-down"></span>
+</button>
+</div>
+<div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#ripasso">Ripasso</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#problema-computazionale">Problema Computazionale</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#classificazione-dei-problemi-per-tipo-di-soluzione">Classificazione dei Problemi per Tipo di Soluzione</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#algoritmi">Algoritmi</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#dimensione-del-problema">Dimensione del Problema</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#analisi-asintotica">Analisi Asintotica</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#classificazione-dei-problemi-per-difficolta">Classificazione dei Problemi per Difficoltà</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#perche-il-polinomiale-e-la-soglia-di-trattabilita">Perché il Polinomiale è la Soglia di Trattabilità?</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#tesi-di-church-turing">Tesi di Church-Turing</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div></div>
+<div class="col-md-9" role="main">
+<h1 id="ripasso">Ripasso</h1>
+<h2 id="problema-computazionale"><strong>Problema Computazionale</strong></h2>
+<p>Un <strong>problema computazionale</strong> Π è una questione generale che dipende da parametri i cui valori non sono specificati. Si definisce tramite:</p>
+<ul>
+<li><strong>INPUT</strong>: insieme <span class="arithmatex">\(I\)</span> di possibili assegnamenti ai parametri</li>
+<li><strong>OUTPUT</strong>: insieme <span class="arithmatex">\(S\)</span> di possibili soluzioni</li>
+<li><strong>Funzione</strong>: <span class="arithmatex">\(Π : I → S\)</span></li>
+</ul>
+<p>Un'<strong>istanza</strong> del problema si ottiene assegnando valori specifici ai parametri.
+<em>Per esempio, definisco il problema "Ordinare una sequenza di numeri" e un'istanza del problema può essere "Ordinare la sequenza {5, 2, 9, 1}".</em></p>
+<hr/>
+<h2 id="classificazione-dei-problemi-per-tipo-di-soluzione"><strong>Classificazione dei Problemi per Tipo di Soluzione</strong></h2>
+<p>I problemi si classificano in base al tipo di soluzione cercata:</p>
+<ol>
+<li>
+<p><strong>Problemi Decisionali</strong>: la risposta è binaria (<strong>SÌ/NO</strong>)</p>
+<ul>
+<li><em>Esempio:</em> "Il numero <span class="arithmatex">\(x\)</span> è primo?" o "Esiste un cammino da A a B di lunghezza <span class="arithmatex">\(\le K\)</span>?"</li>
+</ul>
+</li>
+<li>
+<p><strong>Problemi di Ricerca</strong>: cerchiamo una soluzione che soddisfi certe proprietà.</p>
+<ul>
+<li><em>Esempio:</em> "Trovami un cammino da A a B".</li>
+</ul>
+</li>
+<li>
+<p><strong>Problemi di Ottimizzazione</strong>: Cerchiamo la soluzione <strong>migliore</strong> (minimo costo o massimo guadagno) tra tutte quelle ammissibili.</p>
+<ul>
+<li><em>Esempio:</em> "Trovami il cammino <em>più breve</em> da A a B".</li>
+</ul>
+</li>
+</ol>
+<hr/>
+<h2 id="algoritmi"><strong>Algoritmi</strong></h2>
+<p>Un <strong>algoritmo</strong> è una procedura generale per risolvere un problema definita tramite una <strong>sequenza di passi finita</strong>, <strong>ben ordinata</strong>, <strong>non ambigua</strong>, effettivamente <strong>realizzabile</strong> e che <strong>termina</strong> in tempo finito.</p>
+<p>Un algoritmo per il problema Π è <strong>corretto</strong> se, per ogni istanza <span class="arithmatex">\(i ∈ I\)</span>, produce la soluzione corrispondente <span class="arithmatex">\(Π(i) ∈ S\)</span>.</p>
+<p>Due proprietà chiave:
+- <strong>Correttezza:</strong> L'algoritmo deve terminare e produrre l'output corretto per <em>ogni</em> istanza valida
+- <strong>Efficienza:</strong> Misuriamo quanto "costa" l'algoritmo in termini di risorse (indipendentemente dalla macchina).
+    - Tempo: Numero di operazioni
+    - Spazio: Numero di celle di memoria</p>
+<hr/>
+<h2 id="dimensione-del-problema"><strong>Dimensione del Problema</strong></h2>
+<p>La dimensione misura la quantità di informazione necessaria per specificare l'istanza:</p>
+<ul>
+<li><strong>Criterio di costo logaritmico</strong>: numero di bit necessari per rappresentare l'input</li>
+<li><strong>Criterio di costo uniforme</strong>: numero di "elementi" necessari per rappresentare l'input</li>
+</ul>
+<hr/>
+<h2 id="analisi-asintotica">Analisi Asintotica</h2>
+<p>Non misuriamo il <strong>tempo</strong> in secondi, ma in <strong>numero di operazioni elementari</strong> in funzione della dimensione dell'input (<span class="arithmatex">\(n\)</span>).</p>
+<ul>
+<li>
+<p><strong>Caso Peggiore (Worst Case):</strong> Il tempo massimo richiesto per un input di dimensione <span class="arithmatex">\(n\)</span>. È la garanzia che diamo.</p>
+</li>
+<li>
+<p><strong>Notazioni:</strong></p>
+<ul>
+<li><strong><span class="arithmatex">\(O(f(n))\)</span>:</strong> Limite superiore (non va peggio di così).</li>
+<li><strong><span class="arithmatex">\(\Omega(f(n))\)</span>:</strong> Limite inferiore (serve almeno questo tempo).</li>
+<li><strong><span class="arithmatex">\(\Theta(f(n))\)</span>:</strong> Ordine di grandezza esatto (limite superiore e inferiore coincidono).</li>
+</ul>
+</li>
+</ul>
+<p><img alt="" src="../assets/0_ripasso_complessita_images/image_1.png"/></p>
+<hr/>
+<h2 id="classificazione-dei-problemi-per-difficolta"><strong>Classificazione dei Problemi per Difficoltà</strong></h2>
+<p>In base al costo computazionale, i problemi si classificano in:</p>
+<ol>
+<li>
+<p><strong>Problemi Trattabili (facili, classe P)</strong>: Esiste un algoritmo che li risolve in tempo <strong>polinomiale</strong> <em>(es. <span class="arithmatex">\(O(n), O(n^2), O(n \log n)\)</span>)</em> $$ T(n) ∈ O(n^k), k ≥ 0 $$</p>
+<ul>
+<li><em>Esempi:</em> Ordinamento, Cammino Minimo (Dijkstra), Spanning Tree.</li>
+<li><em>Perché:</em> Se raddoppio l'input, il tempo aumenta di un fattore gestibile.</li>
+</ul>
+</li>
+<li>
+<p><strong>Problemi Presumibilmente Intrattabili (difficili)</strong>: non abbiamo un algoritmo di costo polinomiale, ma non è stato dimostrato che non esista</p>
+</li>
+<li>
+<p><strong>Problemi Intrattabili</strong>: si può dimostrare che non esiste un algoritmo di costo polinomiale. Il costo è <strong>esponenziale</strong> (es. <span class="arithmatex">\(O(2^n), O(n!)\)</span>).</p>
+<ul>
+<li><em>Esempi:</em> Tutti i possibili sottoinsiemi, tutte le permutazioni (TSP forza bruta), Torre di Hanoi.</li>
+<li><em>Perché:</em> Basta aggiungere un piccolo elemento all'input (es. una città in più nel TSP) e il tempo di calcolo raddoppia o peggio. Diventa inutilizzabile molto presto.</li>
+</ul>
+</li>
+<li>
+<p><strong>Problemi Irrisolvibili</strong>: si può dimostrare che non esiste alcun algoritmo risolutivo (indipendentemente dal costo)</p>
+<ul>
+<li>Esempio: <strong>Problema della fermata</strong> (dato un algoritmo A con input D, l'esecuzione di A con input D termina in tempo finito?)</li>
+</ul>
+</li>
+</ol>
+<hr/>
+<h2 id="perche-il-polinomiale-e-la-soglia-di-trattabilita"><strong>Perché il Polinomiale è la Soglia di Trattabilità?</strong></h2>
+<p>I problemi trattabili sono quelli di costo polinomiale perché:</p>
+<ul>
+<li>Esistono pochi problemi trattabili con algoritmi polinomiali di grado alto</li>
+<li>In molti problemi, lo spazio delle soluzioni è esponenziale: trovare un algoritmo polinomiale significa "fare meglio" di un algoritmo di forza bruta</li>
+<li>Le istanze worst case sono spesso rare o poco probabili</li>
+<li>Costi peggiori del polinomiale diventano rapidamente intrattabili al crescere della dimensione delle istanze</li>
+<li>È una misura indipendente dal progresso tecnologico</li>
+</ul>
+<hr/>
+<p><em>DOMANDA: l’appartenenza dei problemi a queste classi di problemi, non potrebbe dipendere dal modello di calcolo?</em></p>
+<h2 id="tesi-di-church-turing"><strong>Tesi di Church-Turing</strong></h2>
+<p>Modelli di calcolo diversi, ma ragionevoli, si possono simulare a vicenda con uno <strong>slowdown polinomiale</strong>. Sono tutti polinomialmente equivalenti alla Macchina di Turing.</p>
+<p>Le classi di problemi non cambiano cambiando modello di calcolo, purché quest'ultimo sia ragionevole.</p></div>
+</div>
+</div>
+<footer class="col-md-12">
+<hr/>
+<p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+</footer>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+<script src="../js/base.js"></script>
+<script src="../javascripts/pdf_mathjax_hook.js"></script>
+<script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<p>From here you can search these documents. Enter your search terms below.</p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="search"/>
+</div>
+</form>
+<div data-no-results-text="No results found" id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
