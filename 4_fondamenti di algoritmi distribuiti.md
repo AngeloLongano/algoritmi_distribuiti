@@ -135,7 +135,7 @@ _N.B. A differenza dello studio di complessità degli algoritmi classici, mi con
 # Broadcast (Bcast) e protocollo FLOODING
 
 ## Problema (Broadcast)
-![[Pasted image 20260203175451.png]]
+![[assets/4_fondamenti di algoritmi distribuiti_images/image_1.png]]
 
 Dato un sistema distribuito su un grafo di comunicazione $G=(V,E)$, **un solo nodo** (l’**initiator**) possiede un’informazione $I$ e vuole far sì che **tutti** gli altri nodi la apprendano **in tempo finito**.  
 
@@ -432,7 +432,7 @@ Infatti il flooding è efficiente in un albero, ma non è adatto per i grafi gen
 
 # Wake-up problem 
 
-![[Pasted image 20260210181714.png]]
+![[assets/4_fondamenti di algoritmi distribuiti_images/image_2.png]]
 Il **wake-up problem** è la “versione più generale” del broadcast: devi far partire una computazione che coinvolga _tutti_ i nodi, ma **all’inizio solo alcuni sono attivi** (possono iniziare a mandare messaggi), mentre gli altri sono **ASLEEP** e si “svegliano” solo quando ricevono un messaggio.
 
 - Situazione: un task deve coinvolgere **tutte** le entità, ma inizialmente **solo alcune** sono attive (*awake*) e le altre sono inattive (*asleep*). 
