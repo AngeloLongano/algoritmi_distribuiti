@@ -27,7 +27,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
 
+extra_css:
+  - stylesheets/minimal.css
+
 extra_javascript:
+  - javascripts/toc_panel.js
   - javascripts/mathjax_config.js
   - javascripts/pdf_mathjax_hook.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
